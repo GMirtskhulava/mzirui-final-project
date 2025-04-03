@@ -1,0 +1,37 @@
+.shipping-section{
+    width: 100%;
+    padding: 5rem 0;
+
+    .shipping-container{
+        width: 100%;
+        padding: 0 15%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+
+        & .shipping-card {
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            border: 1px dashed $primary-color;
+            border-radius: 5px;
+            
+            &__icon{
+                user-select: none;
+            }
+
+            &__text{
+                &__title{
+                    color: $secondary-color;
+                    font-size: 20px;
+                }
+                &__desc{
+                    color: $secondary-color;
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+}
