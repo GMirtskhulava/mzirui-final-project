@@ -6,7 +6,19 @@
 
 // Layouts
 @import "./layouts/header";
+@import "./layouts/footer";
+
+// Routes
+@import "./routes/notFoundPage";
+@import "./routes/contactPage";
 
 // components
 @import "./components/homePage/slider";
 @import "./components/homePage/shipping";
+@import "./components/homePage/ourProduct";
+@import "./components/homePage/collections";
+@import "./components/homePage/clientComments";
+@import "./components/homePage/brands";
+@import "./components/homePage/latestBlogs";
+
+@import "./components/routerPath";

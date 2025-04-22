@@ -1,0 +1,26 @@
+.brands-section{
+    width: 100%;
+    padding: 1rem 15%;
+
+    .brands-box{
+        width: 100%;
+        padding: 6rem;
+        border-radius: 10px;
+        background-image: url("/src/assets/images/brands-bg.png");
+        background-color: $white-color;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        & a {
+            opacity: 0.5;
+            transition: all 0.2s;
+            &:hover{
+                opacity: 1;
+            }
+        }
+    }
+}

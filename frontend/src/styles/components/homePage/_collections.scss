@@ -1,0 +1,147 @@
+.collections-section{
+    width: 100%;
+    padding: 1rem 15%;
+
+    .collection-content {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+
+        .collection-box{
+            padding: 0.5rem;
+            position: relative;
+
+            &__banner{
+                position: relative;
+
+                user-select: none;
+
+                &:hover::before {
+                    left: 0;
+                    right: 0;
+                    opacity: 0;
+                    -webkit-transition: all 900ms ease-in;
+                    -o-transition: all 900ms ease-in;
+                    transition: all 900ms ease-in;
+                }
+                &:hover::after {
+                    top: 0;
+                    bottom: 0;
+                    opacity: 0;
+                    -webkit-transition: all 900ms ease-in;
+                    -o-transition: all 900ms ease-in;
+                    transition: all 900ms ease-in;
+                }
+                &::before {
+                    background: rgba(255, 255, 255, 0.2);
+                    bottom: 0;
+                    content: "";
+                    left: 50%;
+                    position: absolute;
+                    right: 51%;
+                    top: 0;
+                    opacity: 1;
+                    pointer-events: none;
+                }
+                &::after {
+                    background: rgba(255, 255, 255, 0.2);
+                    bottom: 50%;
+                    content: "";
+                    left: 0;
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    opacity: 1;
+                    pointer-events: none;
+                }
+            }
+            &__info-rectangle {
+                position: absolute;
+                top: 50%;
+                left: 40px;
+                transform: translateY(-50%);
+
+                display: flex;
+
+                flex-direction: column;
+                align-items: start;
+                flex-wrap: wrap;
+                gap: 1rem;
+
+                color: $secondary-color;
+
+                & p{
+                    font-size: 18px;
+                }
+                & h3 {
+                    font-size: 30px;
+                }
+
+                & button{
+                    padding: 1rem 2rem;
+                    border: 0;
+                    border-radius: 20px;
+                    background: $primary-color;
+                    transition: all 0.4s ease 0s;
+                    font-size: 16px;
+                    font-weight: 300;
+                    cursor: pointer;
+                    
+                    & a{
+                        color: $white-color;
+                        text-transform: uppercase;
+                    }
+        
+                    &:hover{
+                        background-color: $secondary-color;
+                        color: $white-color;
+                    }
+                }
+
+            }
+            &__info-square {
+                position: absolute;
+                top: 40px;
+                left: 50%;
+                transform: translateX(-50%);
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+
+                color: $secondary-color;
+
+                & p{
+                    font-size: 18px;
+                }
+                & h3 {
+                    font-size: 30px;
+                }
+                & button{
+                    padding: 1rem 2rem;
+                    border: 0;
+                    border-radius: 20px;
+                    background: $primary-color;
+                    transition: all 0.4s ease 0s;
+                    font-size: 16px;
+                    font-weight: 300;
+                    cursor: pointer;
+                    
+                    & a{
+                        color: $white-color;
+                        text-transform: uppercase;
+                    }
+        
+                    &:hover{
+                        background-color: $secondary-color;
+                        color: $white-color;
+                    }
+                }
+            }
+        }
+    }
+
+}
