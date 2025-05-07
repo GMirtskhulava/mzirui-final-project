@@ -1,8 +1,14 @@
 import React from 'react'
 
+import RouterPath from '../components/RouterPath'
+
+
+
 function ShopPage() {
     return (
-        <div>ShopPage</div>
+    <>
+        <RouterPath />
+    </>
     )
 }
 

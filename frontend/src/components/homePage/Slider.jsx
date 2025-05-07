@@ -1,6 +1,10 @@
 import React from 'react'
+import { useTranslation } from "react-i18next";
+
 
 function Slider() {
+    const {t, i18n} = useTranslation();
+    
     return (
     <div className="slider-container">
         <div className="slider-content">

@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { Routes, Route, useNavigate, Router } from 'react-router-dom'
 
+//
 
 // scss
 import "./styles/style.scss";
@@ -32,6 +33,7 @@ import GetRouterPathName from './utils/GetRouterPath';
 
 // https://htmldemo.net/pronia/pronia/index.html
 function App() {
+  
 
     useEffect(() => {
         const title = GetRouterPathName(window.location.pathname);
