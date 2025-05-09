@@ -1,15 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-import RouterPath from '../components/RouterPath'
-
-
+import RouterPath from '../components/RouterPath';
 
 function ShopPage() {
     return (
-    <>
-        <RouterPath />
-    </>
-    )
+        <>
+            <RouterPath />
+        </>
+    );
 }
 
-export default ShopPage
+export default ShopPage;
