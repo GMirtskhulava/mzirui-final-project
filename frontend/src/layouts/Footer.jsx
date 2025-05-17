@@ -1,9 +1,8 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from '../assets/images/icon.png';
 import paymentMethods from '../assets/images/payment-methods.png';
-
+//
 function Footer() {
     return (
         <footer>
@@ -23,22 +22,22 @@ function Footer() {
                         <ul>
                             <li>
                                 <Link to="https://facebook.com">
-                                    <i class="fa-brands fa-facebook-f"></i>
+                                    <i className="fa-brands fa-facebook-f"></i>
                                 </Link>
                             </li>
                             <li>
                                 <Link to="https://twitter.com">
-                                    <i class="fa-brands fa-twitter"></i>
+                                    <i className="fa-brands fa-twitter"></i>
                                 </Link>
                             </li>
                             <li>
                                 <Link to="https://youtube.com">
-                                    <i class="fa-brands fa-youtube"></i>
+                                    <i className="fa-brands fa-youtube"></i>
                                 </Link>
                             </li>
                             <li>
                                 <Link to="https://pinterest.com">
-                                    <i class="fa-brands fa-pinterest"></i>
+                                    <i className="fa-brands fa-pinterest"></i>
                                 </Link>
                             </li>
                         </ul>
@@ -126,7 +125,7 @@ function Footer() {
             </div>
             <div className="footer-bottom">
                 <p>
-                    © 2021 Pronia Made with <i class="fa-solid fa-heart"></i> by HasThemes
+                    © 2021 Pronia Made with <i className="fa-solid fa-heart"></i> by HasThemes
                 </p>
             </div>
         </footer>

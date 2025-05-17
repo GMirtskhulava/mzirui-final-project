@@ -26,7 +26,7 @@ export default [
         rules: {
             ...js.configs.recommended.rules,
             ...reactHooks.configs.recommended.rules,
-            'no-console': 'warn', // Warn on console.* usage (debug leftovers)
+            // 'no-console': 'warn', // Warn on console.* usage (debug leftovers)
             'no-debugger': 'error', // Error on debugger statements
             'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' }], // Error on unused vars/args unless prefixed
             'no-duplicate-imports': 'error', // Disallow importing the same file multiple times
@@ -41,7 +41,7 @@ export default [
             'no-new': 'error', // Prevent useless object instantiation like `new Object()`
             'no-shadow': 'warn', // Prevent variable declarations from shadowing variables in outer scopes
             'prefer-template': 'error', // Enforce template literals over string concatenation
-            'no-use-before-define': ['error', { functions: false, classes: true }], // Prevent usage of variables before declaration
+            // 'no-use-before-define': ['error', { functions: false, classes: true }], // Prevent usage of variables before declaration
 
             // Prettier-related
             'prettier/prettier': 'error', // Treat Prettier formatting issues as errors

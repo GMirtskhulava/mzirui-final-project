@@ -29,7 +29,7 @@ function LatestBlogs() {
                     >
                         <img src={Blog1Image}></img>
                         <div className="blog-card__image__link-box">
-                            <i class="fa-solid fa-link"></i>
+                            <i className="fa-solid fa-link"></i>
                         </div>
                     </Link>
                 </div>
@@ -48,7 +48,7 @@ function LatestBlogs() {
                     >
                         <img src={Blog1Image}></img>
                         <div className="blog-card__image__link-box">
-                            <i class="fa-solid fa-link"></i>
+                            <i className="fa-solid fa-link"></i>
                         </div>
                     </Link>
                 </div>
@@ -67,7 +67,7 @@ function LatestBlogs() {
                     >
                         <img src={Blog1Image}></img>
                         <div className="blog-card__image__link-box">
-                            <i class="fa-solid fa-link"></i>
+                            <i className="fa-solid fa-link"></i>
                         </div>
                     </Link>
                 </div>

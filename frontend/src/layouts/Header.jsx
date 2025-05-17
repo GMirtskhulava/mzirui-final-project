@@ -1,9 +1,26 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 
 // imgs
 import logo from '../assets/images/icon.png';
+//
+import { getToken } from '../api/UsersApi';
 
 function Header() {
+    const [isLoggined, setIsLoggined] = useState();
+    useEffect(() => {
+        getToken()
+            .then((res) => {
+                if (res.status === 200) {
+                    setIsLoggined(true);
+                } else {
+                    setIsLoggined(false);
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                setIsLoggined(false);
+            });
+    });
     return (
         <header className="header-section">
             <div className="header-top-box">
@@ -30,20 +47,26 @@ function Header() {
                     </a>
                 </div>
                 <div className="header-center-box__settings-box">
-                    <a href="/">
-                        <i className="fa-solid fa-search"></i>
-                    </a>
-                    <a href="/">
-                        <i className="fa-solid fa-user"></i>
-                    </a>
-                    <a href="/">
-                        <i className="fa-solid fa-heart"></i>
-                    </a>
-                    <a href="/">
-                        <i className="fa-solid fa-cart-shopping user-cart-icon">
-                            <span className="user-cart-icon__cart-value">1</span>
-                        </i>
-                    </a>
+                    {isLoggined === true ? (
+                        <>
+                            <a href="/">
+                                <i className="fa-solid fa-search"></i>
+                            </a>
+                            <a href="/profile">
+                                <i className="fa-solid fa-user"></i>
+                            </a>
+                            <a href="/wishlist">
+                                <i className="fa-solid fa-heart"></i>
+                            </a>
+                            <a href="/cart">
+                                <i className="fa-solid fa-cart-shopping user-cart-icon">
+                                    <span className="user-cart-icon__cart-value">1</span>
+                                </i>
+                            </a>
+                        </>
+                    ) : (
+                        <a href="/login">Sign In</a>
+                    )}
                 </div>
             </div>
             <div className="header-bottom-box">

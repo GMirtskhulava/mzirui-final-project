@@ -1,18 +1,23 @@
-.notFound-page{
+.notAllowed-page{
     width: 100%;
     min-height: 100%;
     height: 100%;
     overflow: hidden;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
+    padding: 5rem;
 
     & h1{
-        padding: 5rem;
         font-size: 30px;
         font-weight: bold;
         font-family: 'Times New Roman', Times, serif;
         color: $secondary-color;
+    }
+    & p{
+        text-align: center;
     }
 }

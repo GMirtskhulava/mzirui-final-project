@@ -28,17 +28,17 @@ function OurTeam() {
                                 <ul>
                                     <li>
                                         <Link to="https://facebook.com">
-                                            <i class="fa-brands fa-facebook-f"></i>
+                                            <i className="fa-brands fa-facebook-f"></i>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="https://twitter.com">
-                                            <i class="fa-brands fa-twitter"></i>
+                                            <i className="fa-brands fa-twitter"></i>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="https://instagram.com">
-                                            <i class="fa-brands fa-instagram"></i>
+                                            <i className="fa-brands fa-instagram"></i>
                                         </Link>
                                     </li>
                                 </ul>
@@ -59,17 +59,17 @@ function OurTeam() {
                                 <ul>
                                     <li>
                                         <Link to="https://facebook.com">
-                                            <i class="fa-brands fa-facebook-f"></i>
+                                            <i className="fa-brands fa-facebook-f"></i>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="https://twitter.com">
-                                            <i class="fa-brands fa-twitter"></i>
+                                            <i className="fa-brands fa-twitter"></i>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="https://instagram.com">
-                                            <i class="fa-brands fa-instagram"></i>
+                                            <i className="fa-brands fa-instagram"></i>
                                         </Link>
                                     </li>
                                 </ul>
@@ -90,17 +90,17 @@ function OurTeam() {
                                 <ul>
                                     <li>
                                         <Link to="https://facebook.com">
-                                            <i class="fa-brands fa-facebook-f"></i>
+                                            <i className="fa-brands fa-facebook-f"></i>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="https://twitter.com">
-                                            <i class="fa-brands fa-twitter"></i>
+                                            <i className="fa-brands fa-twitter"></i>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="https://instagram.com">
-                                            <i class="fa-brands fa-instagram"></i>
+                                            <i className="fa-brands fa-instagram"></i>
                                         </Link>
                                     </li>
                                 </ul>
@@ -121,17 +121,17 @@ function OurTeam() {
                                 <ul>
                                     <li>
                                         <Link to="https://facebook.com">
-                                            <i class="fa-brands fa-facebook-f"></i>
+                                            <i className="fa-brands fa-facebook-f"></i>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="https://twitter.com">
-                                            <i class="fa-brands fa-twitter"></i>
+                                            <i className="fa-brands fa-twitter"></i>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="https://instagram.com">
-                                            <i class="fa-brands fa-instagram"></i>
+                                            <i className="fa-brands fa-instagram"></i>
                                         </Link>
                                     </li>
                                 </ul>

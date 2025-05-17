@@ -10,9 +10,13 @@
 
 // Routes
 @import "./routes/notFoundPage";
+@import "./routes/notAllowedPage";
 @import "./routes/contactPage";
 @import "./routes/aboutPage";
 @import "./routes/loginPage";
+@import "./routes/regPage";
+@import "./routes/forgotPasswordPage";
+@import "./routes/resetPasswordPage";
 
 // components
 @import "./components/homePage/slider";

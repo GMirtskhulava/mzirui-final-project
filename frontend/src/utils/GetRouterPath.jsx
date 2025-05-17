@@ -1,4 +1,8 @@
 export default function GetRouterPathName(pathname) {
+    if (pathname.startsWith('/reset-password/')) {
+        return 'Reset Password | Pronia';
+    }
+
     switch (pathname) {
         case '/':
             return 'Home';
@@ -20,6 +24,10 @@ export default function GetRouterPathName(pathname) {
             return 'Wishlist';
         case '/checkout':
             return 'Checkout';
+        case '/forgot-password':
+            return 'Forgot Password | Pronia';
+        case '/reset-password':
+            return 'Reset Password | Pronia';
         default:
             return '404 - Page not found';
     }
