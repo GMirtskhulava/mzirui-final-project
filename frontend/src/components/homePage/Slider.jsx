@@ -20,7 +20,7 @@ function Slider() {
             </div>
             <div className="slider-buttons">
                 <button>
-                    <i className="fa-solid fa-arrow-left"></i>
+                    <i className="fa-solid fa-arrow-left"></i>ц
                 </button>
                 <button>
                     <i className="fa-solid fa-arrow-right"></i>

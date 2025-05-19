@@ -4,7 +4,13 @@ import { useParams } from 'react-router-dom';
 import { resetPasswordUser } from '../api/UsersApi';
 import { checkResetTokenValidation } from '../api/ResetTokensApi';
 
+import { useLoader } from '../context/LoaderContext';
+
+
 function ResetPassword() {
+    const { useDataLoader } = useLoader();
+
+
     const [inputValues, setInputValues] = useState({
         newPassword: '',
         confirmPassword: '',
@@ -22,18 +28,22 @@ function ResetPassword() {
     };
 
     useEffect(() => {
-        checkResetTokenValidation(token)
-            .then((res) => {
-                if (res.status === 200) {
-                    setIsTokenFound(true);
-                } else {
+        useDataLoader(() => {
+            checkResetTokenValidation(token)
+                .then((res) => {
+                    if (res.status === 200) {
+                        setIsTokenFound(true);
+                    } else {
+                        setIsTokenFound(false);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err.response.data.err);
                     setIsTokenFound(false);
-                }
-            })
-            .catch((err) => {
-                console.log(err.response.data.err);
-                setIsTokenFound(false);
-            });
+                });
+
+        })
+
     }, [token]);
 
     const checkFormValidations = () => {

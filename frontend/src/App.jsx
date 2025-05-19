@@ -1,10 +1,15 @@
 //
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 //
 
 // scss
 import './styles/style.scss';
+
+//
+import { useLoader } from './context/LoaderContext';
+import Loader from './components/Loader';
 
 // Layouts
 import Header from './layouts/Header';
@@ -43,8 +48,16 @@ function App() {
     const title = GetRouterPathName(window.location.pathname);
     document.title = `${title} | Pronia`;
 
+    const { loading } = useLoader();
+
+    const { useFakeLoader } = useLoader();
+
+    useEffect(() => {
+        useFakeLoader();
+    }, []);
     return (
         <>
+            {loading && <Loader />}
             <Header />
             <Main>
                 <Routes>
