@@ -156,33 +156,20 @@ export const resetPasswordUser = async (req, res) => {
     }
 };
 
+export const checkResetTokenValidation = async (req, res) => {
+    try {
+        const token = req.query.checkToken;
+        if(!token) {
+            return res.status(400).json({ err: 'Token is required' });
+        }
 
-const mockReq = {
-    cookies: {
-        token: ''
-    },
-    body: {
-        username: 'Asd Dsa',
-        email: 'asd@gmail.com',
-        password: 'asddsa'
+        const resetToken = await ResetTokens.findOne({ token });
+        if(!resetToken) {
+            return res.status(400).json({ err: 'Invalid or expired token' });
+        }
+
+        res.status(200).json({ msg: 'Token is valid', email: resetToken.email });
+    } catch (error) {
+        res.status(500).json({ err: `Server error: ${error.message}` });
     }
-};
-
-const mockRes = {
-    status(code) {
-        this.statusCode = code;
-        return this;
-    },
-    json(data) {
-        console.log('JSON Response:', data);
-    },
-    cookie(name, value, options) {
-        token = '';
-        console.log('Set-Cookie:', { name, value, options });
-    },
-    clearCookie(name, options) {
-        console.log('Cleared Cookie:', { name, options });
-    },
-};
-
-// logoutUser(mockReq, mockRes);
+}

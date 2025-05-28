@@ -18,7 +18,9 @@
             flex: 1;
         }
 
-        &__language-box{
+        &__select-box{
+            display: flex;
+            gap: 1rem;
             & select{
                 padding: 0.2rem;
                 background: transparent;
@@ -123,6 +125,7 @@
             position: relative;
 
             & a{
+                text-transform: uppercase;
                 color: $secondary-color;
                 transition: color 0.2s;
                 position: relative;

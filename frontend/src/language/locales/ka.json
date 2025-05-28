@@ -1,10 +1,81 @@
 {
-    "CounterProject": "ქაუნთერ პროექტი",
-    "Count": "ცვლადი",
-    "ChangeCountVariable": "შეცვალე ცვლადის მნიშვნელობა",
-    "Multiplier": "მამრავლი",
-    "ChangeMultiplierVariable": "შეცვალე მამრავლის მნიშვნელობა",
-    "MultipliedAmount": "ნამრავლი",
-    "ChangeLanguage": "შეცვალე ენა",
-    "GameIsActiveTillX": "თამაში მიმდინარეობს {{gamePoint}} ქულამდე"
+    "homePageTitle": "მთავარი",
+    "shopPageTitle": "მაღაზია",
+    "blogPageTitle": "ბლოგი",
+    "aboutPageTitle": "ჩვენს შესახებ",
+    "contactPageTitle": "კონტაქტი",
+    
+    "signIn": "შესვლა",
+    "myAccount": "ჩემი ანგარიში",
+    "viewCart": "კალათის ნახვა",
+    "myWishlist": "ჩემი სურვილების სია",
+    "trackOrder": "ჩემი შეკვეთის ტრეკინგი",
+
+
+    "header": {
+        "sale": "25% ფასდაკლება ყველა პროდუქტზე",
+        "langEnglish": "ინგლისური",
+        "langGeorgian": "ქართული"
+    },
+
+    "footer": {
+        "usefulLinksTitle": "ბმულები",
+        "howToShop": "როგორ ვიყიდოთ",
+        "help": "დახმარება",
+        "ourServices": "ჩვენი სერვისები",
+        "paymentMethods": "გადახდის მეთოდები",
+        "moneyGuarantee": "ფულის გარანტია",
+        "returns": "დაბრუნებები",
+        "shipping": "გადაზიდვა",
+        "privacyPolicy": "კონფიდენციალურობის პოლიტიკა",
+        "gotQuestion": "შეკითხვა გაქვთ? დაგვიკავშირდით"
+    },
+    "shipping": {
+        "freeShipping": "უფასო მიტანა",
+        "freeShippingDescription": "შეკვეთის ღირებულება 319$-მდე",
+        "safePayment": "უსაფრთხო გადახდა",
+        "safePaymentDescription": "ჩვენი გადახდის სისტემით",
+        "bestServices": "საუკეთესო სერვისები",
+        "bestServicesDescription": "მეგობრული და სწრაფი სერვისები"
+    },
+    "homePage": {
+        "slider": {
+            "offerText": "ფასდაკლება",
+            "newPlant": "ახალი მცენარე",
+            "proniaSlogan": "პრონია, 100% ნატურალური, მცენარეების მაღაზია."
+        },
+        "ourProduct": {
+            "title": "ჩვენი პროდუქცია",
+            "featured": "გამორჩეული",
+            "bestSeller": "გაყიდვადი",
+            "latest": "ბოლო"
+        },
+        "collections": {
+            "cactusTitle": "კაქტუსების კოლექცია",
+            "cactusDesc": "კერამიკის ქოთნები და მცენარეები",
+            "newCollectionTitle": "ახალი კოლექცია",
+            "newCollectionDesc": "მცენარის ქოთნები",
+            "shopNow": "ახლავე შეძენა"
+        },
+        "clientComments": {
+            "title": "რას ამბობს კლიენტი",
+            "description": "ჩვენი კლიენტების მოსაზრებები",
+            "clientRole": "კლიენტი"
+        },
+        "latestBlog": {
+            "title": "ბოლო ბლოგი",
+            "description": "ბლოგი ჩვენი ახალი ამბებით",
+            "blogDate": "ადმინის მიერ | თარიღი: 24 აპრილი 2021",
+            "blogTitle": "ბევრი ვარიაციაა"
+        }
+    },
+
+
+
+
+    "error": {
+        "notFound": "გვერდი ვერ მოიძებნა",
+        "accessDenied": "წვდომა უარყოფილია",
+        "accessDeniedDescription": "თქვენ არ გაქვთ ნებართვა ამ გვერდზე წვდომისთვის."
+    }
 }

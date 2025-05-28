@@ -1,10 +1,82 @@
 {
-    "CounterProject": "Counter Project",
-    "Count": "Count",
-    "ChangeCountVariable": "Change Count Variable",
-    "Multiplier": "Multiplier",
-    "ChangeMultiplierVariable": "Change Multiplier Variable",
-    "MultipliedAmount": "Multiplied Amount",
-    "ChangeLanguage": "Change Language",
-    "GameIsActiveTillX": "Game is active till {{gamePoint}} points"
+    "homePageTitle": "Home",
+    "shopPageTitle": "Shop",
+    "blogPageTitle": "Blog",
+    "aboutPageTitle": "About Us",
+    "contactPageTitle": "Contact Us",
+
+    "signIn": "Sign In",
+    "myAccount": "My Account",
+    "viewCart": "View Cart",
+    "myWishlist": "My Wishlist",
+    "trackOrder": "Track My Order",
+
+
+    "header": {
+        "sale": "HELLO EVERYONE! 25% Off All Products",
+        "langEnglish": "English",
+        "langGeorgian": "Georgian"
+    },
+
+    "footer": {
+        "usefulLinksTitle": "Useful Links",
+        "howToShop": "How to Shop",
+        "help": "Help",
+        "ourServices": "Our Services",
+        "paymentMethods": "Payment Methods",
+        "moneyGuarantee": "Money Guarantee!",
+        "returns": "Returns",
+        "shipping": "Shipping",
+        "privacyPolicy": "Privacy Policy",
+        "gotQuestion": "Got a Question? Call Us"
+    },
+    "shipping": {
+        "freeShipping": "Free Shipping",
+        "freeShippingDescription": "Capped at $319 per order",
+        "safePayment": "Safe Payment",
+        "safePaymentDescription": "With our payment gateway",
+        "bestServices": "Best Services",
+        "bestServicesDescription": "Friendly & Supper Services"
+    },
+
+    "homePage": {
+        "slider": {
+            "offerText": "Discount",
+            "newPlant": "New Plant",
+            "proniaSlogan": "Pronia, 100% Natural, Organic & Plant Shop."
+        },
+        "ourProduct": {
+            "title": "Our Product",
+            "featured": "Featured",
+            "bestSeller": "Bestseller",
+            "latest": "Latest"
+        },
+        "collections": {
+            "cactusTitle": "Collection of Cactus",
+            "cactusDesc": "Pottery Pots & Plants",
+            "newCollectionTitle": "New Collection",
+            "newCollectionDesc": "Plant Port",
+            "shopNow": "Shop Now"
+        },
+        "clientComments": {
+            "title": "What Say Client",
+            "description": "What our clients say about us",
+            "clientRole": "Client"
+        },
+        "latestBlog": {
+            "title": "Latest Blog",
+            "description": "Latest blog posts from our blog",
+            "blogDate": "By: Admin | Date: 24 april 2021",
+            "blogTitle": "There Many Variations"
+        }
+    },
+
+
+
+
+    "error": {
+        "notFound": "Page Not Found",
+        "accessDenied": "Access Denied",
+        "accessDeniedDescription": "You do not have permission to access this page."
+    }
 }

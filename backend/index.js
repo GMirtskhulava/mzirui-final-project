@@ -8,7 +8,7 @@ import connectDB from './db/connection.js'
 
 // Routes
 import UsersRouter from './routes/users.routes.js'
-import ResetTokensRouter from './routes/tokens.routes.js'
+import ProductsRouter from './routes/products.routes.js'
 
 const app = express()
 const PORT = 2508;
@@ -25,7 +25,7 @@ app.use(cookieParser()); // to access cookies in node.js
 
 //
 app.use("/api/users", UsersRouter);
-app.use("/api/resetTokens", ResetTokensRouter);
+app.use("/api/products", ProductsRouter);
 
 //
 

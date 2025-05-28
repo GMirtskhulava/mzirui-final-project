@@ -45,20 +45,19 @@ import useScrollTop from './hooks/useScrollTop';
 function App() {
     useScrollTop();
 
-    const title = GetRouterPathName(window.location.pathname);
-    document.title = `${title} | Pronia`;
-
     const { loading } = useLoader();
-
     const { useFakeLoader } = useLoader();
 
     useEffect(() => {
+        const title = GetRouterPathName(window.location.pathname);
+        document.title = `${title} | Pronia`;
         useFakeLoader();
-    }, []);
+    }, [location.pathname]);
     return (
         <>
-            {loading && <Loader />}
             <Header />
+            {loading ? <Loader />
+            :
             <Main>
                 <Routes>
                     {/* Home */}
@@ -120,7 +119,7 @@ function App() {
                     ></Route>
                 </Routes>
             </Main>
-
+}
             <Footer />
         </>
     );

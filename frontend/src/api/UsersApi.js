@@ -52,3 +52,13 @@ export const resetPasswordUser = async (newPassword, token) => {
     );
     return response;
 };
+
+export const checkResetTokenValidation = async (token) => {
+    const response = await axios.get('http://localhost:2508/api/users/check-resetToken', {
+        withCredentials: true,
+        params: {
+            checkToken: token,
+        },
+    });
+    return response;
+};

@@ -2,8 +2,13 @@ import { Link } from 'react-router-dom';
 
 import logo from '../assets/images/icon.png';
 import paymentMethods from '../assets/images/payment-methods.png';
+
+// 
+import { useTranslation } from 'react-i18next';
+
 //
 function Footer() {
+    const { t } = useTranslation();
     return (
         <footer>
             <div className="footer-main">
@@ -44,67 +49,67 @@ function Footer() {
                     </div>
                 </div>
                 <div className="footer-main__column">
-                    <h3 className="footer-main__column__title">Useful Links</h3>
+                    <h3 className="footer-main__column__title">{t("footer.usefulLinksTitle")}</h3>
                     <ul className="footer-main__column__links">
                         <li>
-                            <Link to="/about">About Pronia</Link>
+                            <Link to="/about">{t("aboutPageTitle")}</Link>
                         </li>
                         <li>
-                            <Link to="/shop">How to Shop</Link>
+                            <Link to="/shop">{t("footer.howToShop")}</Link>
                         </li>
                         <li>
                             <Link to="/faq">F.A.Q</Link>
                         </li>
                         <li>
-                            <Link to="/contact">Contact Us</Link>
+                            <Link to="/contact">{t("contactPageTitle")}</Link>
                         </li>
                         <li>
-                            <Link to="/login">Log In</Link>
+                            <Link to="/login">{t("signIn")}</Link>
                         </li>
                     </ul>
                 </div>
                 <div className="footer-main__column">
-                    <h3 className="footer-main__column__title">My Account</h3>
+                    <h3 className="footer-main__column__title">{t("myAccount")}</h3>
                     <ul className="footer-main__column__links">
                         <li>
-                            <Link to="/login">Sign In</Link>
+                            <Link to="/login">{t("signIn")}</Link>
                         </li>
                         <li>
-                            <Link to="/cart">View Cart</Link>
+                            <Link to="/cart">{t("viewCart")}</Link>
                         </li>
                         <li>
-                            <Link to="/whishlist">My Whishlist</Link>
+                            <Link to="/whishlist">{t("myWishlist")}</Link>
                         </li>
                         <li>
-                            <Link to="/profile">Track My Order</Link>
+                            <Link to="/profile">{t("trackOrder")}</Link>
                         </li>
                         <li>
-                            <Link to="/help">Help</Link>
+                            <Link to="/help">{t("footer.help")}</Link>
                         </li>
                     </ul>
                 </div>
                 <div className="footer-main__column">
-                    <h3 className="footer-main__column__title">Our Service</h3>
+                    <h3 className="footer-main__column__title">{t("footer.ourServices")}</h3>
                     <ul className="footer-main__column__links">
                         <li>
-                            <Link to="/profile">Payment Methods</Link>
+                            <Link to="/profile">{t("footer.paymentMethods")}</Link>
                         </li>
                         <li>
-                            <Link to="/profile">Money Guarantee!</Link>
+                            <Link to="/profile">{t("footer.moneyGuarantee")}</Link>
                         </li>
                         <li>
-                            <Link to="/profile">Returns</Link>
+                            <Link to="/profile">{t("footer.returns")}</Link>
                         </li>
                         <li>
-                            <Link to="/profile">Shipping</Link>
+                            <Link to="/profile">{t("footer.shipping")}</Link>
                         </li>
                         <li>
-                            <Link to="/privacy-policy">Privacy Policy</Link>
+                            <Link to="/privacy-policy">{t("footer.privacyPolicy")}</Link>
                         </li>
                     </ul>
                 </div>
                 <div className="footer-main__column">
-                    <h3 className="footer-main__column__title modern">Got Question? Call Us</h3>
+                    <h3 className="footer-main__column__title modern">{t("footer.gotQuestion")}</h3>
                     <Link
                         to="tel://123-456-789"
                         className="footer-main__column__addon-link"

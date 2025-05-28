@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // Components
 import RouterPath from '../components/RouterPath';
 
 function ContactPage() {
+
     return (
         <>
             <RouterPath />

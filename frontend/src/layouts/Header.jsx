@@ -5,8 +5,17 @@ import logo from '../assets/images/icon.png';
 //
 import { getToken } from '../api/UsersApi';
 
+import SkeletonLoading from '../components/SkeletonLoading';
+import { useTranslation } from 'react-i18next';
+
+// 
+
 function Header() {
     const [isLoggined, setIsLoggined] = useState();
+    const [choosedLanguage, setChoosedLanguage] = useState(localStorage.getItem('lang') || 'en');
+
+    const { t, i18n } = useTranslation();
+
     useEffect(() => {
         getToken()
             .then((res) => {
@@ -20,18 +29,23 @@ function Header() {
                 console.error(err);
                 setIsLoggined(false);
             });
-    });
+    }, []);
+    useEffect(() => {
+        i18n.changeLanguage(choosedLanguage);
+        localStorage.setItem('lang', choosedLanguage);
+    }, [choosedLanguage, i18n]);
     return (
         <header className="header-section">
             <div className="header-top-box">
                 <div className="header-top-box__greeting-box">
-                    HELLO EVERYONE! 25% Off All Products
+                    {t("header.sale")}
                 </div>
-                <div className="header-top-box__language-box">
-                    <select>
-                        <option>English</option>
-                        <option>Georgian</option>
+                <div className="header-top-box__select-box">
+                    <select onChange={(e) => setChoosedLanguage(e.target.value)} value={choosedLanguage}>
+                        <option value="en">{t("header.langEnglish")}</option>
+                        <option value="ka">{t("header.langGeorgian")}</option>
                     </select>
+
                 </div>
             </div>
             <div className="header-center-box">
@@ -64,27 +78,29 @@ function Header() {
                                 </i>
                             </a>
                         </>
+                    ) : isLoggined === false ? (
+                        <a href="/login">{t("signIn")}</a>
                     ) : (
-                        <a href="/login">Sign In</a>
+                        <SkeletonLoading width='100px'/>
                     )}
                 </div>
             </div>
             <div className="header-bottom-box">
                 <ul>
                     <li>
-                        <a href="/">HOME</a>
+                        <a href="/">{t("homePageTitle")}</a>
                     </li>
                     <li>
-                        <a href="/shop">SHOP</a>
+                        <a href="/shop">{t("shopPageTitle")}</a>
                     </li>
                     <li>
-                        <a href="/blog">BLOG</a>
+                        <a href="/blog">{t("blogPageTitle")}</a>
                     </li>
                     <li>
-                        <a href="/about">ABOUT US</a>
+                        <a href="/about">{t("aboutPageTitle")}</a>
                     </li>
                     <li>
-                        <a href="/contact">CONTACT US</a>
+                        <a href="/contact">{t("contactPageTitle")}</a>
                     </li>
                 </ul>
             </div>

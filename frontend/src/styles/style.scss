@@ -17,6 +17,7 @@
 @import "./routes/regPage";
 @import "./routes/forgotPasswordPage";
 @import "./routes/resetPasswordPage";
+@import "./routes/shopPage";
 
 // components
 @import "./components/homePage/slider";
@@ -29,3 +30,5 @@
 
 @import "./components/routerPath";
 @import "./components/LoadingPage";
+@import "./components/skeletonLoading";
+@import "./components/productCard";

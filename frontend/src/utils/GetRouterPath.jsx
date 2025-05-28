@@ -25,9 +25,9 @@ export default function GetRouterPathName(pathname) {
         case '/checkout':
             return 'Checkout';
         case '/forgot-password':
-            return 'Forgot Password | Pronia';
+            return 'Forgot Password';
         case '/reset-password':
-            return 'Reset Password | Pronia';
+            return 'Reset Password';
         default:
             return '404 - Page not found';
     }

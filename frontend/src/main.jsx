@@ -5,6 +5,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import { LoaderProvider } from './context/LoaderContext.jsx';
 
+import "./language/i18n.js";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

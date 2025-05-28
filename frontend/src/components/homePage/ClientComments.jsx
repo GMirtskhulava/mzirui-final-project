@@ -1,34 +1,36 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import UserImage1 from '../../assets/images/user-image1.png';
 import UserImage2 from '../../assets/images/user-image3.png';
 import UserImage3 from '../../assets/images/user-image2.png';
 
-const commentsData = [
-    {
-        name: 'PHOENIX BAKER',
-        role: 'Client',
-        comment:
-            'Lorem ipsum dolor sit amet, conse adipisic elit, sed do eiusmod tempo incididunt ut labore et dolore.',
-        image: UserImage1,
-    },
-    {
-        name: 'JEMALIKO 123',
-        role: 'Client',
-        comment:
-            'Lorem ipsum dolor sit amet, conse adipisic elit, sed do eiusmod tempo incididunt ut labore et dolore.',
-        image: UserImage2,
-    },
-    {
-        name: 'BADRI 001',
-        role: 'Client',
-        comment:
-            'Lorem ipsum dolor sit amet, conse adipisic elit, sed do eiusmod tempo incididunt ut labore et dolore.',
-        image: UserImage3,
-    },
-];
 
-function ClientComments() {
+
+function ClientComments({ t }) {
+    const commentsData = [
+        {
+            name: 'PHOENIX BAKER',
+            role: t("homePage.clientComments.clientRole"),
+            comment:
+                'Lorem ipsum dolor sit amet, conse adipisic elit, sed do eiusmod tempo incididunt ut labore et dolore.',
+            image: UserImage1,
+        },
+        {
+            name: 'JEMALIKO 123',
+            role: t("homePage.clientComments.clientRole"),
+            comment:
+                'Lorem ipsum dolor sit amet, conse adipisic elit, sed do eiusmod tempo incididunt ut labore et dolore.',
+            image: UserImage2,
+        },
+        {
+            name: 'BADRI 001',
+            role: t("homePage.clientComments.clientRole"),
+            comment:
+                'Lorem ipsum dolor sit amet, conse adipisic elit, sed do eiusmod tempo incididunt ut labore et dolore.',
+            image: UserImage3,
+        },
+    ];
+
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const infinity_comments = [...commentsData, ...commentsData, ...commentsData];
@@ -38,10 +40,9 @@ function ClientComments() {
         <div className="clientComments-section">
             <div className="clientComments-bg">
                 <div className="clientComments-bg__text">
-                    <h3 className="clientComments-bg__text__title">What Say Client</h3>
+                    <h3 className="clientComments-bg__text__title">{t("homePage.clientComments.title")}</h3>
                     <p className="clientComments-bg__text__desc">
-                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has
-                        roots in a piece of classical Latin literature
+                        {t("homePage.clientComments.description")}
                     </p>
                 </div>
             </div>

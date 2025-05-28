@@ -2,14 +2,12 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { resetPasswordUser } from '../api/UsersApi';
-import { checkResetTokenValidation } from '../api/ResetTokensApi';
+import { checkResetTokenValidation } from '../api/UsersApi';
 
-import { useLoader } from '../context/LoaderContext';
+import SkeletonLoading from '../components/SkeletonLoading';
 
 
 function ResetPassword() {
-    const { useDataLoader } = useLoader();
-
 
     const [inputValues, setInputValues] = useState({
         newPassword: '',
@@ -28,23 +26,19 @@ function ResetPassword() {
     };
 
     useEffect(() => {
-        useDataLoader(() => {
-            checkResetTokenValidation(token)
-                .then((res) => {
-                    if (res.status === 200) {
-                        setIsTokenFound(true);
-                    } else {
-                        setIsTokenFound(false);
-                    }
-                })
-                .catch((err) => {
-                    console.log(err.response.data.err);
-                    setIsTokenFound(false);
-                });
+        const fetchData = async () => {
+            try {
+                const res = await checkResetTokenValidation(token);
+                setIsTokenFound(res.status === 200);
+            } catch {
+                setIsTokenFound(false);
+            }
+        };
 
-        })
-
+        fetchData();
     }, [token]);
+
+
 
     const checkFormValidations = () => {
         if (inputValues.newPassword === '' || inputValues.confirmPassword === '')
@@ -116,8 +110,14 @@ function ResetPassword() {
                             Invalid or Expired Token
                         </p>
                     ) : (
-                        <p>Loading...</p>
+                        <div className="resetPassword-page__form__inputs__skeletons">
+                            <SkeletonLoading height="30px" style={{ marginBottom: '12px' }} />
+                            <SkeletonLoading height="30px" style={{ marginBottom: '12px' }} />
+                            <SkeletonLoading height="20px" style={{ marginBottom: '12px' }} />
+                            <SkeletonLoading height="35px" width="120px" />
+                        </div>
                     )}
+
                 </div>
             </div>
         </div>

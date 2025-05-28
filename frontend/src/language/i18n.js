@@ -12,7 +12,7 @@ i18n.use(initReactI18next).init({
             translation: ka,
         },
     },
-    fallbackLng: 'en', //default language
+    fallbackLng: localStorage.getItem('lang') || 'en', //default language
     interpolation: {
         escapeValue: false,
     },
