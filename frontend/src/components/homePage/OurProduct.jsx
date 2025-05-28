@@ -1,6 +1,9 @@
 import ProductCard from "../ProductCard";
 
+import { useProductsData } from "../../context/ProductsContext";
+
 function OurProduct({ t }) {
+    const { productsData } = useProductsData();
     return (
         <div className="ourProduct-section">
             <div className="ourProduct-box">
@@ -8,12 +11,23 @@ function OurProduct({ t }) {
                     <h2>{t("homePage.ourProduct.title")}</h2>
                     <div className="ourProduct-box__header__filter-section">
                         <button className="active">{t("homePage.ourProduct.featured")}</button>
-                        <button>{t("homePage.ourProduct.bestSeller")}</button>
                         <button>{t("homePage.ourProduct.latest")}</button>
                     </div>
                 </div>
                 <div className="ourProduct-box__content">
-                    <ProductCard id="123" title="American Cactus" price="9.99" stars="5" imgSrc="https://htmldemo.net/pronia/pronia/assets/images/product/medium-size/1-2-270x300.jpg"/>
+                    {
+                        productsData.map((product) => (
+                            <ProductCard
+                                key={product._id}
+                                id={product._id}
+                                title={product.title.en}
+                                price={product.price}
+                                stars={product.stars}
+                                imgSrc={product.image}
+                            />
+                        ))
+                    }
+                    {/* <ProductCard id="123" title="American Cactus" price="9.99" stars="5" imgSrc="https://htmldemo.net/pronia/pronia/assets/images/product/medium-size/1-2-270x300.jpg" /> */}
                 </div>
             </div>
         </div>

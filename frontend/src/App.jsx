@@ -43,7 +43,9 @@ import useScrollTop from './hooks/useScrollTop';
 
 //
 import { getToken, getUser } from './api/UsersApi';
+import { getProducts } from './api/ProductsApi'
 import { useUserData } from './context/UserContext';
+import { useProductsData } from './context/ProductsContext';
 
 // https://htmldemo.net/pronia/pronia/index.html
 function App() {
@@ -52,6 +54,7 @@ function App() {
     const { loading } = useLoader();
     const { useFakeLoader } = useLoader();
     const { loggedIn, userData, login, logout } = useUserData();
+    const { setProductsData } = useProductsData();
 
     useEffect(() => {
         const title = GetRouterPathName(window.location.pathname);
@@ -85,7 +88,16 @@ function App() {
             }
         };
 
+        const fetchProductData = async () => {
+            await getProducts().then((res) => {
+                setProductsData(res.data.products)
+            }).catch((err)=> {
+                setProductsData([]);
+            })
+        }
+
         fetchUserData();
+        fetchProductData();
         if(!loggedIn) logout();
     }, [])
     return (

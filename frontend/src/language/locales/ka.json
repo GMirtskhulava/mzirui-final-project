@@ -47,7 +47,6 @@
         "ourProduct": {
             "title": "ჩვენი პროდუქცია",
             "featured": "გამორჩეული",
-            "bestSeller": "გაყიდვადი",
             "latest": "ბოლო"
         },
         "collections": {

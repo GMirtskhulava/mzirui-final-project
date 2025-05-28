@@ -48,7 +48,6 @@
         "ourProduct": {
             "title": "Our Product",
             "featured": "Featured",
-            "bestSeller": "Bestseller",
             "latest": "Latest"
         },
         "collections": {

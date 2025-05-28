@@ -4,11 +4,14 @@ import RouterPath from '../components/RouterPath';
 import Filters from '../components/shopPage/Filters';
 import ProductList from '../components/shopPage/ProductList';
 
-import { getProducts } from '../api/ProductsApi';
+// import { getProducts } from '../api/ProductsApi';
+
+import { useProductsData } from '../context/ProductsContext';
+
 
 function ShopPage() {
-    const [products, setProducts] = useState(undefined);
-    const [filteredProducts, setFilteredProducts] = useState(undefined);
+    const { productsData } = useProductsData();
+    const [filteredProducts, setFilteredProducts] = useState(productsData);
 
     // Filt
     const [searchTerm, setSearchTerm] = useState('');
@@ -16,20 +19,21 @@ function ShopPage() {
     const [minPrice, setMinPrice] = useState(5);
     const [maxPrice, setMaxPrice] = useState(350);
 
-    useEffect(() => {
-        getProducts()
-            .then(res => {
-                setProducts(res.data.products);
-                setFilteredProducts(res.data.products);
-            })
-            .catch(err => {
-                console.error('Error fetching products:', err);
-            });
-    }, []);
+    // useEffect(() => {
+    //     getProducts()
+    //         .then(res => {
+    //             setProducts(res.data.products);
+    //             setFilteredProducts(res.data.products);
+    //             console.log(res.data.products)
+    //         })
+    //         .catch(err => {
+    //             console.error('Error fetching products:', err);
+    //         });
+    // }, []);
 
     useEffect(() => {
-        if(!products) return;
-        let filtered = [...products];
+        if(!productsData) return;
+        let filtered = [...productsData];
 
         if(category !== 'All') {
             filtered = filtered.filter(product => product.category.name === category);
@@ -44,7 +48,7 @@ function ShopPage() {
         );
 
         setFilteredProducts(filtered);
-    }, [products, category, searchTerm, minPrice, maxPrice]);
+    }, [productsData, category, searchTerm, minPrice, maxPrice]);
 
     return (
         <>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import  { useEffect, useRef } from 'react';
 
 function Filters({ searchTerm, setSearchTerm, category, setCategory, minPrice, setMinPrice, maxPrice, setMaxPrice }) {
     const trackRef = useRef(null);
