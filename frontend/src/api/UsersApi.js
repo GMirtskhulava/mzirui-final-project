@@ -29,6 +29,13 @@ export const getToken = async () => {
     return response;
 };
 
+export const getUser = async (token) => {
+    const response = await axios.get(`http://localhost:2508/api/users/get-user`, {
+        headers: { Authorization: token },
+    });
+    return response.data;
+};
+
 export const forgotPasswordUser = async (email) => {
     const response = await axios.put(
         'http://localhost:2508/api/users/forgot-password',

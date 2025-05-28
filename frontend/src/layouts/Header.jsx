@@ -1,35 +1,37 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 // imgs
 import logo from '../assets/images/icon.png';
+
 //
 import { getToken } from '../api/UsersApi';
 
 import SkeletonLoading from '../components/SkeletonLoading';
 import { useTranslation } from 'react-i18next';
-
+//
+import { useUserData } from '../context/UserContext';
 // 
 
 function Header() {
-    const [isLoggined, setIsLoggined] = useState();
     const [choosedLanguage, setChoosedLanguage] = useState(localStorage.getItem('lang') || 'en');
-
     const { t, i18n } = useTranslation();
+    const { loggedIn } = useUserData();
 
-    useEffect(() => {
-        getToken()
-            .then((res) => {
-                if (res.status === 200) {
-                    setIsLoggined(true);
-                } else {
-                    setIsLoggined(false);
-                }
-            })
-            .catch((err) => {
-                console.error(err);
-                setIsLoggined(false);
-            });
-    }, []);
+    // useEffect(() => {
+    //     getToken()
+    //         .then((res) => {
+    //             if (res.status === 200) {
+    //                 setIsLoggined(true);
+    //             } else {
+    //                 setIsLoggined(false);
+    //             }
+    //         })
+    //         .catch((err) => {
+    //             console.error(err);
+    //             setIsLoggined(false);
+    //         });
+    // }, []);
     useEffect(() => {
         i18n.changeLanguage(choosedLanguage);
         localStorage.setItem('lang', choosedLanguage);
@@ -61,24 +63,24 @@ function Header() {
                     </a>
                 </div>
                 <div className="header-center-box__settings-box">
-                    {isLoggined === true ? (
+                    {loggedIn === true ? (
                         <>
-                            <a href="/">
+                            <Link to="/">
                                 <i className="fa-solid fa-search"></i>
-                            </a>
-                            <a href="/profile">
+                            </Link>
+                            <Link to="/profile">
                                 <i className="fa-solid fa-user"></i>
-                            </a>
-                            <a href="/wishlist">
+                            </Link>
+                            <Link to="/wishlist">
                                 <i className="fa-solid fa-heart"></i>
-                            </a>
-                            <a href="/cart">
+                            </Link>
+                            <Link to="/cart">
                                 <i className="fa-solid fa-cart-shopping user-cart-icon">
                                     <span className="user-cart-icon__cart-value">1</span>
                                 </i>
-                            </a>
+                            </Link>
                         </>
-                    ) : isLoggined === false ? (
+                    ) : loggedIn === false ? (
                         <a href="/login">{t("signIn")}</a>
                     ) : (
                         <SkeletonLoading width='100px'/>
@@ -88,19 +90,19 @@ function Header() {
             <div className="header-bottom-box">
                 <ul>
                     <li>
-                        <a href="/">{t("homePageTitle")}</a>
+                        <Link to="/">{t("homePageTitle")}</Link>
                     </li>
                     <li>
-                        <a href="/shop">{t("shopPageTitle")}</a>
+                        <Link to="/shop">{t("shopPageTitle")}</Link>
                     </li>
                     <li>
-                        <a href="/blog">{t("blogPageTitle")}</a>
+                        <Link to="/blog">{t("blogPageTitle")}</Link>
                     </li>
                     <li>
-                        <a href="/about">{t("aboutPageTitle")}</a>
+                        <Link to="/about">{t("aboutPageTitle")}</Link>
                     </li>
                     <li>
-                        <a href="/contact">{t("contactPageTitle")}</a>
+                        <Link to="/contact">{t("contactPageTitle")}</Link>
                     </li>
                 </ul>
             </div>

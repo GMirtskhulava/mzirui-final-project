@@ -41,18 +41,53 @@ import GetRouterPathName from './utils/GetRouterPath';
 // Hooks
 import useScrollTop from './hooks/useScrollTop';
 
+//
+import { getToken, getUser } from './api/UsersApi';
+import { useUserData } from './context/UserContext';
+
 // https://htmldemo.net/pronia/pronia/index.html
 function App() {
     useScrollTop();
 
     const { loading } = useLoader();
     const { useFakeLoader } = useLoader();
+    const { loggedIn, userData, login, logout } = useUserData();
 
     useEffect(() => {
         const title = GetRouterPathName(window.location.pathname);
         document.title = `${title} | Pronia`;
         useFakeLoader();
     }, [location.pathname]);
+
+    useEffect(() => {
+        // console.log(`LoggedIn: ${loggedIn} | userData: ${userData}`)
+
+        const fetchUserData = async () => {
+            try {
+                const tokenResponse = await getToken();
+                const token = tokenResponse?.data?.token;
+                if (!token) {
+                    if(loggedIn || userData) logout()
+                    return;
+                }
+
+                const userRes = await getUser(token);
+                if (userRes?.data) {
+                    console.log(userRes);
+                    login(userRes.data)
+                }
+                else {
+                    if(loggedIn || userData) logout()
+
+                }
+            } catch (err) {
+                if(loggedIn || userData) logout()
+            }
+        };
+
+        fetchUserData();
+        if(!loggedIn) logout();
+    }, [])
     return (
         <>
             <Header />
@@ -71,11 +106,7 @@ function App() {
                         element={<AboutPage />}
                     ></Route>
                     <Route path="/shop"
-                        element={
-                            <ProtectedRoute>
-                                <ShopPage />
-                            </ProtectedRoute>
-                        }
+                        element={<ShopPage />}
                     ></Route>
                     <Route path="/blog"
                         element={<BlogPage />}

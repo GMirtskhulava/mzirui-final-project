@@ -5,12 +5,17 @@ import { Link } from 'react-router-dom';
 
 import { loginUser } from '../api/UsersApi';
 
+import { useUserData } from '../context/UserContext';
+
 function LoginPage() {
+
     const [inputValues, setInputValues] = useState({
         email: '',
         password: '',
     });
     const [errormsg, setErrorMsg] = useState('');
+    const { login } = useUserData();
+
 
     const handleFormChange = (e) => {
         setInputValues((p) => ({
@@ -39,6 +44,7 @@ function LoginPage() {
                 .then((res) => {
                     if (res.status === 200) {
                         console.log(res.data);
+                        // login(res.data.data);
                         window.location.href = '/';
                     }
                 })

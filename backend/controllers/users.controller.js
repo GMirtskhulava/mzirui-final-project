@@ -1,6 +1,5 @@
 import Users from '../models/users.model.js';
 import ResetTokens from '../models/token.models.js';
-import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { HashString, CompareHash } from '../utils/bcrypt.js';
 import mailSender from '../utils/mailSender.js';
@@ -61,6 +60,19 @@ export const registerUser = async (req, res) => {
         res.status(500).json({ err: `Server error: ${error.message}` });
     }
 }
+
+export const getUser = async (req, res) => {
+    try {
+        const token = req.header('Authorization');
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        const userData = await Users.findById(decoded.id).select('-password');
+
+        return res.status(200).json({ data: userData });
+    } catch (error) {
+        return res.status(500).json({ err: error });
+    }
+};
 
 export const getToken = (req, res) => {
     try {
