@@ -26,21 +26,24 @@ function OurProduct({ t }) {
     return (
         <div className="ourProduct-section">
             <div className="ourProduct-box">
-                <div className="ourProduct-box__header__filter-section">
-                    <button
-                        className={activeFilter === "featured" ? "active" : ""}
-                        onClick={() => setActiveFilter("featured")}
-                    >
-                        {t("homePage.ourProduct.featured")}
-                    </button>
-                    <button
-                        className={activeFilter === "latest" ? "active" : ""}
-                        onClick={() => setActiveFilter("latest")}
-                    >
-                        {t("homePage.ourProduct.latest")}
-                    </button>
-                </div>
+                <div className="ourProduct-box__header">
+                    <h2>{t("homePage.ourProduct.title")}</h2>
+                    <div className="ourProduct-box__header__filter-section">
 
+                        <button
+                            className={activeFilter === "featured" ? "active" : ""}
+                            onClick={() => setActiveFilter("featured")}
+                        >
+                            {t("homePage.ourProduct.featured")}
+                        </button>
+                        <button
+                            className={activeFilter === "latest" ? "active" : ""}
+                            onClick={() => setActiveFilter("latest")}
+                        >
+                            {t("homePage.ourProduct.latest")}
+                        </button>
+                    </div>
+                </div>
                 <div className="ourProduct-box__content">
                     {
                         !filteredProducts ? (
@@ -66,7 +69,7 @@ function OurProduct({ t }) {
                                 <ProductCard
                                     key={product._id}
                                     id={product._id}
-                                    title={product.title.en}
+                                    title={product.title}
                                     price={product.price}
                                     stars={product.stars}
                                     imgSrc={product.image}

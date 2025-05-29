@@ -15,7 +15,7 @@ function ProductList({ filteredProducts }) {
     const currentProducts = filteredProducts ? filteredProducts.slice(startIndex, startIndex + productsPerPage) : null;
 
     const goToPage = (page) => {
-        if (page < 1 || page > totalPages) return;
+        if(page < 1 || page > totalPages) return;
         setCurrentPage(page);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -46,7 +46,7 @@ function ProductList({ filteredProducts }) {
                         <ProductCard
                             key={product._id}
                             id={product._id}
-                            title={product.title.en}
+                            title={product.title}
                             price={product.price}
                             stars={product.stars}
                             imgSrc={product.image}
@@ -57,7 +57,6 @@ function ProductList({ filteredProducts }) {
                 )}
             </div>
 
-            {/* Pagination Controls */}
             {totalPages > 1 && (
                 <div className="pagination">
                     <button onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1}>
