@@ -6,7 +6,7 @@ function Filters({ searchTerm, setSearchTerm, category, setCategory, minPrice, s
     const maxTooltipRef = useRef(null);
 
     const minLimit = 5;
-    const maxLimit = 350;
+    const maxLimit = 500;
 
     const categorylist = ['All', 'Bonsai', 'Indoor Plants', 'Outdoor Plants'];
 

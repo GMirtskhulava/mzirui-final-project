@@ -76,8 +76,9 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            width: 100%;
+            width: calc(280px * 3);
             height: auto;
+            gap: 1rem;
         }
     }
 }

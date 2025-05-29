@@ -91,6 +91,7 @@ function App() {
         const fetchProductData = async () => {
             await getProducts().then((res) => {
                 setProductsData(res.data.products)
+                console.log(res.data.products)
             }).catch((err)=> {
                 setProductsData([]);
             })

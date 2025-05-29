@@ -17,7 +17,7 @@ function ShopPage() {
     const [searchTerm, setSearchTerm] = useState('');
     const [category, setCategory] = useState('All');
     const [minPrice, setMinPrice] = useState(5);
-    const [maxPrice, setMaxPrice] = useState(350);
+    const [maxPrice, setMaxPrice] = useState(500);
 
     // useEffect(() => {
     //     getProducts()
@@ -33,7 +33,7 @@ function ShopPage() {
 
     useEffect(() => {
         if(!productsData) return;
-        let filtered = [...productsData];
+        let filtered = productsData;
 
         if(category !== 'All') {
             filtered = filtered.filter(product => product.category.name === category);

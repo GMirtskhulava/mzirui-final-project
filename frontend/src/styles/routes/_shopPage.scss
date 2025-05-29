@@ -181,8 +181,9 @@
 
         &__products{
             display: flex;
-            justify-content: space-between;
             flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: flex-start;
             width: 100%;
             height: auto;
         }
@@ -191,4 +192,35 @@
 
 .filter-price{
     padding-bottom: 15px;
+}
+.pagination {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+
+    button {
+        padding: 0.5rem 0.9rem;
+        border: 1px solid #ddd;
+        background: white;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: background-color 0.2s;
+
+        &:disabled {
+            cursor: default;
+            opacity: 0.5;
+        }
+
+        &.active {
+            background-color: #abd373; // your primary color
+            color: white;
+            border-color: #abd373;
+        }
+
+        &:hover:not(:disabled):not(.active) {
+            background-color: #f0f0f0;
+        }
+    }
 }
