@@ -1,30 +1,26 @@
 import { useState } from 'react';
 
-import UserImage1 from '../../assets/images/user-image1.png';
-import UserImage2 from '../../assets/images/user-image3.png';
-import UserImage3 from '../../assets/images/user-image2.png';
-
-
+import { UserImage1, UserImage2, UserImage3 } from '../../assets';
 
 function ClientComments({ t }) {
     const commentsData = [
         {
             name: 'PHOENIX BAKER',
-            role: t("homePage.clientComments.clientRole"),
+            role: t('homePage.clientComments.clientRole'),
             comment:
                 'Lorem ipsum dolor sit amet, conse adipisic elit, sed do eiusmod tempo incididunt ut labore et dolore.',
             image: UserImage1,
         },
         {
             name: 'JEMALIKO 123',
-            role: t("homePage.clientComments.clientRole"),
+            role: t('homePage.clientComments.clientRole'),
             comment:
                 'Lorem ipsum dolor sit amet, conse adipisic elit, sed do eiusmod tempo incididunt ut labore et dolore.',
             image: UserImage2,
         },
         {
             name: 'BADRI 001',
-            role: t("homePage.clientComments.clientRole"),
+            role: t('homePage.clientComments.clientRole'),
             comment:
                 'Lorem ipsum dolor sit amet, conse adipisic elit, sed do eiusmod tempo incididunt ut labore et dolore.',
             image: UserImage3,
@@ -40,9 +36,11 @@ function ClientComments({ t }) {
         <div className="clientComments-section">
             <div className="clientComments-bg">
                 <div className="clientComments-bg__text">
-                    <h3 className="clientComments-bg__text__title">{t("homePage.clientComments.title")}</h3>
+                    <h3 className="clientComments-bg__text__title">
+                        {t('homePage.clientComments.title')}
+                    </h3>
                     <p className="clientComments-bg__text__desc">
-                        {t("homePage.clientComments.description")}
+                        {t('homePage.clientComments.description')}
                     </p>
                 </div>
             </div>

@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import CollectionBanner1 from '../../assets/images/collection-banner-1.png';
-import CollectionBanner2 from '../../assets/images/collection-banner-2.png';
-import CollectionBanner3 from '../../assets/images/collection-banner-3.png';
-import CollectionBanner4 from '../../assets/images/collection-banner-4.png';
+import {
+    CollectionBanner1,
+    CollectionBanner2,
+    CollectionBanner3,
+    CollectionBanner4,
+} from '../../assets/index.js';
 
 function Collections() {
     return (

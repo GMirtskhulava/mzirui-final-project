@@ -7,8 +7,7 @@ import { LoaderProvider } from './context/LoaderContext.jsx';
 import { UserProvider } from './context/UserContext.jsx';
 import { ProductsProvider } from './context/ProductsContext.jsx';
 
-import "./language/i18n.js";
-
+import './language/i18n.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

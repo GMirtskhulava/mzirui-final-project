@@ -1,21 +1,19 @@
 import { useState } from 'react';
 
-import RouterPath from '../components/RouterPath';
+import { RouterPath } from '../components/index.js';
 import { Link } from 'react-router-dom';
 
 import { loginUser } from '../api/UsersApi';
 
-import { useUserData } from '../context/UserContext';
+// import { useUserData } from '../context/UserContext';
 
 function LoginPage() {
-
     const [inputValues, setInputValues] = useState({
         email: '',
         password: '',
     });
     const [errormsg, setErrorMsg] = useState('');
-    const { login } = useUserData();
-
+    // const { login } = useUserData();
 
     const handleFormChange = (e) => {
         setInputValues((p) => ({

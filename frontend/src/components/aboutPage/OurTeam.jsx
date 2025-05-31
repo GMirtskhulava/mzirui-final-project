@@ -2,10 +2,7 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import TeamImg1 from '../../assets/images/team-img-1.png';
-import TeamImg2 from '../../assets/images/team-img-2.png';
-import TeamImg3 from '../../assets/images/team-img-3.png';
-import TeamImg4 from '../../assets/images/team-img-4.png';
+import { TeamImg1, TeamImg2, TeamImg3, TeamImg4 } from '../../assets/index.js';
 
 function OurTeam() {
     return (

@@ -1,34 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
-
-
-@import "./abstracts/variables";
-@import "./abstracts/reset";
+@use "./abstracts/variables";
+@use "./abstracts/reset";
+@use "./abstracts/fonts";
 
 // Layouts
-@import "./layouts/header";
-@import "./layouts/footer";
+@use "./layouts/header";
+@use "./layouts/footer";
 
 // Routes
-@import "./routes/notFoundPage";
-@import "./routes/notAllowedPage";
-@import "./routes/contactPage";
-@import "./routes/aboutPage";
-@import "./routes/loginPage";
-@import "./routes/regPage";
-@import "./routes/forgotPasswordPage";
-@import "./routes/resetPasswordPage";
-@import "./routes/shopPage";
+@use "./routes/notFoundPage";
+@use "./routes/notAllowedPage";
+@use "./routes/contactPage";
+@use "./routes/aboutPage";
+@use "./routes/loginPage";
+@use "./routes/regPage";
+@use "./routes/forgotPasswordPage";
+@use "./routes/resetPasswordPage";
+@use "./routes/shopPage";
 
 // components
-@import "./components/homePage/slider";
-@import "./components/homePage/shipping";
-@import "./components/homePage/ourProduct";
-@import "./components/homePage/collections";
-@import "./components/homePage/clientComments";
-@import "./components/homePage/brands";
-@import "./components/homePage/latestBlogs";
+@use "./components/homePage/slider";
+@use "./components/homePage/shipping";
+@use "./components/homePage/ourProduct";
+@use "./components/homePage/collections";
+@use "./components/homePage/clientComments";
+@use "./components/homePage/brands";
+@use "./components/homePage/latestBlogs";
 
-@import "./components/routerPath";
-@import "./components/LoadingPage";
-@import "./components/skeletonLoading";
-@import "./components/productCard";
+@use "./components/routerPath";
+@use "./components/loadingPage";
+@use "./components/skeletonLoading";
+@use "./components/productCard";
+@use "./components/productList";

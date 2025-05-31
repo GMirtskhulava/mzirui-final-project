@@ -1,3 +1,6 @@
+@use '../../abstracts/variables' as *;
+
+
 .clientComments-section{
     width: 100%;
     padding: 3rem 1rem;
@@ -6,7 +9,7 @@
         width: 100%;
         min-height: 440px;
         padding: 100px 50px 0 50px;
-        background-image: url("/src/assets/images/comments-banner.png");
+        background-image: url("/src/assets/images/comments-banner.svg");
         // background-color: #ffffff;
         background-repeat: no-repeat;
         background-position: center center;

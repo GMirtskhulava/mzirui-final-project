@@ -5,7 +5,6 @@ const ProductsContext = createContext({
     setProductsData: () => {},
 });
 
-
 export const useProductsData = () => useContext(ProductsContext);
 
 const ProductsProvider = ({ children }) => {

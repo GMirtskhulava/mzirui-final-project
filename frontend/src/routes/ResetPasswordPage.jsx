@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { resetPasswordUser } from '../api/UsersApi';
-import { checkResetTokenValidation } from '../api/UsersApi';
+import { resetPasswordUser, checkResetTokenValidation } from '../api/UsersApi';
 
-import SkeletonLoading from '../components/SkeletonLoading';
+import { SkeletonLoading } from '../components/index.js';
 
-
-function ResetPassword() {
-
+function ResetPasswordPage() {
     const [inputValues, setInputValues] = useState({
         newPassword: '',
         confirmPassword: '',
@@ -37,8 +34,6 @@ function ResetPassword() {
 
         fetchData();
     }, [token]);
-
-
 
     const checkFormValidations = () => {
         if (inputValues.newPassword === '' || inputValues.confirmPassword === '')
@@ -111,17 +106,28 @@ function ResetPassword() {
                         </p>
                     ) : (
                         <div className="resetPassword-page__form__inputs__skeletons">
-                            <SkeletonLoading height="30px" style={{ marginBottom: '12px' }} />
-                            <SkeletonLoading height="30px" style={{ marginBottom: '12px' }} />
-                            <SkeletonLoading height="20px" style={{ marginBottom: '12px' }} />
-                            <SkeletonLoading height="35px" width="120px" />
+                            <SkeletonLoading
+                                height="30px"
+                                style={{ marginBottom: '12px' }}
+                            />
+                            <SkeletonLoading
+                                height="30px"
+                                style={{ marginBottom: '12px' }}
+                            />
+                            <SkeletonLoading
+                                height="20px"
+                                style={{ marginBottom: '12px' }}
+                            />
+                            <SkeletonLoading
+                                height="35px"
+                                width="120px"
+                            />
                         </div>
                     )}
-
                 </div>
             </div>
         </div>
     );
 }
 
-export default ResetPassword;
+export default ResetPasswordPage;

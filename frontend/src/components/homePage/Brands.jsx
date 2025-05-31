@@ -1,11 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import BrandIcon1 from '../../assets/images/brand-icon1.png';
-import BrandIcon2 from '../../assets/images/brand-icon2.png';
-import BrandIcon3 from '../../assets/images/brand-icon3.png';
-import BrandIcon4 from '../../assets/images/brand-icon4.png';
-import BrandIcon5 from '../../assets/images/brand-icon5.png';
+import { BrandIcon1, BrandIcon2, BrandIcon3, BrandIcon4, BrandIcon5 } from '../../assets/index.js';
 
 function Brands() {
     return (

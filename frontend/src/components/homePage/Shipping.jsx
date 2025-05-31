@@ -1,12 +1,7 @@
-import React from 'react';
-
 import { useTranslation } from 'react-i18next';
 
-
 // icons
-import shippingCarIcon from '../../assets/images/icons/car.png';
-import shippingCardIcon from '../../assets/images/icons/card.png';
-import shippingServiceIcon from '../../assets/images/icons/service.png';
+import { shippingCarIcon, shippingCardIcon, shippingServiceIcon } from '../../assets/index.js';
 
 function Shipping() {
     const { t } = useTranslation();
@@ -19,8 +14,10 @@ function Shipping() {
                         <img src={shippingCarIcon}></img>
                     </div>
                     <div className="shipping-card__text">
-                        <h2 className="shipping-card__text__title">{t("shipping.freeShipping")}</h2>
-                        <p className="shipping-card__text__desc">{t("shipping.freeShippingDescription")}</p>
+                        <h2 className="shipping-card__text__title">{t('shipping.freeShipping')}</h2>
+                        <p className="shipping-card__text__desc">
+                            {t('shipping.freeShippingDescription')}
+                        </p>
                     </div>
                 </div>
                 <div className="shipping-card">
@@ -28,8 +25,10 @@ function Shipping() {
                         <img src={shippingCardIcon}></img>
                     </div>
                     <div className="shipping-card__text">
-                        <h2 className="shipping-card__text__title">{t("shipping.safePayment")}</h2>
-                        <p className="shipping-card__text__desc">{t("shipping.safePaymentDescription")}</p>
+                        <h2 className="shipping-card__text__title">{t('shipping.safePayment')}</h2>
+                        <p className="shipping-card__text__desc">
+                            {t('shipping.safePaymentDescription')}
+                        </p>
                     </div>
                 </div>
                 <div className="shipping-card">
@@ -37,8 +36,10 @@ function Shipping() {
                         <img src={shippingServiceIcon}></img>
                     </div>
                     <div className="shipping-card__text">
-                        <h2 className="shipping-card__text__title">{t("shipping.bestServices")}</h2>
-                        <p className="shipping-card__text__desc">{t("shipping.bestServicesDescription")}</p>
+                        <h2 className="shipping-card__text__title">{t('shipping.bestServices')}</h2>
+                        <p className="shipping-card__text__desc">
+                            {t('shipping.bestServicesDescription')}
+                        </p>
                     </div>
                 </div>
             </div>

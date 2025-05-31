@@ -1,33 +1,14 @@
-import { useState, useEffect } from 'react';
-import { getToken } from '../api/UsersApi';
+import { NotAllowedPage } from './index.js';
 
-import NotAllowed from './NotAllowed';
+import { useUserData } from '../context/UserContext';
 
 function ProtectedRoute({ children }) {
-    const [haveAccess, setHaveAccess] = useState(null);
+    const { loggedIn } = useUserData();
 
-    useEffect(() => {
-        console.log('ProtectedRoute');
-        getToken()
-            .then((res) => {
-                if (res.status === 200) {
-                    setHaveAccess(true);
-                } else {
-                    console.log(res.status);
-                    setHaveAccess(false);
-                }
-            })
-            .catch((err) => {
-                console.error(err);
-                setHaveAccess(false);
-            });
-    }, []);
-
-    if (haveAccess === null) {
+    if (loggedIn === null) {
         return <div>Loading...</div>;
-    }
-    if (haveAccess === false) {
-        return <NotAllowed />;
+    } else if (loggedIn === false) {
+        return <NotAllowedPage />;
     }
 
     return children;

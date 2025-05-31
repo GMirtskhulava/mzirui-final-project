@@ -21,9 +21,8 @@ export const LoaderProvider = ({ children }) => {
         setLoading(false);
 
         try {
-            return data?.json ? data.json() : data
-        }
-        catch {
+            return data?.json ? data.json() : data;
+        } catch {
             return data;
         }
     };

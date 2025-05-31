@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import RouterPath from '../components/RouterPath';
+import { RouterPath } from '../components/index.js';
 import { Link } from 'react-router-dom';
 
 import { registerUser } from '../api/UsersApi';

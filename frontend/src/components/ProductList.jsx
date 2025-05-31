@@ -1,42 +1,57 @@
 import { useState } from 'react';
-import ProductCard from '../ProductCard';
-import SkeletonLoading from '../SkeletonLoading';
+
+import { ProductCard, SkeletonLoading } from './index.js';
 
 import { useTranslation } from 'react-i18next';
 
-function ProductList({ filteredProducts }) {
+function ProductList({ filteredProducts, maxProductsPerPage }) {
     const { t } = useTranslation();
     const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 5;
+    const productsPerPage = maxProductsPerPage || 20;
 
     const totalProducts = filteredProducts ? filteredProducts.length : 0;
     const totalPages = Math.ceil(totalProducts / productsPerPage);
     const startIndex = (currentPage - 1) * productsPerPage;
-    const currentProducts = filteredProducts ? filteredProducts.slice(startIndex, startIndex + productsPerPage) : null;
+    const currentProducts = filteredProducts
+        ? filteredProducts.slice(startIndex, startIndex + productsPerPage)
+        : null;
 
     const goToPage = (page) => {
-        if(page < 1 || page > totalPages) return;
+        if (page < 1 || page > totalPages) return;
         setCurrentPage(page);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     return (
-        <div className="shop-page__product-list">
-            <div className="shop-page__product-list__products">
+        <div className="product-list">
+            <div className="product-list__products">
                 {!filteredProducts ? (
                     <>
                         <div className="productCard">
                             <div className="productCard__image no-hover">
-                                <SkeletonLoading height="200px" width="15rem" style={{ marginBottom: '20px' }} />
+                                <SkeletonLoading
+                                    height="200px"
+                                    width="15rem"
+                                    style={{ marginBottom: '20px' }}
+                                />
                             </div>
                             <div className="productCard__content">
-                                <SkeletonLoading height="15px" width="15rem" />
+                                <SkeletonLoading
+                                    height="15px"
+                                    width="15rem"
+                                />
 
                                 <div className="productCard__content__price">
-                                    <SkeletonLoading height="12px" width="15rem" />
+                                    <SkeletonLoading
+                                        height="12px"
+                                        width="15rem"
+                                    />
                                 </div>
                                 <div className="productCard__content__stars">
-                                    <SkeletonLoading height="20px" width="15rem" />
+                                    <SkeletonLoading
+                                        height="20px"
+                                        width="15rem"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -53,14 +68,17 @@ function ProductList({ filteredProducts }) {
                         />
                     ))
                 ) : (
-                    <div className="error">{t("productsNotFound")}</div>
+                    <div className="error">{t('productsNotFound')}</div>
                 )}
             </div>
 
             {totalPages > 1 && (
                 <div className="pagination">
-                    <button onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1}>
-                        &lt; {t("previous")}
+                    <button
+                        onClick={() => goToPage(currentPage - 1)}
+                        disabled={currentPage === 1}
+                    >
+                        &lt; {t('previous')}
                     </button>
 
                     {[...Array(totalPages)].map((_, idx) => {
@@ -76,8 +94,11 @@ function ProductList({ filteredProducts }) {
                         );
                     })}
 
-                    <button onClick={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages}>
-                        {t("next")} &gt;
+                    <button
+                        onClick={() => goToPage(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                    >
+                        {t('next')} &gt;
                     </button>
                 </div>
             )}

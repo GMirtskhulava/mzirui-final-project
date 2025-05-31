@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react';
-import RouterPath from '../components/RouterPath';
 
-import Filters from '../components/shopPage/Filters';
-import ProductList from '../components/shopPage/ProductList';
+import { RouterPath, Filters, ProductList } from '../components/index.js';
 
 // import { getProducts } from '../api/ProductsApi';
 
 import { useProductsData } from '../context/ProductsContext';
-
 
 function ShopPage() {
     const { productsData } = useProductsData();
@@ -32,19 +29,19 @@ function ShopPage() {
     // }, []);
 
     useEffect(() => {
-        if(!productsData) return;
+        if (!productsData) return;
         let filtered = productsData;
 
-        if(category !== 'All') {
-            filtered = filtered.filter(product => product.category.name === category);
+        if (category !== 'All') {
+            filtered = filtered.filter((product) => product.category.name === category);
         }
-        if(searchTerm.trim() !== '') {
-            filtered = filtered.filter(product =>
+        if (searchTerm.trim() !== '') {
+            filtered = filtered.filter((product) =>
                 product.title.en.toLowerCase().includes(searchTerm.toLowerCase())
             );
         }
-        filtered = filtered.filter(product =>
-            product.price >= minPrice && product.price <= maxPrice
+        filtered = filtered.filter(
+            (product) => product.price >= minPrice && product.price <= maxPrice
         );
 
         setFilteredProducts(filtered);
@@ -64,7 +61,10 @@ function ShopPage() {
                     maxPrice={maxPrice}
                     setMaxPrice={setMaxPrice}
                 />
-                <ProductList filteredProducts={filteredProducts} />
+                <ProductList
+                    filteredProducts={filteredProducts}
+                    maxProductsPerPage="20"
+                />
             </div>
         </>
     );

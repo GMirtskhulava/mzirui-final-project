@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { forgotPasswordUser } from '../api/UsersApi';
 
-function ForgotPassword() {
+function ForgotPasswordPage() {
     const [inputValues, setInputValues] = useState({
         email: '',
     });
@@ -81,4 +81,4 @@ function ForgotPassword() {
     );
 }
 
-export default ForgotPassword;
+export default ForgotPasswordPage;

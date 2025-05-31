@@ -1,6 +1,15 @@
-import  { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
-function Filters({ searchTerm, setSearchTerm, category, setCategory, minPrice, setMinPrice, maxPrice, setMaxPrice }) {
+function Filters({
+    searchTerm,
+    setSearchTerm,
+    category,
+    setCategory,
+    minPrice,
+    setMinPrice,
+    maxPrice,
+    setMaxPrice,
+}) {
     const trackRef = useRef(null);
     const minTooltipRef = useRef(null);
     const maxTooltipRef = useRef(null);
@@ -14,15 +23,15 @@ function Filters({ searchTerm, setSearchTerm, category, setCategory, minPrice, s
         const minPercent = (minPrice / maxLimit) * 100;
         const maxPercent = (maxPrice / maxLimit) * 100;
 
-        if(trackRef.current) {
+        if (trackRef.current) {
             trackRef.current.style.background = `linear-gradient(to right, #ddd ${minPercent}%, #abd373 ${minPercent}%, #abd373 ${maxPercent}%, #ddd ${maxPercent}%)`;
         }
 
-        if(minTooltipRef.current) {
+        if (minTooltipRef.current) {
             minTooltipRef.current.style.left = `${minPercent}%`;
         }
 
-        if(maxTooltipRef.current) {
+        if (maxTooltipRef.current) {
             maxTooltipRef.current.style.left = `${maxPercent}%`;
         }
     }, [minPrice, maxPrice]);
@@ -79,7 +88,10 @@ function Filters({ searchTerm, setSearchTerm, category, setCategory, minPrice, s
                         <h2>Price</h2>
                     </div>
                     <div className="shop-page__filters__main-filter__section__range-slider">
-                        <div className="slider-track" ref={trackRef}></div>
+                        <div
+                            className="slider-track"
+                            ref={trackRef}
+                        ></div>
 
                         <input
                             type="range"
@@ -96,10 +108,16 @@ function Filters({ searchTerm, setSearchTerm, category, setCategory, minPrice, s
                             onChange={handleMaxChange}
                         />
 
-                        <div className="tooltip min-tooltip" ref={minTooltipRef}>
+                        <div
+                            className="tooltip min-tooltip"
+                            ref={minTooltipRef}
+                        >
                             ${minPrice}
                         </div>
-                        <div className="tooltip max-tooltip" ref={maxTooltipRef}>
+                        <div
+                            className="tooltip max-tooltip"
+                            ref={maxTooltipRef}
+                        >
                             ${maxPrice}
                         </div>
                     </div>

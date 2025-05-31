@@ -1,11 +1,4 @@
-import { useEffect } from 'react';
-
-
-import RouterPath from '../components/RouterPath';
-
-import Shipping from '../components/homePage/Shipping';
-import CompanyInfo from '../components/aboutPage/CompanyInfo';
-import OurTeam from '../components/aboutPage/OurTeam';
+import { RouterPath, Shipping, CompanyInfo, OurTeam } from '../components/index.js';
 
 function AboutPage() {
     return (

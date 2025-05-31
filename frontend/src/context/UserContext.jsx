@@ -13,7 +13,7 @@ const UserProvider = ({ children }) => {
     const login = async (userData) => {
         setUserData(userData);
         setLoggedIn(true);
-    }
+    };
 
     const logout = () => {
         setUserData(null);

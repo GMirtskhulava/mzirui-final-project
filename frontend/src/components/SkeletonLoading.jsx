@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-function SkeletonLoading({ height = '20px', width = '100%',  style = {} }) {
+function SkeletonLoading({ height = '20px', width = '100%', style = {} }) {
     const defaultStyle = {
         height,
         width,
@@ -9,7 +9,12 @@ function SkeletonLoading({ height = '20px', width = '100%',  style = {} }) {
         ...style,
     };
 
-    return <div style={defaultStyle} className="skeleton-box" />;
+    return (
+        <div
+            style={defaultStyle}
+            className="skeleton-box"
+        />
+    );
 }
 
-export default SkeletonLoading
+export default SkeletonLoading;
