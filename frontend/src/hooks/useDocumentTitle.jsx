@@ -5,45 +5,48 @@ const useDocumentTitle = () => {
     const { pathname } = useLocation();
 
     useEffect(() => {
-        switch (pathname) {
-            case '/':
-                document.title = 'Home';
+        switch (true) {
+            case pathname === '/':
+                document.title = 'Home | Pronia';
                 break;
-            case '/contact':
-                document.title = 'Contact Us';
+            case pathname === '/contact':
+                document.title = 'Contact Us | Pronia';
                 break;
-            case '/about':
-                document.title = 'About Us';
+            case pathname === '/about':
+                document.title = 'About Us | Pronia';
                 break;
-            case '/shop':
-                document.title = 'Shop';
+            case pathname === '/shop':
+                document.title = 'Shop | Pronia';
                 break;
-            case '/blog':
-                document.title = 'Blog';
+            case pathname === '/blog':
+                document.title = 'Blog | Pronia';
                 break;
-            case '/login':
-                document.title = 'Login';
+            case pathname === '/login':
+                document.title = 'Login | Pronia';
                 break;
-            case '/register':
-                document.title = 'Register';
+            case pathname === '/register':
+                document.title = 'Register | Pronia';
                 break;
-            case '/profile':
-                document.title = 'Your Profile';
+            case pathname === '/profile':
+                document.title = 'Your Profile | Pronia';
                 break;
-            case '/whishlist':
-                document.title = 'Wishlist';
+            case pathname === '/whishlist':
+                document.title = 'Wishlist | Pronia';
                 break;
-            case '/checkout':
-                document.title = 'Checkout';
+            case pathname === '/checkout':
+                document.title = 'Checkout | Pronia';
                 break;
-            case '/forgot-password':
-                document.title = 'Forgot Password';
+            case pathname === '/forgot-password':
+                document.title = 'Forgot Password | Pronia';
                 break;
-            case '/reset-password':
-                document.title = 'Reset Password';
+            case pathname.startsWith('/reset-password/'):
+                document.title = 'Reset Password | Pronia';
+                break;
+            case pathname.startsWith('/product/'):
+                document.title = 'Product Details | Pronia';
                 break;
             default:
-                document.title = '404 - Page not found';
+                document.title = '404 - Page not found | Pronia';
                 break;
         }
     }, [pathname]);

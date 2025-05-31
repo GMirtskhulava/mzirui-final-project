@@ -38,3 +38,40 @@
         }
     }
 }
+.shipping-section--smaller{
+    width: 100%;
+    padding: 3rem 0;
+
+    .shipping-container{
+        width: 100%;
+        // padding: 0 15%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+
+        & .shipping-card {
+            padding: 15px 10px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: 1px dashed $primary-color;
+            border-radius: 5px;
+            
+            &__icon{
+                user-select: none;
+            }
+
+            &__text{
+                &__title{
+                    color: $secondary-color;
+                    font-size: 18px;
+                }
+                &__desc{
+                    color: $secondary-color;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}

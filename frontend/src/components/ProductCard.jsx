@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import i18n from 'i18next';
 
@@ -16,7 +15,7 @@ function ProductCard({ id, title, price, stars, imgSrc }) {
                     <button>
                         <i className="fa-solid fa-heart"></i>
                     </button>
-                    <button>
+                    <button onClick={() => window.location.href = `/product/${id}`}>
                         <i className="fa-solid fa-eye"></i>
                     </button>
                     <button>

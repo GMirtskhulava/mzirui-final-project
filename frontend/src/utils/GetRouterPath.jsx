@@ -1,33 +1,33 @@
 export default function GetRouterPathName(pathname) {
-    if (pathname.startsWith('/reset-password/')) {
-        return 'Reset Password | Pronia';
-    }
-
-    switch (pathname) {
-        case '/':
+    switch (true) {
+        case pathname === '/':
             return 'Home';
-        case '/contact':
+        case pathname === '/contact':
             return 'Contact Us';
-        case '/about':
+        case pathname === '/about':
             return 'About Us';
-        case '/shop':
+        case pathname === '/shop':
             return 'Shop';
-        case '/blog':
+        case pathname === '/blog':
             return 'Blog';
-        case '/login':
+        case pathname === '/login':
             return 'Login';
-        case '/register':
+        case pathname === '/register':
             return 'Register';
-        case '/profile':
+        case pathname === '/profile':
             return 'Your Profile';
-        case '/whishlist':
+        case pathname === '/whishlist':
             return 'Wishlist';
-        case '/checkout':
+        case pathname === '/checkout':
             return 'Checkout';
-        case '/forgot-password':
+        case pathname === '/forgot-password':
             return 'Forgot Password';
-        case '/reset-password':
+        case pathname === '/reset-password':
             return 'Reset Password';
+        case pathname.startsWith('/reset-password/'):
+            return 'Reset Password';
+        case pathname.startsWith('/product/'):
+            return 'Product Details';
         default:
             return '404 - Page not found';
     }

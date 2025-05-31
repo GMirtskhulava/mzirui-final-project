@@ -1,0 +1,137 @@
+@use "../abstracts/variables" as *;
+
+.single-product-page{
+    width: 100%;
+    padding: 5rem 15%;
+
+    &__bottom{
+        width: 100%;
+        display: flex;
+        gap: 2rem;
+        &__image{
+            width: 50%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid $light-gray-color;
+            img{
+                width: 70%;
+                object-fit: center center;
+            }
+        }
+
+        &__details{
+            width: 50%;
+
+            &__title{
+                font-size: 1.8rem;
+                font-weight: 400;
+                color: $secondary-color;
+                margin-bottom: 0.5rem;
+            }
+            &__price{
+                font-size: 2.2rem;
+                font-weight: 400;
+                color: $primary-color;
+                margin-bottom: 1rem;
+            }
+            &__stars{
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                margin-bottom: 1.5rem;
+
+                & i{
+                    color: #ffe600;
+                }
+            }
+            &__description{
+                font-size: 1.2rem;
+                font-weight: 300;
+                color: $black-color;
+                margin-bottom: 1.5rem;
+                line-height: 31px;
+            }
+            &__buttons{
+                display: flex;
+                gap: 1rem;
+                margin-bottom: 2rem;
+
+                &__quantity{
+                    width: 60px;
+                    height: 50px;
+                    padding: 0.5rem;
+                    background-color: $secondary-color;
+                    color: $white-color;
+                    border: 0;
+                    border-radius: 5px;
+                    text-align: center;
+                    &:focus{
+                        outline: none;
+                    }
+                }
+                &__add-to-cart{
+                    font-size: 16px;
+                    padding: 0.5rem 1rem;
+                    background-color: $primary-color;
+                    color: $white-color;
+                    border: 0;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+
+                    &:hover{
+                        background-color: $secondary-color;
+                    }
+                }
+                &__add-to-wishlist{
+                    width: 50px;
+                    font-size: 16px;
+                    padding: 0.5rem;
+                    background-color: $secondary-color;
+                    color: $white-color;
+                    border: 0;
+                    border-radius: 5px;
+
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+
+                    &:hover{
+                        background-color: $primary-color;
+                    }
+                }
+            }
+            &__info{
+                &__item{
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    padding-bottom: 15px;
+                    font-weight: bold;
+                    color: $secondary-color;
+                    font-size: 16px;
+                    & ul{
+                        margin: 0;
+                        padding: 0;
+                        list-style: none;
+                        display: flex;
+                        gap: 1rem;
+
+                        & li{
+                            font-weight: 500;
+                            color: $gray-color;
+                            font-size: 16px;
+                            cursor: pointer;
+                            transition: color 0.3s ease;
+                            &:hover{
+                                color: $primary-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
