@@ -2,14 +2,27 @@ import mongoose from "mongoose";
 
 const users = new mongoose.Schema({
     username: {
-        type: String
+        type: String,
+        required: true
     },
     email: {
-        type: String
+        type: String,
+        required: true
     },
     password: {
-        type: String
+        type: String,
+        required: true
     },
+    wishlist: {
+        type: Array,
+    },
+    cart: {
+        type: Array,
+    },
+    admin: {
+        type: Boolean,
+        default: false
+    }
 
 }, {timestamps: true})
 

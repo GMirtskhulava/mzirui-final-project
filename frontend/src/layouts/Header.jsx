@@ -11,12 +11,14 @@ import { SkeletonLoading } from '../components/index.js';
 import { useTranslation } from 'react-i18next';
 //
 import { useUserData } from '../context/UserContext';
+import { useWishlistData } from '../context/WishlistContext.jsx';
 //
 
 function Header() {
     const [choosedLanguage, setChoosedLanguage] = useState(localStorage.getItem('lang') || 'en');
     const { t, i18n } = useTranslation();
     const { loggedIn } = useUserData();
+    const { wishlistData } = useWishlistData();
 
     // useEffect(() => {
     //     getToken()
@@ -72,7 +74,11 @@ function Header() {
                                 <i className="fa-solid fa-user"></i>
                             </Link>
                             <Link to="/wishlist">
-                                <i className="fa-solid fa-heart"></i>
+                                <i className="fa-solid fa-heart user-wishlist-icon">
+                                    {wishlistData && wishlistData.length > 0 ? (
+                                        <span className="user-wishlist-icon__wishlist-value">{wishlistData.length}</span>
+                                    ) : <></>}
+                                </i>
                             </Link>
                             <Link to="/cart">
                                 <i className="fa-solid fa-cart-shopping user-cart-icon">

@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { LoaderProvider } from './context/LoaderContext.jsx';
 import { UserProvider } from './context/UserContext.jsx';
 import { ProductsProvider } from './context/ProductsContext.jsx';
+import { WishlistProvider } from './context/WishlistContext.jsx';
 
 import './language/i18n.js';
 
@@ -16,7 +17,9 @@ root.render(
             <UserProvider>
                 <LoaderProvider>
                     <ProductsProvider>
-                        <App />
+                        <WishlistProvider>
+                            <App />
+                        </WishlistProvider>
                     </ProductsProvider>
                 </LoaderProvider>
             </UserProvider>

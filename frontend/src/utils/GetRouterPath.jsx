@@ -28,6 +28,10 @@ export default function GetRouterPathName(pathname) {
             return 'Reset Password';
         case pathname.startsWith('/product/'):
             return 'Product Details';
+        case pathname === '/wishlist': 
+            return 'Wishlist';
+        case pathname === '/cart':
+            return 'Cart';
         default:
             return '404 - Page not found';
     }

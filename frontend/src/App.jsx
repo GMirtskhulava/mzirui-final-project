@@ -48,6 +48,7 @@ import { getToken, getUser } from './api/UsersApi';
 import { getProducts } from './api/ProductsApi';
 import { useUserData } from './context/UserContext';
 import { useProductsData } from './context/ProductsContext';
+import { useWishlistData } from './context/WishlistContext.jsx';
 
 // https://htmldemo.net/pronia/pronia/index.html
 function App() {
@@ -58,6 +59,7 @@ function App() {
     const { useFakeLoader } = useLoader();
     const { loggedIn, userData, login, logout } = useUserData();
     const { setProductsData } = useProductsData();
+    const { wishlistData, setWishlistData } = useWishlistData();
 
     useEffect(() => {
         useFakeLoader();
@@ -91,7 +93,6 @@ function App() {
             await getProducts()
                 .then((res) => {
                     setProductsData(res.data.products);
-                    console.log(res.data.products);
                 })
                 .catch((err) => {
                     setProductsData([]);
@@ -100,8 +101,20 @@ function App() {
 
         fetchUserData();
         fetchProductData();
-        if (!loggedIn) logout();
+        if (!loggedIn) {
+            logout();
+        }
     }, []);
+
+    useEffect(() => {
+        if (loggedIn && userData) {
+            const wishlist = userData.wishlist || [];
+            setWishlistData(wishlist);
+        } else {
+            const localWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            setWishlistData(localWishlist);
+        }
+    }, [loggedIn, userData]);
     return (
         <>
             <Header />
@@ -160,12 +173,8 @@ function App() {
                             }
                         ></Route>
                         <Route
-                            path="/whishlist"
-                            element={
-                                <ProtectedRoute>
-                                    <WishlistPage />
-                                </ProtectedRoute>
-                            }
+                            path="/wishlist"
+                            element={<WishlistPage />}
                         ></Route>
                         <Route
                             path="/checkout"

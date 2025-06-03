@@ -69,3 +69,26 @@ export const checkResetTokenValidation = async (token) => {
     });
     return response;
 };
+
+export const addWishlistItem = async (productId, userId) => {
+    const response = await axios.post(
+        'http://localhost:2508/api/users/wishlist-add',
+        JSON.stringify({ productId: productId, userId: userId }),
+        {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+        }
+    );
+    return response;
+};
+export const removeWishlistItem = async (productId, userId) => {
+    const response = await axios.delete(
+        'http://localhost:2508/api/users/wishlist-remove',
+        {
+            data: { productId, userId },
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+        }
+    );
+    return response;
+};

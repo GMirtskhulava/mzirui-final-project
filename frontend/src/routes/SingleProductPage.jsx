@@ -3,12 +3,18 @@ import { useEffect, useState } from 'react';
 import { RouterPath, Shipping } from '../components/index.js';
 import i18n from 'i18next';
 import { useParams } from 'react-router-dom';
+import { useUserData } from '../context/UserContext.jsx';
 import { useProductsData } from '../context/ProductsContext.jsx';
+import { useWishlistData } from '../context/WishlistContext.jsx';
 
 function SingleProductPage() {
     const { id } = useParams();
+    const { loggedIn, userData } = useUserData();
     const { productsData } = useProductsData();
+    const { isInWishlist, addWishlistItem, removeWishlistItem } = useWishlistData();
+
     const [product, setProduct] = useState(null);
+    const [clickedButton, setClickedButton] = useState(false);
 
     useEffect(() => {
         if (!productsData) {
@@ -19,6 +25,39 @@ function SingleProductPage() {
         }
     }, [productsData, id]);
 
+    const toggleWishlist = async (productId) => {
+        if(clickedButton) return console.log("Button already clicked");
+        setClickedButton(true);
+        if(isInWishlist(productId)) {
+            if (!loggedIn) {
+                removeWishlistItem(productId);
+            }
+            else {
+                if (await removeWishlistItem(productId, userData._id)) {
+                    console.log("Removed successfully");
+                    // notification samomavlod
+                }
+                else {
+                    console.log("Failed to remove item from wishlist");
+                }
+            }
+        }
+        else {
+            if(!loggedIn) {
+                addWishlistItem(productId);
+            }
+            else {
+                if(await addWishlistItem(productId, userData._id)) {
+                    console.log("Added successfully");
+                    // notification samomavlod
+                }
+                else {
+                    console.log("Failed to add item to wishlist");
+                }
+            }
+        }
+        setClickedButton(false);
+    }
 
     return (
         <>
@@ -31,11 +70,12 @@ function SingleProductPage() {
                 ) : (
                     <div className='single-product-page__bottom'>
                         <div className='single-product-page__bottom__image'>
-                            <img src={product.image} alt="Product" />
+                            <img src={product.image["medium"]} alt="Product" />
                         </div>
                         <div className='single-product-page__bottom__details'>
                             <h2 className='single-product-page__bottom__details__title'>
                                 {product.title[i18n.language]}
+                                {product.countInStock === 0 && <span className='single-product-page__bottom__details__title__out-of-stock'>(Out of Stock)</span>}
                             </h2>
                             <h1 className='single-product-page__bottom__details__price'>
                                 ${product.price}
@@ -59,8 +99,8 @@ function SingleProductPage() {
                                 <button className='single-product-page__bottom__details__buttons__add-to-cart'>
                                     Add to Cart
                                 </button>
-                                <button className='single-product-page__bottom__details__buttons__add-to-wishlist'>
-                                    <i className="fa-solid fa-heart"></i>
+                                <button className='single-product-page__bottom__details__buttons__add-to-wishlist' onClick={() => toggleWishlist(product._id)}>
+                                    <i className={`fa-solid fa-heart ${isInWishlist(product._id) ? 'active' : ''}`}></i>
                                 </button>
                             </div>
                             <Shipping style="1" />

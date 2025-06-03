@@ -90,10 +90,10 @@
                     color: $primary-color;
                 }
             }
-            .user-cart-icon{
+            .user-cart-icon, .user-wishlist-icon{
                 position: relative;
 
-                &__cart-value{
+                &__cart-value, &__wishlist-value{
                     // padding: 5px;
                     font-size: 12px;
                     position: absolute;

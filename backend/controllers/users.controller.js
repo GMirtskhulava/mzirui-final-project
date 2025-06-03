@@ -185,3 +185,51 @@ export const checkResetTokenValidation = async (req, res) => {
         res.status(500).json({ err: `Server error: ${error.message}` });
     }
 }
+
+export const wishlistAdd = async (req, res) => {
+    try {
+        const { productId, userId } = req.body;
+
+        if(!productId) {
+            return res.status(400).json({ err: 'Product ID is required' });
+        }
+
+        const user = await Users.findById(userId);
+        if(!user) {
+            return res.status(404).json({ err: 'User not found' });
+        }
+
+        if(!user.wishlist) {
+            user.wishlist = [];
+        }
+        const updatedWishlist = [...user.wishlist, productId];
+        const updatedUser = await Users.findOneAndUpdate({ _id: userId }, { wishlist: updatedWishlist }, { new: true } );
+
+        res.status(200).json({ msg: 'Product added to wishlist', data: updatedUser });
+    } catch (error) {
+        res.status(500).json({ err: `Server error: ${error.message}` });
+    }
+}
+export const wishlistRemove = async (req, res) => {
+    try {
+        console.log(req.body)
+        const { productId, userId } = req.body;
+        if(!productId) {
+            return res.status(400).json({ err: 'Product ID is required' });
+        }
+
+        const user = await Users.findById(userId);
+
+        if(!user) {
+            return res.status(404).json({ err: 'User not found' });
+        }
+
+        const updatedWishlist = user.wishlist.filter(id => id.toString() !== productId.toString());
+        const updatedUser = await Users.findOneAndUpdate({ _id: userId }, { wishlist: updatedWishlist }, { new: true } );
+
+        res.status(200).json({ msg: 'Product removed from wishlist', data: updatedUser });
+        console.log("deleted");
+    } catch (error) {
+        res.status(500).json({ err: `Server error: ${error.message}` });
+    }
+}

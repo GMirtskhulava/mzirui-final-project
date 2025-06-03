@@ -45,6 +45,12 @@ const useDocumentTitle = () => {
             case pathname.startsWith('/product/'):
                 document.title = 'Product Details | Pronia';
                 break;
+            case pathname === '/wishlist':
+                document.title = 'Wishlist | Pronia';
+                break;
+            case pathname === '/cart':
+                document.title = 'Cart | Pronia';
+                break;
             default:
                 document.title = '404 - Page not found | Pronia';
                 break;

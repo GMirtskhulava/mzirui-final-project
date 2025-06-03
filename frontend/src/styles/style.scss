@@ -17,6 +17,8 @@
 @use "./routes/resetPasswordPage";
 @use "./routes/shopPage";
 @use "./routes/singleProductPage";
+@use "./routes/wishlistPage";
+@use "./routes/cartPage";
 
 // components
 @use "./components/homePage/slider";
