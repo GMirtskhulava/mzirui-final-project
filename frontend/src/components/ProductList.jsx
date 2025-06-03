@@ -9,12 +9,15 @@ function ProductList({ filteredProducts, maxProductsPerPage }) {
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = maxProductsPerPage || 20;
 
-    const totalProducts = filteredProducts ? filteredProducts.length : 0;
+    const visibleProducts = filteredProducts
+        ? filteredProducts.filter(product => !product.hidden)
+        : [];
+
+    const totalProducts = visibleProducts.length;
     const totalPages = Math.ceil(totalProducts / productsPerPage);
     const startIndex = (currentPage - 1) * productsPerPage;
-    const currentProducts = filteredProducts
-        ? filteredProducts.slice(startIndex, startIndex + productsPerPage)
-        : null;
+    const currentProducts = visibleProducts.slice(startIndex, startIndex + productsPerPage);
+
 
     const goToPage = (page) => {
         if (page < 1 || page > totalPages) return;

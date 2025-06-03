@@ -38,6 +38,10 @@ const productSchema = new mongoose.Schema({
         min: 0,
         default: 0
     },
+    hidden: {
+        type: Boolean,
+        default: false
+    },
     image: {
         type: Object,
 

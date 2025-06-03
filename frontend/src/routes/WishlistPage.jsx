@@ -92,24 +92,25 @@ function WishlistPage() {
                                     <td>-</td>
                                 </tr>
                             ) : wishlistProducts.map((product) => (
-                                <tr key={product._id}>
+                                <tr key={product._id} className={product.hidden ? "hidden-product" : ""}>
                                     <td className='wishlist-page__body__remove'>
-                                        <button className='wishlist-page__body__remove__btn' onClick={() => removeFromWishlist(product._id)}><i className="fa-solid fa-trash"></i></button>
+                                        <button className='wishlist-page__body__remove__btn' disabled={product.hidden} onClick={() => removeFromWishlist(product._id)}><i className="fa-solid fa-trash"></i></button>
                                     </td>
                                     <td className='wishlist-page__body__image'>
-                                        <Link to={`/product/${product._id}`}><img src={product.image["small"]} alt="Product" /></Link>
+                                        <Link to={product.hidden ? '' : `/product/${product._id}`} ><img src={product.image["small"]} alt="Product" /></Link>
                                     </td>
                                     <td className='wishlist-page__body__product'>
-                                        <Link to={`/product/${product._id}`}>{product.title[i18n.language]}</Link>
+                                        <Link to={product.hidden ? '' : `/product/${product._id}`} >{product.title[i18n.language]}</Link>
+                                        {product.hidden && <span className="hidden-product-label">[Unavailable]</span>}
                                     </td>
                                     <td className='wishlist-page__body__unit-price'>
-                                        ${product.price}
+                                        ${product.hidden ? '-' : product.price}
                                     </td>
-                                    <td className={`wishlist-page__body__stock-status ${product.countInStock > 0 ? '' : 'out-of-stock'}`}>
-                                        {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
+                                    <td className={`wishlist-page__body__stock-status ${product.hidden ? '' : product.countInStock > 0 ? '' : 'out-of-stock'}`}>
+                                        {product.hidden ? '-' : product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
                                     </td>
                                     <td className='wishlist-page__body__add-to-cart'>
-                                        <button className='wishlist-page__body__add-to-cart__btn'>Add to Cart</button>
+                                        <button className='wishlist-page__body__add-to-cart__btn' disabled={product.hidden}>Add to Cart</button>
                                     </td>
                                 </tr>
                             ))

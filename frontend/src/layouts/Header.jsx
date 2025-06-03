@@ -65,14 +65,20 @@ function Header() {
                     </a>
                 </div>
                 <div className="header-center-box__settings-box">
-                    {loggedIn === true ? (
+                    
                         <>
                             <Link to="/">
                                 <i className="fa-solid fa-search"></i>
                             </Link>
-                            <Link to="/profile">
-                                <i className="fa-solid fa-user"></i>
-                            </Link>
+                            {loggedIn === true ? (
+                                <Link to="/profile">
+                                    <i className="fa-solid fa-user"></i>
+                                </Link>
+                            ) : loggedIn === false ? (
+                                <Link to="/login">{t('signIn')}</Link>
+                            ) : (
+                                <SkeletonLoading width="100px" />
+                            )}
                             <Link to="/wishlist">
                                 <i className="fa-solid fa-heart user-wishlist-icon">
                                     {wishlistData && wishlistData.length > 0 ? (
@@ -80,17 +86,20 @@ function Header() {
                                     ) : <></>}
                                 </i>
                             </Link>
-                            <Link to="/cart">
-                                <i className="fa-solid fa-cart-shopping user-cart-icon">
-                                    <span className="user-cart-icon__cart-value">1</span>
-                                </i>
-                            </Link>
+                            {loggedIn === true ? (
+                                <Link to="/cart">
+                                    <i className="fa-solid fa-cart-shopping user-cart-icon">
+                                        <span className="user-cart-icon__cart-value">1</span>
+                                    </i>
+                                </Link>
+                            ) : loggedIn === false ? (
+                                <></>
+                            ) : (
+                                <SkeletonLoading width="10px" />
+                            )}
+
                         </>
-                    ) : loggedIn === false ? (
-                        <a href="/login">{t('signIn')}</a>
-                    ) : (
-                        <SkeletonLoading width="100px" />
-                    )}
+
                 </div>
             </div>
             <div className="header-bottom-box">

@@ -73,9 +73,14 @@
                 text-decoration: none;
                 transition: color 0.3s ease;
 
+
                 &:hover {
                     color: $primary-color;
                 }
+            }
+            .hidden-product-label{
+                color: $red-color;
+                margin-left: 5px;
             }
         }
 
@@ -103,5 +108,20 @@
             }
         }
 
+    }
+}
+
+
+.hidden-product {
+    .wishlist-page__body {
+        &__remove, &__add-to-cart{
+            & button {
+                cursor: not-allowed !important;
+            }
+
+        }
+    }
+    a{
+        cursor: not-allowed !important;
     }
 }
