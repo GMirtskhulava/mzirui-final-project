@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { Link } from 'react-router-dom'
 import { RouterPath, SkeletonLoading } from '../components/index.js'
@@ -102,6 +103,7 @@ function WishlistPage() {
                                     <td className='wishlist-page__body__product'>
                                         <Link to={product.hidden ? '' : `/product/${product._id}`} >{product.title[i18n.language]}</Link>
                                         {product.hidden && <span className="hidden-product-label">[Unavailable]</span>}
+                                        {userData.admin ? <p className='wishlist-page__body__product__adm-id'>ID: <span>{product._id.toString()}</span> <CopyToClipboard text={product._id}><span><i class="fa-solid fa-copy wishlist-page__body__product__adm-id__copy"></i></span></CopyToClipboard></p> : <></>}
                                     </td>
                                     <td className='wishlist-page__body__unit-price'>
                                         ${product.hidden ? '-' : product.price}

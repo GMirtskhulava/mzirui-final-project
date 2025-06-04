@@ -38,6 +38,25 @@
                     font-size: 15px;
                     
                 }
+
+                &__adm-id{
+                    font-size: 13px;
+                    & span{
+                        user-select: text;
+                    }
+                    &__copy{
+                        font-size: 13px;
+                        margin-left: 3px;
+                        user-select: none;
+                        color: $secondary-color;
+                        transition: color 0.3s ease;
+                        cursor: pointer;
+                        &:hover{
+                            color: $primary-color;
+                        }
+
+                    }
+                }
             }
 
             &__price {

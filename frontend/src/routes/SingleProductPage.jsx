@@ -1,4 +1,5 @@
-import { useEffect, useState, useTransition } from 'react';
+import { useEffect, useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { RouterPath, Shipping } from '../components/index.js';
 import i18n from 'i18next';
@@ -90,6 +91,7 @@ function SingleProductPage() {
                                 {product.hidden && <span className="single-product-page__bottom__details__title__hidden-product-label">[Unavailable]</span>}
                                 {userData.admin ? product.countInStock === 0 && <span className='single-product-page__bottom__details__title__out-of-stock'>(Out of Stock)</span> 
                                     : !product.hidden && product.countInStock === 0 && <span className='single-product-page__bottom__details__title__out-of-stock'>(Out of Stock)</span>}
+                                {userData.admin ? <p className='single-product-page__bottom__details__title__adm-id'>ID: <span>{product._id}</span> <CopyToClipboard text={product._id}><span><i class="fa-solid fa-copy single-product-page__bottom__details__title__adm-id__copy"></i></span></CopyToClipboard></p> : <></>}
                             </h2>
                             <h1 className='single-product-page__bottom__details__price'>
                                 ${product.price}
