@@ -1,6 +1,7 @@
 import { NotAllowedPage } from './index.js';
 
-import { useUserData } from '../context/UserContext';
+import { useUserData } from '../context/index.js';
+
 
 function ProtectedRoute({ children }) {
     const { loggedIn } = useUserData();

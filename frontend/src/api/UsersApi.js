@@ -92,3 +92,26 @@ export const removeWishlistItem = async (productId, userId) => {
     );
     return response;
 };
+
+export const addCartItem = async ({productId, productCount}, userId) => {
+    const response = await axios.post(
+        'http://localhost:2508/api/users/cart-add',
+        JSON.stringify({ productId: productId, productCount: productCount, userId: userId }),
+        {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+        }
+    );
+    return response;
+};
+export const removeCartItem = async (productId, userId) => {
+    const response = await axios.delete(
+        'http://localhost:2508/api/users/cart-remove',
+        {
+            data: { productId, userId },
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+        }
+    );
+    return response;
+};

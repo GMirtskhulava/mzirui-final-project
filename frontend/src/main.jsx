@@ -7,6 +7,8 @@ import { LoaderProvider } from './context/LoaderContext.jsx';
 import { UserProvider } from './context/UserContext.jsx';
 import { ProductsProvider } from './context/ProductsContext.jsx';
 import { WishlistProvider } from './context/WishlistContext.jsx';
+import { CartProvider } from './context/CartContext.jsx';
+import { NotifProvider } from './context/NotifContext.jsx';
 
 import './language/i18n.js';
 
@@ -17,9 +19,13 @@ root.render(
             <UserProvider>
                 <LoaderProvider>
                     <ProductsProvider>
-                        <WishlistProvider>
-                            <App />
-                        </WishlistProvider>
+                        <NotifProvider>
+                            <WishlistProvider>
+                                <CartProvider>
+                                    <App />
+                                </CartProvider>
+                            </WishlistProvider>
+                        </NotifProvider>
                     </ProductsProvider>
                 </LoaderProvider>
             </UserProvider>

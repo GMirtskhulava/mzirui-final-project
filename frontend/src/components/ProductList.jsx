@@ -61,14 +61,7 @@ function ProductList({ filteredProducts, maxProductsPerPage }) {
                     </>
                 ) : currentProducts.length > 0 ? (
                     currentProducts.map((product) => (
-                        <ProductCard
-                            key={product._id}
-                            id={product._id}
-                            title={product.title}
-                            price={product.price}
-                            stars={product.stars}
-                            imgSrc={product.image}
-                        />
+                        <ProductCard key={product._id} product={product} />
                     ))
                 ) : (
                     <div className="error">{t('productsNotFound')}</div>

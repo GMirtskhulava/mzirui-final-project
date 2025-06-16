@@ -4,7 +4,7 @@ import { RouterPath, Filters, ProductList } from '../components/index.js';
 
 // import { getProducts } from '../api/ProductsApi';
 
-import { useProductsData } from '../context/ProductsContext';
+import { useProductsData } from '../context/index.js';
 
 function ShopPage() {
     const { productsData } = useProductsData();

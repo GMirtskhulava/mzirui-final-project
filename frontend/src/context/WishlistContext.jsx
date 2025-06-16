@@ -4,7 +4,7 @@ import { addWishlistItem as wishlistAdd, removeWishlistItem as wishlistRemove } 
 import { useUserData } from './UserContext';
 
 const WishlistContext = createContext({
-    wishlistData: null
+    wishlistData: null,
 });
 
 export const useWishlistData = () => useContext(WishlistContext);

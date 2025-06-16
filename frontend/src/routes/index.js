@@ -14,6 +14,7 @@ import ResetPasswordPage from './ResetPasswordPage.jsx';
 import ShopPage from './ShopPage.jsx';
 import SingleProductPage from './SingleProductPage.jsx';
 import WishlistPage from './WishlistPage.jsx';
+import CartPage from './CartPage.jsx';
 
 export {
     AboutPage,
@@ -32,4 +33,5 @@ export {
     ShopPage,
     SingleProductPage,
     WishlistPage,
+    CartPage
 };

@@ -4,10 +4,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Link } from 'react-router-dom'
 import { RouterPath, SkeletonLoading } from '../components/index.js'
 
-import { useUserData } from '../context/UserContext'
-import { useProductsData } from '../context/ProductsContext.jsx'
-import { useWishlistData } from '../context/WishlistContext.jsx';
-
+import { useUserData, useProductsData, useWishlistData, useCartData, useNotification } from '../context/index.js';
 
 import i18n from 'i18next'
 
@@ -15,8 +12,13 @@ function WishlistPage() {
     const { loggedIn, userData } = useUserData();
     const { productsData } = useProductsData();
     const { wishlistData, isInWishlist, removeWishlistItem } = useWishlistData();
+    const { isInCart, addCartItem, removeCartItem } = useCartData();
+    const { showNotification } = useNotification();
+
 
     const [wishlistProducts, setWishlistProducts] = useState();
+    const [clickedButton, setClickedButton] = useState(false);
+
     
 
     useEffect(() => {
@@ -43,6 +45,33 @@ function WishlistPage() {
             }
         }
     }
+
+    const toggleCart = async (product) => {
+        if(clickedButton) return console.log("Button already clicked");
+        if(product.hidden) return console.log("Product is unavailable"), showNotification("cart", "Product is unavailable", 1);
+        if(product.countInStock < 1) return showNotification("cart", "Product is not in Stock", 1)
+        if(!loggedIn) return showNotification("cart", "You are not logged in", 1);
+        setClickedButton(true);
+        if(isInCart(product._id)) {
+            if (await removeCartItem(product._id, userData._id)) {
+                showNotification("cart", "Removed successfully")
+            }
+            else {
+                console.log("Failed to remove item from cart");
+                showNotification("cart", "Failed to remove item from cart", 1)
+            }
+        }
+        else {
+            if(await addCartItem({productId: product._id, productCount: 1}, userData._id)) {
+                showNotification("cart", "Added successfully")
+            }
+            else {
+                showNotification("cart", "Failed to add item from cart", 1)
+            }
+        }
+        setClickedButton(false);
+    }
+
 
 
     return (
@@ -103,7 +132,7 @@ function WishlistPage() {
                                     <td className='wishlist-page__body__product'>
                                         <Link to={product.hidden ? '' : `/product/${product._id}`} >{product.title[i18n.language]}</Link>
                                         {product.hidden && <span className="hidden-product-label">[Unavailable]</span>}
-                                        {userData.admin ? <p className='wishlist-page__body__product__adm-id'>ID: <span>{product._id.toString()}</span> <CopyToClipboard text={product._id}><span><i class="fa-solid fa-copy wishlist-page__body__product__adm-id__copy"></i></span></CopyToClipboard></p> : <></>}
+                                        {userData?.admin ? <p className='wishlist-page__body__product__adm-id'>ID: <span>{product._id.toString()}</span> <CopyToClipboard text={product._id}><span><i className="fa-solid fa-copy wishlist-page__body__product__adm-id__copy"></i></span></CopyToClipboard></p> : <></>}
                                     </td>
                                     <td className='wishlist-page__body__unit-price'>
                                         ${product.hidden ? '-' : product.price}
@@ -111,8 +140,8 @@ function WishlistPage() {
                                     <td className={`wishlist-page__body__stock-status ${product.hidden ? '' : product.countInStock > 0 ? '' : 'out-of-stock'}`}>
                                         {product.hidden ? '-' : product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
                                     </td>
-                                    <td className='wishlist-page__body__add-to-cart'>
-                                        <button className='wishlist-page__body__add-to-cart__btn' disabled={product.hidden}>Add to Cart</button>
+                                    <td className='wishlist-page__body__add-to-cart' >
+                                        <button className='wishlist-page__body__add-to-cart__btn' disabled={product.hidden} onClick={() => toggleCart(product)} >{isInCart(product._id) ? "Remove from Cart" : "Add to Cart"}</button>
                                     </td>
                                 </tr>
                             ))

@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 import { logo } from '../assets/index.js';
 
 //
-
 import { SkeletonLoading } from '../components/index.js';
 
 import { useTranslation } from 'react-i18next';
 //
-import { useUserData } from '../context/UserContext';
-import { useWishlistData } from '../context/WishlistContext.jsx';
+
+import { useWishlistData, useUserData, useCartData } from '../context/index.js';
+
 //
 
 function Header() {
@@ -19,21 +19,8 @@ function Header() {
     const { t, i18n } = useTranslation();
     const { loggedIn } = useUserData();
     const { wishlistData } = useWishlistData();
+    const { cartData } = useCartData();
 
-    // useEffect(() => {
-    //     getToken()
-    //         .then((res) => {
-    //             if (res.status === 200) {
-    //                 setIsLoggined(true);
-    //             } else {
-    //                 setIsLoggined(false);
-    //             }
-    //         })
-    //         .catch((err) => {
-    //             console.error(err);
-    //             setIsLoggined(false);
-    //         });
-    // }, []);
     useEffect(() => {
         i18n.changeLanguage(choosedLanguage);
         localStorage.setItem('lang', choosedLanguage);
@@ -89,7 +76,9 @@ function Header() {
                             {loggedIn === true ? (
                                 <Link to="/cart">
                                     <i className="fa-solid fa-cart-shopping user-cart-icon">
-                                        <span className="user-cart-icon__cart-value">1</span>
+                                    {cartData && cartData.length > 0 ? (
+                                        <span className="user-cart-icon__cart-value">{cartData.length}</span>
+                                    ) : <></>}
                                     </i>
                                 </Link>
                             ) : loggedIn === false ? (

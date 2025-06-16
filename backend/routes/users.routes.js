@@ -1,5 +1,5 @@
 import express from "express";
-import { loginUser, registerUser, getUser, getToken, forgotPasswordUser, resetPasswordUser, checkResetTokenValidation, wishlistAdd, wishlistRemove } from "../controllers/users.controller.js";
+import { loginUser, registerUser, getUser, getToken, forgotPasswordUser, resetPasswordUser, checkResetTokenValidation, wishlistAdd, wishlistRemove, cartAdd, cartRemove } from "../controllers/users.controller.js";
 
 
 const UsersRouter = express.Router()
@@ -13,5 +13,7 @@ UsersRouter.put('/reset-password', resetPasswordUser)
 UsersRouter.get('/check-resetToken', checkResetTokenValidation)
 UsersRouter.post('/wishlist-add', wishlistAdd);
 UsersRouter.delete('/wishlist-remove', wishlistRemove);
+UsersRouter.post('/cart-add', cartAdd);
+UsersRouter.delete('/cart-remove', cartRemove);
 
 export default UsersRouter

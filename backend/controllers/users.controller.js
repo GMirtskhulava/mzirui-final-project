@@ -233,3 +233,69 @@ export const wishlistRemove = async (req, res) => {
         res.status(500).json({ err: `Server error: ${error.message}` });
     }
 }
+
+export const cartAdd = async (req, res) => {
+    try {
+        let { productId, productCount, userId } = req.body;
+
+        if(!productId) {
+            return res.status(400).json({ err: 'Product ID is required' });
+        }
+
+        if(productCount < 1) productCount = 1;
+
+        const user = await Users.findById(userId);
+        if(!user) {
+            return res.status(404).json({ err: 'User not found' });
+        }
+
+        if(!user.cart) {
+            user.cart = [];
+        }
+
+        const existingIndex = user.cart.findIndex(
+            item => item.productId.toString() === productId
+        );
+
+        if(existingIndex !== -1) { // zveli
+            user.cart[existingIndex].productCount = productCount;
+        } else {
+            user.cart.push({ productId, productCount });
+        }
+        if(!user.wishlist) {
+            user.wishlist = [];
+        }
+        const updatedCart = user.cart;
+        const updatedUser = await Users.findOneAndUpdate({ _id: userId }, { cart: updatedCart }, { new: true } );
+
+        res.status(200).json({ msg: 'Product updated in cart', data: updatedUser });
+    } catch (error) {
+        res.status(500).json({ err: `Server error: ${error.message}` });
+    }
+}
+
+export const cartRemove = async (req, res) => {
+    try {
+        console.log(req.body)
+        const { productId, userId } = req.body;
+        if(!productId) {
+            return res.status(400).json({ err: 'Product ID is required' });
+        }
+
+        const user = await Users.findById(userId);
+
+        if(!user) {
+            return res.status(404).json({ err: 'User not found' });
+        }
+
+        const updatedCart = user.cart.filter(
+            item => item.productId.toString() !== productId.toString()
+        );
+        const updatedUser = await Users.findOneAndUpdate({ _id: userId }, { cart: updatedCart }, { new: true } );
+
+        res.status(200).json({ msg: 'Product removed from cart', data: updatedUser });
+        console.log("deleted");
+    } catch (error) {
+        res.status(500).json({ err: `Server error: ${error.message}` });
+    }
+}

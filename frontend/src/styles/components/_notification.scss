@@ -1,0 +1,71 @@
+@use "../abstracts/variables" as *;
+
+.notification-list {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 100;
+    pointer-events: none;
+
+    .notification-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        background-color: $white-color;
+        color: $secondary-color;
+        padding: 1rem 1.25rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        min-width: 300px;
+        max-width: 400px;
+        pointer-events: auto;
+        border-left: 5px solid $primary-color;
+
+        animation: slideIn 0.5s ease forwards;
+
+        &__content {
+            flex: 1;
+
+            &__title {
+                font-size: 1rem;
+                font-weight: 600;
+                color: $black-color;
+                margin: 0;
+            }
+
+            &__text {
+                font-size: 0.9rem;
+                color: $gray-color;
+                margin-top: 0.25rem;
+            }
+        }
+
+        &__icon {
+            margin-left: 1rem;
+            font-size: 1.5rem;
+            
+            &__info{
+                color: $primary-color;
+            }
+            &__error {
+                color: $red-color;
+            }
+        }
+    }
+}
+
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+

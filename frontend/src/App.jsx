@@ -8,8 +8,9 @@ import { Routes, Route } from 'react-router-dom';
 import './styles/style.scss';
 
 //
-import { useLoader } from './context/LoaderContext';
+import { useLoader } from './context/index.js';
 import { Loader } from './components/index.js';
+
 // Layouts
 import Header from './layouts/Header';
 import Main from './layouts/Main';
@@ -33,6 +34,7 @@ import {
     ForgotPasswordPage,
     ResetPasswordPage,
     SingleProductPage,
+    CartPage
 } from './routes/index.js';
 
 // components
@@ -49,6 +51,7 @@ import { getProducts } from './api/ProductsApi';
 import { useUserData } from './context/UserContext';
 import { useProductsData } from './context/ProductsContext';
 import { useWishlistData } from './context/WishlistContext.jsx';
+import { useCartData } from './context/CartContext.jsx';
 
 // https://htmldemo.net/pronia/pronia/index.html
 function App() {
@@ -59,7 +62,8 @@ function App() {
     const { useFakeLoader } = useLoader();
     const { loggedIn, userData, login, logout } = useUserData();
     const { setProductsData } = useProductsData();
-    const { wishlistData, setWishlistData } = useWishlistData();
+    const { setWishlistData } = useWishlistData();
+    const { setCartData } = useCartData();
 
     useEffect(() => {
         useFakeLoader();
@@ -108,8 +112,8 @@ function App() {
 
     useEffect(() => {
         if (loggedIn && userData) {
-            const wishlist = userData.wishlist || [];
-            setWishlistData(wishlist);
+            setWishlistData(userData.wishlist || []);
+            setCartData(userData.cart || [])
         } else {
             const localWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
             setWishlistData(localWishlist);
@@ -175,6 +179,14 @@ function App() {
                         <Route
                             path="/wishlist"
                             element={<WishlistPage />}
+                        ></Route>
+                        <Route
+                            path="/cart"
+                            element={
+                                <ProtectedRoute>
+                                    <CartPage />
+                                </ProtectedRoute>
+                            }
                         ></Route>
                         <Route
                             path="/checkout"
