@@ -27,9 +27,6 @@ const useDocumentTitle = () => {
             case pathname === '/register':
                 document.title = 'Register | Pronia';
                 break;
-            case pathname === '/profile':
-                document.title = 'Your Profile | Pronia';
-                break;
             case pathname === '/whishlist':
                 document.title = 'Wishlist | Pronia';
                 break;
@@ -44,6 +41,9 @@ const useDocumentTitle = () => {
                 break;
             case pathname.startsWith('/product/'):
                 document.title = 'Product Details | Pronia';
+                break;
+            case pathname.startsWith('/profile/'):
+                document.title = 'Profile | Pronia';
                 break;
             case pathname === '/wishlist':
                 document.title = 'Wishlist | Pronia';

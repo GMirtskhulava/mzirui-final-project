@@ -22,6 +22,10 @@ const users = new mongoose.Schema({
     admin: {
         type: Boolean,
         default: false
+    },
+    banned: {
+        type: Boolean,
+        default: false
     }
 
 }, {timestamps: true})

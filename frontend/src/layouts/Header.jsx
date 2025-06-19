@@ -10,21 +10,30 @@ import { SkeletonLoading } from '../components/index.js';
 import { useTranslation } from 'react-i18next';
 //
 
-import { useWishlistData, useUserData, useCartData } from '../context/index.js';
+import { useWishlistData, useUserData, useCartData, useProductsData } from '../context/index.js';
 
 //
 
 function Header() {
-    const [choosedLanguage, setChoosedLanguage] = useState(localStorage.getItem('lang') || 'en');
     const { t, i18n } = useTranslation();
-    const { loggedIn } = useUserData();
+    const { loggedIn, userData } = useUserData();
     const { wishlistData } = useWishlistData();
     const { cartData } = useCartData();
-
+    const { productsData } = useProductsData();
+    const [choosedLanguage, setChoosedLanguage] = useState(localStorage.getItem('lang') || 'en');
+    const [cartItemsLength, setCartItemsLength] = useState(0);
+    
     useEffect(() => {
         i18n.changeLanguage(choosedLanguage);
         localStorage.setItem('lang', choosedLanguage);
     }, [choosedLanguage, i18n]);
+
+    useEffect(() => {
+        setCartItemsLength((cartData && productsData ? cartData.filter(cartItem => {
+                const product = productsData.find(p => p._id === cartItem.productId);
+                return product && !product.hidden;
+            }) : [] ).length)
+    }, [productsData, cartData])
     return (
         <header className="header-section">
             <div className="header-top-box">
@@ -58,7 +67,7 @@ function Header() {
                                 <i className="fa-solid fa-search"></i>
                             </Link>
                             {loggedIn === true ? (
-                                <Link to="/profile">
+                                <Link to={`/profile/${userData._id}`}>
                                     <i className="fa-solid fa-user"></i>
                                 </Link>
                             ) : loggedIn === false ? (
@@ -76,8 +85,8 @@ function Header() {
                             {loggedIn === true ? (
                                 <Link to="/cart">
                                     <i className="fa-solid fa-cart-shopping user-cart-icon">
-                                    {cartData && cartData.length > 0 ? (
-                                        <span className="user-cart-icon__cart-value">{cartData.length}</span>
+                                    {cartItemsLength > 0 ? (
+                                        <span className="user-cart-icon__cart-value">{cartItemsLength}</span>
                                     ) : <></>}
                                     </i>
                                 </Link>
@@ -98,9 +107,6 @@ function Header() {
                     </li>
                     <li>
                         <Link to="/shop">{t('shopPageTitle')}</Link>
-                    </li>
-                    <li>
-                        <Link to="/blog">{t('blogPageTitle')}</Link>
                     </li>
                     <li>
                         <Link to="/about">{t('aboutPageTitle')}</Link>

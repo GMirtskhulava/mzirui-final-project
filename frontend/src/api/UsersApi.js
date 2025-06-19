@@ -36,6 +36,20 @@ export const getUser = async (token) => {
     return response.data;
 };
 
+export const getUserById = async (userId) => {
+    const response = await axios.get(`http://localhost:2508/api/users/get-user-id`, {
+        headers: { Authorization: userId },
+    });
+    return response;
+};
+
+export const getUserByName = async (userName) => {
+    const response = await axios.get(`http://localhost:2508/api/users/get-user-name`, {
+        params: { name: userName },
+    });
+    return response;
+};
+
 export const forgotPasswordUser = async (email) => {
     const response = await axios.put(
         'http://localhost:2508/api/users/forgot-password',
@@ -109,6 +123,18 @@ export const removeCartItem = async (productId, userId) => {
         'http://localhost:2508/api/users/cart-remove',
         {
             data: { productId, userId },
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+        }
+    );
+    return response;
+};
+
+export const updateUserData = async (userId, newData) => {
+    const response = await axios.put(
+        'http://localhost:2508/api/users/update-data',
+        JSON.stringify({ userId, newData }),
+        {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true,
         }

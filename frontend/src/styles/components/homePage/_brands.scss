@@ -1,11 +1,11 @@
 @use '../../abstracts/variables' as *;
 
 
-.brands-section{
+.brands-section {
     width: 100%;
     padding: 1rem 15%;
 
-    .brands-box{
+    .brands-box {
         width: 100%;
         padding: 6rem;
         border-radius: 10px;
@@ -21,8 +21,63 @@
         & a {
             opacity: 0.5;
             transition: all 0.2s;
-            &:hover{
+
+            &:hover {
                 opacity: 1;
+            }
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .brands-section {
+        padding: 1rem 2rem;
+
+        .brands-box {
+            padding: 4rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+
+            & a {
+                opacity: 0.6;
+                flex: 0 0 30%;
+                max-width: 9rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .brands-section {
+        padding: 1rem 1.5rem;
+
+        .brands-box {
+            padding: 3rem;
+            gap: 1.5rem;
+
+            & a {
+                flex: 0 0 40%;
+                max-width: 8rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .brands-section {
+        padding: 1rem 1rem;
+
+        .brands-box {
+            padding: 2rem;
+            flex-direction: column;
+            gap: 1rem;
+
+            & a {
+                opacity: 1;
+                flex: none;
+                max-width: 100px;
+                margin: 0 auto;
             }
         }
     }

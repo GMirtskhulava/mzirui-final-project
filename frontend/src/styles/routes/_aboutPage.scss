@@ -1,23 +1,24 @@
 @use '../abstracts/variables' as *;
 
 
-.about-page{
+.about-page {
     width: 100%;
     padding: 5rem 15%;
 
-    &__our-story{
+    &__our-story {
+
         // margin-bottom: 5rem;
-        & h2{
+        & h2 {
             margin-bottom: 5.5rem;
             color: $secondary-color;
             font-size: 60px;
             line-height: 57px;
 
-            & span{
+            & span {
                 color: $primary-color;
                 position: relative;
 
-                &::before{
+                &::before {
                     content: url("/src/assets/images/about-page-header-decoration.png");
                     position: absolute;
                     bottom: -40px;
@@ -25,13 +26,15 @@
                 }
             }
         }
-        & p{
+
+        & p {
             font-size: 18px;
             line-height: 31px;
             margin-bottom: 30px;
             color: $secondary-color;
         }
     }
+
     &__video {
         max-width: 70%;
         margin: 3rem auto 0;
@@ -50,59 +53,67 @@
             object-fit: cover;
         }
     }
-    &__counter{
+
+    &__counter {
         color: $secondary-color;
         margin-bottom: 5rem;
 
-        & p{
+        & p {
             font-style: italic;
             font-size: 36px;
             line-height: 57px;
             text-align: center;
             margin-bottom: 70px;
 
-            & span{
+            & span {
                 color: $primary-color;
             }
         }
-        &__list{
+
+        &__list {
             padding: 0 5%;
             display: flex;
             align-items: center;
             justify-content: space-between;
             // gap: 10rem;
 
-            &__column{
+            &__column {
                 width: 100%;
                 border-right: 1px solid #dcdcdc;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
                 align-items: center;
-                & h2{
+
+                & h2 {
                     color: $primary-color;
                     font-size: 40px;
                 }
-                & p{
+
+                & p {
                     font-size: 30px !important;
                     font-weight: 300;
                     margin-bottom: 0 !important;
                 }
+
                 &:last-child {
                     border-right: 0;
                 }
             }
- 
+
         }
     }
-    &__our-team{
+
+    &__our-team {
         width: 100%;
+
         &__header {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             gap: 2.5rem;
+
             & h2 {
                 color: $secondary-color;
                 position: relative;
@@ -130,7 +141,8 @@
                     right: 0;
                 }
             }
-            & p{
+
+            & p {
                 color: $secondary-color;
                 text-align: center;
                 line-height: 31px;
@@ -139,19 +151,20 @@
                 max-width: 580px;
             }
         }
-        &__content{
+
+        &__content {
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-            &__card{
-                &__image{
+            &__card {
+                &__image {
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     position: relative;
-                    
-                    &__hover-content{
+
+                    &__hover-content {
                         border-left: 1px solid #dee2e6;
                         border-right: 1px solid #dee2e6;
                         border-bottom: 1px solid #dee2e6;
@@ -171,28 +184,30 @@
                         -o-transition: all 0.3s ease 0s;
                         transition: all 0.3s ease 0s;
 
-                        & h2{
+                        & h2 {
                             color: $secondary-color;
                             font-size: 18px;
                             line-height: 24px;
                         }
-                        & p{
+
+                        & p {
                             color: $secondary-color;
                             font-size: 14px;
                         }
 
-                        &__links{
+                        &__links {
                             display: flex;
                             justify-content: center;
                             padding-top: 30px;
-                            & ul{
+
+                            & ul {
                                 margin: 0;
                                 padding: 0;
                                 list-style: none;
                                 display: flex;
                                 gap: 1rem;
 
-                                & li{
+                                & li {
                                     background-color: $white-color;
                                     border: 1px solid $primary-color;
                                     width: 40px;
@@ -204,19 +219,21 @@
                                     transition: all 0.2s;
                                     cursor: pointer;
 
-                                    & a{
+                                    & a {
                                         color: $primary-color;
                                         transition: color 0.2s;
                                     }
-                                    &:hover{
+
+                                    &:hover {
                                         background-color: $primary-color;
                                         border-color: $primary-color;
-                                        & a{
+
+                                        & a {
                                             color: $white-color;
                                         }
                                     }
 
-                                    &:nth-child(2){
+                                    &:nth-child(2) {
                                         transform: translateY(10px);
                                     }
                                 }
@@ -225,25 +242,231 @@
                     }
 
                 }
-                &__content{
+
+                &__content {
                     padding-top: 25px;
                     text-align: center;
-                    & p{
+
+                    & p {
                         color: $secondary-color;
                         font-size: 18px;
                         line-height: 24px;
                         font-weight: 500;
                     }
                 }
-                &:nth-child(2n-1){
+
+                &:nth-child(2n-1) {
                     padding-top: 4rem;
                 }
-                
+
                 &:hover &__image__hover-content {
                     opacity: 1;
                     visibility: visible;
-                  }
-                  
+                }
+
+            }
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .about-page {
+        padding: 3rem 8%;
+
+        &__our-story {
+            & h2 {
+                font-size: 48px;
+                line-height: 45px;
+                margin-bottom: 3rem;
+
+                & span::before {
+                    bottom: -30px;
+                }
+            }
+
+            & p {
+                font-size: 16px;
+                line-height: 28px;
+                margin-bottom: 25px;
+            }
+        }
+
+        &__video {
+            max-width: 85%;
+            margin-bottom: 4rem;
+        }
+
+        &__counter {
+            & p {
+                font-size: 28px;
+                line-height: 42px;
+                margin-bottom: 50px;
+            }
+
+            &__list {
+                padding: 0 2%;
+
+                &__column {
+                    border-right: 0;
+
+                    & h2 {
+                        font-size: 32px;
+                    }
+
+                    & p {
+                        font-size: 24px !important;
+                    }
+                }
+            }
+        }
+
+        &__our-team {
+            &__header {
+                & h2 {
+                    font-size: 28px;
+                    padding-left: 40px;
+                    padding-right: 40px;
+                }
+
+                & p {
+                    max-width: 400px;
+                    margin-bottom: 40px;
+                }
+            }
+
+            &__content {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 2rem;
+
+                &__card {
+                    width: 280px !important;
+                    padding-top: 2rem !important;
+
+                    // &__image{
+                    //     &__hover-content{
+
+                    //     }
+                    // }
+                    &:nth-child(2n-1) {
+                        padding-top: 2rem !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .about-page {
+        padding: 2rem 5%;
+
+        &__our-story {
+            & h2 {
+                font-size: 36px;
+                line-height: 40px;
+
+            
+
+                & span::before {
+                    bottom: -20px;
+                    width: 50px;
+                    height: auto;
+                }
+            }
+
+            & p {
+                font-size: 14px;
+                line-height: 24px;
+            }
+        }
+
+        &__video {
+            max-width: 100%;
+            margin-bottom: 3rem;
+            border-width: 1rem;
+        }
+
+        &__counter {
+            & p {
+                font-size: 22px;
+                line-height: 30px;
+                margin-bottom: 40px;
+            }
+
+            &__list {
+                flex-direction: column;
+                padding: 0;
+
+                &__column {
+                    border-right: 0;
+                    width: 100%;
+                    margin-bottom: 2rem;
+
+                    & h2 {
+                        font-size: 28px;
+                    }
+
+                    & p {
+                        font-size: 20px !important;
+                    }
+                }
+            }
+        }
+
+        &__our-team {
+            &__header{
+                & h2{
+                    &:before,
+                    &:after {
+                        display: none;
+                    }
+                }
+            }
+            &__content {
+                flex-direction: column;
+                gap: 3rem;
+
+                &__card {
+                    width: 100% !important;
+                    padding-top: 0 !important;
+
+                    &:nth-child(2n-1) {
+                        padding-top: 0 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .about-page {
+        padding: 1rem 3%;
+
+        &__our-story {
+            & h2 {
+                font-size: 28px;
+                line-height: 32px;
+
+                & span::before {
+                    bottom: -15px;
+                    width: 40px;
+                    height: auto;
+                }
+            }
+
+            & p {
+                font-size: 12px;
+                line-height: 20px;
+            }
+        }
+
+        &__counter {
+            & p {
+                font-size: 18px;
+                line-height: 24px;
+                margin-bottom: 30px;
             }
         }
     }

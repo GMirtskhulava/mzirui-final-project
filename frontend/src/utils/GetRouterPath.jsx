@@ -14,8 +14,7 @@ export default function GetRouterPathName(pathname) {
             return 'Login';
         case pathname === '/register':
             return 'Register';
-        case pathname === '/profile':
-            return 'Your Profile';
+
         case pathname === '/whishlist':
             return 'Wishlist';
         case pathname === '/checkout':
@@ -28,6 +27,8 @@ export default function GetRouterPathName(pathname) {
             return 'Reset Password';
         case pathname.startsWith('/product/'):
             return 'Product Details';
+        case pathname.startsWith('/profile/'):
+            return 'Profile';
         case pathname === '/wishlist': 
             return 'Wishlist';
         case pathname === '/cart':

@@ -1,7 +1,7 @@
 @use '../../abstracts/variables' as *;
 
 
-.collections-section{
+.collections-section {
     width: 100%;
     padding: 1rem 15%;
 
@@ -9,16 +9,26 @@
         width: 100%;
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
         gap: 1.5rem;
 
-        .collection-box{
+        .collection-box {
             padding: 0.5rem;
             position: relative;
 
-            &__banner{
+
+            &__banner {
                 position: relative;
 
                 user-select: none;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    object-fit: cover;
+                }
 
                 &:hover::before {
                     left: 0;
@@ -28,6 +38,7 @@
                     -o-transition: all 900ms ease-in;
                     transition: all 900ms ease-in;
                 }
+
                 &:hover::after {
                     top: 0;
                     bottom: 0;
@@ -36,6 +47,7 @@
                     -o-transition: all 900ms ease-in;
                     transition: all 900ms ease-in;
                 }
+
                 &::before {
                     background: rgba(255, 255, 255, 0.2);
                     bottom: 0;
@@ -47,6 +59,7 @@
                     opacity: 1;
                     pointer-events: none;
                 }
+
                 &::after {
                     background: rgba(255, 255, 255, 0.2);
                     bottom: 50%;
@@ -59,6 +72,7 @@
                     pointer-events: none;
                 }
             }
+
             &__info-rectangle {
                 position: absolute;
                 top: 50%;
@@ -74,14 +88,15 @@
 
                 color: $secondary-color;
 
-                & p{
+                & p {
                     font-size: 18px;
                 }
+
                 & h3 {
                     font-size: 30px;
                 }
 
-                & button{
+                & button {
                     padding: 1rem 2rem;
                     border: 0;
                     border-radius: 20px;
@@ -90,19 +105,20 @@
                     font-size: 16px;
                     font-weight: 300;
                     cursor: pointer;
-                    
-                    & a{
+
+                    & a {
                         color: $white-color;
                         text-transform: uppercase;
                     }
-        
-                    &:hover{
+
+                    &:hover {
                         background-color: $secondary-color;
                         color: $white-color;
                     }
                 }
 
             }
+
             &__info-square {
                 position: absolute;
                 top: 40px;
@@ -117,13 +133,15 @@
 
                 color: $secondary-color;
 
-                & p{
+                & p {
                     font-size: 18px;
                 }
+
                 & h3 {
                     font-size: 30px;
                 }
-                & button{
+
+                & button {
                     padding: 1rem 2rem;
                     border: 0;
                     border-radius: 20px;
@@ -132,13 +150,13 @@
                     font-size: 16px;
                     font-weight: 300;
                     cursor: pointer;
-                    
-                    & a{
+
+                    & a {
                         color: $white-color;
                         text-transform: uppercase;
                     }
-        
-                    &:hover{
+
+                    &:hover {
                         background-color: $secondary-color;
                         color: $white-color;
                     }
@@ -147,4 +165,131 @@
         }
     }
 
+}
+
+@media (max-width: 1160px) {
+    .collections-section {
+        padding: 1rem 8%;
+
+        .collection-content {
+            gap: 1rem;
+
+            .collection-box {
+                &__info-rectangle {
+                    left: 20px;
+
+                    & p {
+                        font-size: 16px;
+                    }
+
+                    & h3 {
+                        font-size: 26px;
+                    }
+
+                    & button {
+                        padding: 0.8rem 1.5rem;
+                        font-size: 14px;
+                    }
+                }
+
+                &__info-square {
+                    top: 30px;
+
+                    & p {
+                        font-size: 16px;
+                    }
+
+                    & h3 {
+                        font-size: 26px;
+                    }
+
+                    & button {
+                        padding: 0.8rem 1.5rem;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .collections-section {
+        padding: 1rem 5%;
+
+        .collection-content {
+            flex-direction: column;
+            gap: 1.5rem;
+
+            .collection-box {
+                position: relative;
+                width: 100%;
+
+                &__banner {
+                    width: 100%;
+                }
+
+                &__info-rectangle,
+                &__info-square {
+                    position: static;
+                    transform: none;
+                    padding: 1rem 0;
+
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    text-align: center;
+                    gap: 0.5rem;
+                    color: $secondary-color;
+
+                    & p {
+                        font-size: 16px;
+                    }
+
+                    & h3 {
+                        font-size: 24px;
+                    }
+
+                    & button {
+                        padding: 0.8rem 1.8rem;
+                        font-size: 15px;
+                        border-radius: 15px;
+
+                        & a {
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .collections-section {
+        padding: 1rem 3%;
+
+        .collection-content {
+            gap: 1rem;
+
+            .collection-box {
+
+                &__info-rectangle,
+                &__info-square {
+                    & p {
+                        font-size: 14px;
+                    }
+
+                    & h3 {
+                        font-size: 20px;
+                    }
+
+                    & button {
+                        padding: 0.7rem 1.5rem;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
 }

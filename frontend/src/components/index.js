@@ -17,6 +17,10 @@ import Slider from './homePage/Slider';
 import Filters from './shopPage/Filters';
 import ProductList from './ProductList';
 
+import Dashboard from './profilePage/Dashboard';
+import Orders from './profilePage/Orders.jsx';
+import Afind from './profilePage/Afind.jsx';
+
 export {
     Loader,
     ProductCard,
@@ -33,4 +37,8 @@ export {
     Slider,
     Filters,
     ProductList,
+    // 
+    Dashboard,
+    Orders,
+    Afind,
 };

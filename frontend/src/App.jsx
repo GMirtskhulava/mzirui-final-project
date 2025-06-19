@@ -112,6 +112,7 @@ function App() {
 
     useEffect(() => {
         if (loggedIn && userData) {
+            if(userData.banned) return logout();
             setWishlistData(userData.wishlist || []);
             setCartData(userData.cart || [])
         } else {
@@ -169,7 +170,7 @@ function App() {
                             element={<ResetPasswordPage />}
                         ></Route>
                         <Route
-                            path="/profile"
+                            path="/profile/:userId"
                             element={
                                 <ProtectedRoute>
                                     <ProfilePage />

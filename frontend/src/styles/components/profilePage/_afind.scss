@@ -1,0 +1,118 @@
+@use "../../abstracts/variables" as *;
+
+
+.profile-afind {
+    width: 80%;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: 1px solid $navigation-border-color;
+    border-radius: 8px;
+    background-color: $white-color;
+    text-align: start;
+
+    &__title {
+        margin-bottom: 2rem;
+        color: $black-color;
+
+        & h2 {
+            margin-bottom: 0.2rem;
+        }
+    }
+
+    &__content {
+        width: 100%;
+
+        &__row {
+            width: 100%;
+            margin: 2rem auto;
+            padding: 2rem;
+            border: 1px solid $navigation-border-color;
+            border-radius: 8px;
+            background-color: $white-color;
+            text-align: start;
+
+            display: flex;
+            flex-direction: column; 
+            gap: 10px;
+
+            input {
+                width: 100%;
+                flex: 1;
+            }
+
+            &__input-box {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                input {
+                    padding: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    font-size: 14px;
+                    width: 100%;
+
+                    &:focus{
+                        outline: 1px solid $primary-color;
+                    }
+                }
+
+                button {
+                    padding: 10px 16px;
+                    background-color: $primary-color;
+                    color: $white-color;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    white-space: nowrap;
+                    transition: background-color 0.25s ease;
+
+                    &:hover{
+                        background-color: $secondary-color;
+                    }
+                }
+            }
+
+
+            &__find-result{
+                &__title{
+                    margin: 0.8rem 0;
+                    color: $secondary-color;
+                    font-size: 18px;
+                    font-weight: 500;
+                }
+                &__list{
+                    & ul{
+                        list-style: none;
+                        & li{ 
+                            margin-top: 0.5rem;
+                            & a{
+                                color: $secondary-color;
+                                transition: color 0.2s ease;
+                                &:hover{
+                                    color: $primary-color;
+                                }
+                            }
+                            & span{
+                                font-size: 12px;
+                            }
+                            .badge {
+                                margin-left: 5px;
+                                user-select: none;
+                            }
+                            .red-badge{
+                                color: $red-color;
+                            }
+                            .admin-badge{
+                                color: $yellow-color;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }
+}

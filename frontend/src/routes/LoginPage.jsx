@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom';
 
 import { loginUser } from '../api/UsersApi';
 
-// import { useUserData } from '../context/UserContext';
+import { useNotification } from '../context/index.js';
 
 function LoginPage() {
+    const { showNotification } = useNotification();
     const [inputValues, setInputValues] = useState({
         email: '',
         password: '',
@@ -40,7 +41,7 @@ function LoginPage() {
         if (checkFormValidations()) {
             loginUser(inputValues.email, inputValues.password)
                 .then((res) => {
-                    if (res.status === 200) {
+                    if(res.status === 200) {
                         console.log(res.data);
                         // login(res.data.data);
                         window.location.href = '/';
@@ -49,6 +50,9 @@ function LoginPage() {
                 .catch((err) => {
                     if (err.response.status === 400) {
                         setErrorMsg('Invalid email or password');
+                    } else if(err.response.status === 403) {
+                        setErrorMsg('! Account is Banned !');
+                        showNotification("login", "Account is banned", 1);
                     } else {
                         setErrorMsg('Server error, please try again later');
                     }

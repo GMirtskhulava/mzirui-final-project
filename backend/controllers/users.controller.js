@@ -14,7 +14,9 @@ export const loginUser = async (req, res) => {
         if (!user || !(await CompareHash(password, user.password))) {
             return res.status(400).json({ err: 'Invalid email or password' });
         }
-
+        if(user.banned) {
+            return res.status(403).json({ err: 'Account banned' });
+        }
 
         res.clearCookie('token');
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1d' });
@@ -72,7 +74,39 @@ export const getUser = async (req, res) => {
     } catch (error) {
         return res.status(500).json({ err: error });
     }
+
 };
+export const getUserById = async (req, res) => {
+    try {
+        const userId = req.header('Authorization');
+
+        const userData = await Users.findById(userId).select('-password');
+
+        return res.status(200).json({ data: userData });
+    } catch (error) {
+        return res.status(500).json({ err: error });
+    }
+};
+export const getUserByName = async (req, res) => {
+    const name = req.query.name;
+    // console.log(name);
+    
+    if (!name || name.trim().length === 0) {
+        return res.status(400).json({ message: 'Missing or empty search term' });
+    }
+
+    try {
+        const regex = new RegExp(name, 'i');
+        const results = await Users.find({ username: regex }).limit(10);
+
+        return res.status(200).json({ data: results });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Server error' });
+    }
+};
+
+
 
 export const getToken = (req, res) => {
     try {
@@ -276,7 +310,6 @@ export const cartAdd = async (req, res) => {
 
 export const cartRemove = async (req, res) => {
     try {
-        console.log(req.body)
         const { productId, userId } = req.body;
         if(!productId) {
             return res.status(400).json({ err: 'Product ID is required' });
@@ -294,7 +327,55 @@ export const cartRemove = async (req, res) => {
         const updatedUser = await Users.findOneAndUpdate({ _id: userId }, { cart: updatedCart }, { new: true } );
 
         res.status(200).json({ msg: 'Product removed from cart', data: updatedUser });
-        console.log("deleted");
+        // console.log("deleted");
+    } catch (error) {
+        res.status(500).json({ err: `Server error: ${error.message}` });
+    }
+}
+
+
+export const updateUserData = async (req, res) => {
+    try {
+        const { userId, newData } = req.body;
+        const { newUsername, newEmail, newPassword, newRole, newBanStatus } = newData;
+
+        const user = await Users.findById(userId);
+        if (!user) {
+            return res.status(404).json({ err: 'User not found' });
+        }
+
+        const updates = {};
+
+        if (newUsername && newUsername !== user.username) {
+            updates.username = newUsername;
+        }
+
+        if (newEmail && newEmail !== user.email) {
+            updates.email = newEmail;
+        }
+
+        if (newPassword && newPassword.length > 0) {
+            const isSamePassword = await CompareHash(newPassword, user.password); // Optional
+            if (!isSamePassword) {
+                updates.password = await HashString(newPassword);
+            }
+        }
+        if (typeof newRole === 'boolean' && newRole !== user.admin) {
+            updates.admin = newRole;
+        }
+        if (typeof newBanStatus === 'boolean' && newBanStatus !== user.banned) {
+            updates.banned = newBanStatus;
+        }
+
+
+        if (Object.keys(updates).length === 0) {
+            return res.status(204).json({ msg: 'No changes detected', data: user });
+        }
+
+        const updatedUser = await Users.findByIdAndUpdate(userId, updates, { new: true });
+
+        res.status(200).json({ msg: 'User data updated!', data: updatedUser });
+
     } catch (error) {
         res.status(500).json({ err: `Server error: ${error.message}` });
     }

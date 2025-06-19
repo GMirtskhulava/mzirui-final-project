@@ -1,0 +1,93 @@
+@use "../../abstracts/variables" as *;
+
+
+.profile-dashboard {
+    width: 80%;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: 1px solid $navigation-border-color;
+    border-radius: 8px;
+    background-color: $white-color;
+    text-align: start;
+
+    &__title {
+        margin-bottom: 2rem;
+        color: $black-color;
+
+        & h2{
+            margin-bottom: 0.2rem;
+        }
+        &__adm-id{ 
+            font-size: 12px;
+            & span{
+                user-select: text;
+            }
+            &__copy{
+                font-size: 13px;
+                margin-left: 3px;
+                user-select: none;
+                color: $secondary-color;
+                transition: color 0.3s ease;
+                cursor: pointer;
+                &:hover{
+                    color: $primary-color;
+                }
+
+            }
+
+            .banned-badge{
+                color: $red-color;
+                margin-left: 5px;
+            }
+        }
+    }
+
+    &__row {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1.5rem;
+
+        label {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: $gray-color;
+        }
+
+        input, select {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border: 1px solid $light-gray-color;
+            border-radius: 4px;
+
+            &:disabled {
+                background-color: #f1f1f1;
+                color: $gray-color;
+            }
+            &:focus{
+                outline: 1px solid $primary-color;
+            }
+        }
+
+    }
+
+    &__button {
+        margin-top: 1rem;
+        font-size: 16px;
+        padding: 0.8rem 1.5rem;
+        background-color: $secondary-color;
+        color: $white-color;
+        border: 0;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: $primary-color;
+        }
+    }
+
+    &__error{
+        margin-bottom: 0.5rem;
+        color: $red-color;
+        font-size: 14px;
+    }
+}

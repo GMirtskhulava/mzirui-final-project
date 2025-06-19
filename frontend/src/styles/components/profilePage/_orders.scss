@@ -1,10 +1,22 @@
-@use "../abstracts/variables" as *;
+@use "../../abstracts/variables" as *;
 
-.cart-page {
-    width: 100%;
-    padding: 5rem 15%;
 
-    &__table {
+.profile-orders {
+    width: 80%;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: 1px solid $navigation-border-color;
+    border-radius: 8px;
+    background-color: $white-color;
+    text-align: start;
+
+
+    &__title {
+        margin-bottom: 2rem;
+        color: $black-color;
+    }
+
+    &__content {
         table {
             border-color: #dee2e6;
             border-radius: 0;
@@ -110,66 +122,31 @@
                 }
             }
 
-            &__quantity {
-                &__input {
-                    width: 60px;
-                    height: 50px;
-                    padding: 0.5rem;
+            &__stock-status {
+                color: $secondary-color;
+
+                &.out-of-stock {
+                    color: $red-color !important;
+                }
+            }
+
+            &__add-to-cart {
+                button {
+                    font-size: 16px;
+                    padding: 0.8rem 1.5rem;
                     background-color: $secondary-color;
                     color: $white-color;
                     border: 0;
                     border-radius: 5px;
-                    text-align: center;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
 
-                    &:focus {
-                        outline: none;
+                    &:hover {
+                        background-color: $primary-color;
                     }
                 }
             }
 
-            &__total {
-                color: $secondary-color;
-                font-weight: bold;
-                // font-size: 18px !important;
-            }
-
-        }
-    }
-
-    &__footer {
-        margin-top: 2rem;
-        display: flex;
-        flex-direction: column; // stack children vertically
-        align-items: flex-start; // align to left, change to center if you want centered
-
-        &__title {
-            padding-bottom: 0.5rem;
-        }
-
-        &__total {
-            color: $secondary-color;
-            padding: 10px 30px;
-            border: 1px solid #dee2e6;
-            font-weight: 700;
-            margin-top: 1rem;
-            display: flex;
-            gap: 2rem;
-            font-size: 17px;
-        }
-
-        &__button {
-            margin-top: 1rem;
-            font-size: 16px;
-            padding: 0.8rem 1.5rem;
-            background-color: $secondary-color;
-            color: $white-color;
-            border: 0;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-
-            &:hover {
-                background-color: $primary-color;
-            }
         }
     }
 }

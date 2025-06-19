@@ -1,11 +1,11 @@
 @use '../../abstracts/variables' as *;
 
 
-.shipping-section{
+.shipping-section {
     width: 100%;
-    padding: 5rem 0;
+    padding: 5rem 1rem;
 
-    .shipping-container{
+    .shipping-container {
         width: 100%;
         // padding: 0 15%;
         display: flex;
@@ -20,17 +20,18 @@
             gap: 1.2rem;
             border: 1px dashed $primary-color;
             border-radius: 5px;
-            
-            &__icon{
+
+            &__icon {
                 user-select: none;
             }
 
-            &__text{
-                &__title{
+            &__text {
+                &__title {
                     color: $secondary-color;
                     font-size: 20px;
                 }
-                &__desc{
+
+                &__desc {
                     color: $secondary-color;
                     font-size: 15px;
                 }
@@ -38,11 +39,12 @@
         }
     }
 }
-.shipping-section--smaller{
+
+.shipping-section--smaller {
     width: 100%;
     padding: 3rem 0;
 
-    .shipping-container{
+    .shipping-container {
         width: 100%;
         // padding: 0 15%;
         display: flex;
@@ -57,19 +59,106 @@
             gap: 1rem;
             border: 1px dashed $primary-color;
             border-radius: 5px;
-            
-            &__icon{
+
+            &__icon {
                 user-select: none;
             }
 
-            &__text{
-                &__title{
+            &__text {
+                &__title {
                     color: $secondary-color;
                     font-size: 18px;
                 }
-                &__desc{
+
+                &__desc {
                     color: $secondary-color;
                     font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .shipping-section,
+    .shipping-section--smaller {
+        padding: 3rem 1rem;
+
+        .shipping-container {
+            gap: 1.5rem;
+
+            & .shipping-card {
+                padding: 20px;
+                gap: 1rem;
+
+                &__text {
+                    &__title {
+                        font-size: 18px;
+                    }
+
+                    &__desc {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .shipping-section,
+    .shipping-section--smaller {
+        padding: 2rem 1rem;
+
+        .shipping-container {
+            flex-direction: column;
+            align-items: center;
+
+            & .shipping-card {
+                flex-direction: row;
+                justify-content: center;
+                // width: 50%;
+                padding: 16px;
+
+                &__text {
+                    &__title {
+                        font-size: 17px;
+                    }
+
+                    &__desc {
+                        font-size: 13.5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .shipping-section,
+    .shipping-section--smaller {
+        // padding-left: 1rem;
+        // padding-right: 1rem;
+        .shipping-container {
+            flex-direction: column;
+            align-items: stretch;
+
+            & .shipping-card {
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+                width: 100%;
+                padding: 14px;
+                gap: 0.8rem;
+
+                &__text {
+                    &__title {
+                        font-size: 16px;
+                    }
+
+                    &__desc {
+                        font-size: 13px;
+                    }
                 }
             }
         }

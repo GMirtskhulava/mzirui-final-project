@@ -19,6 +19,8 @@
 @use "./routes/singleProductPage";
 @use "./routes/wishlistPage";
 @use "./routes/cartPage";
+@use "./routes/checkoutPage";
+@use "./routes/profilePage";
 
 // components
 @use "./components/homePage/slider";
@@ -28,6 +30,10 @@
 @use "./components/homePage/clientComments";
 @use "./components/homePage/brands";
 @use "./components/homePage/latestBlogs";
+
+@use "./components/profilePage/dashboard";
+@use "./components/profilePage/orders";
+@use "./components/profilePage/afind";
 
 @use "./components/routerPath";
 @use "./components/loadingPage";

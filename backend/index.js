@@ -16,7 +16,8 @@ const PORT = 2508;
 dotenv.config()
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'http://192.168.1.12:5173',
+  // origin: 'http://localhost:5173',
   credentials: true
 }));
 
