@@ -139,8 +139,8 @@
     &__footer {
         margin-top: 2rem;
         display: flex;
-        flex-direction: column; // stack children vertically
-        align-items: flex-start; // align to left, change to center if you want centered
+        flex-direction: column;
+        align-items: flex-start;
 
         &__title {
             padding-bottom: 0.5rem;
@@ -169,6 +169,100 @@
 
             &:hover {
                 background-color: $primary-color;
+            }
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .cart-page {
+        padding: 3rem 5%;
+
+        &__table {
+            overflow-x: auto;
+
+            table {
+                font-size: 14px;
+                min-width: 700px;
+            }
+
+            &__head th,
+            &__body td {
+                padding: 12px 6px;
+                font-size: 14px;
+            }
+
+            &__body {
+                &__product {
+                    a {
+                        font-size: 14px;
+                    }
+
+                    &__adm-id {
+                        font-size: 10px;
+
+                        &__copy {
+                            font-size: 12px;
+                        }
+                    }
+
+                    .hidden-product-label {
+                        font-size: 12px;
+                    }
+                }
+
+                &__quantity {
+                    &__input {
+                        width: 50px;
+                        height: 40px;
+                        font-size: 14px;
+                    }
+                }
+
+                &__total {
+                    font-size: 14px;
+                }
+
+                &__remove button i {
+                    font-size: 20px;
+                }
+            }
+        }
+
+        &__footer {
+            &__total {
+                flex-direction: column;
+                gap: 0.5rem;
+                font-size: 15px;
+            }
+
+            &__button {
+                width: 100%;
+                font-size: 15px;
+                padding: 0.7rem 1rem;
+                text-align: center;
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .cart-page {
+        padding: 2rem 3%;
+
+        &__footer {
+            align-items: stretch;
+
+            &__title {
+                font-size: 16px;
+            }
+
+            &__total {
+                font-size: 14px;
+            }
+
+            &__button {
+                font-size: 14px;
             }
         }
     }

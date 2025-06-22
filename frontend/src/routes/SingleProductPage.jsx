@@ -30,6 +30,7 @@ function SingleProductPage() {
             const found = productsData.find(item => item._id === id);
             setProduct(found || false);
             setProductCount(found.countInStock === 0 ? 0 : 1)
+            
         }
     }, [productsData, id]);
 
@@ -147,7 +148,7 @@ function SingleProductPage() {
                                     type="number"
                                     className='single-product-page__bottom__details__buttons__quantity'
                                     value={productCount}
-                                    defaultValue={product.countInStock === 0 ? 0 : 1}
+                                    // defaultValue={product.countInStock === 0 ? 0 : 1}
                                     min={product.countInStock === 0 ? 0 : 1}
                                     max={product.countInStock}
                                     onChange={handleCounterChange}

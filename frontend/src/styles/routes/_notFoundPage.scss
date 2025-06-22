@@ -18,3 +18,27 @@
         color: $secondary-color;
     }
 }
+
+@media (max-width: 992px) {
+    .notFound-page{
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .notFound-page{
+        text-align: center;
+        & h1{
+            font-size: 34px;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .notFound-page{
+        text-align: center;
+        & h1{
+            font-size: 32px;
+        }
+    }
+}

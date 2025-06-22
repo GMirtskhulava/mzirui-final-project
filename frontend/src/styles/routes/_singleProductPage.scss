@@ -4,6 +4,7 @@
     width: 100%;
     padding: 5rem 15%;
     position: relative;
+
     &__bottom {
         width: 100%;
         display: flex;
@@ -32,26 +33,30 @@
                 color: $secondary-color;
                 margin-bottom: 0.5rem;
 
-                &__out-of-stock, &__hidden-product-label{
+                &__out-of-stock,
+                &__hidden-product-label {
                     color: $red-color;
                     margin-left: 0.5rem;
                     font-size: 15px;
-                    
+
                 }
 
-                &__adm-id{
+                &__adm-id {
                     font-size: 13px;
-                    & span{
+
+                    & span {
                         user-select: text;
                     }
-                    &__copy{
+
+                    &__copy {
                         font-size: 13px;
                         margin-left: 3px;
                         user-select: none;
                         color: $secondary-color;
                         transition: color 0.3s ease;
                         cursor: pointer;
-                        &:hover{
+
+                        &:hover {
                             color: $primary-color;
                         }
 
@@ -135,7 +140,7 @@
                     &:hover {
                         background-color: $primary-color;
 
-                        .active{
+                        .active {
                             color: $secondary-color !important;
                         }
                     }
@@ -181,7 +186,7 @@
 
     }
 
-    &__unavailable{
+    &__unavailable {
         position: absolute;
         top: 0;
         left: 0;
@@ -206,4 +211,118 @@
 
 .hidden-product {
     user-select: none;
+}
+
+@media (max-width: 1600px) {
+    .single-product-page {
+
+        .shipping-section,
+        .shipping-section--smaller {
+            padding: 2rem 1rem;
+    
+            .shipping-container {
+                flex-direction: column;
+                align-items: center;
+    
+                & .shipping-card {
+                    flex-direction: row;
+                    justify-content: center;
+                    width: 90%;
+                    padding: 16px;
+    
+                    &__text {
+                        &__title {
+                            font-size: 17px;
+                        }
+    
+                        &__desc {
+                            font-size: 13.5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: 992px) {
+    .single-product-page {
+        padding: 3rem 5%;
+
+        &__bottom {
+            flex-direction: column;
+            align-items: center;
+
+            &__image,
+            &__details {
+                width: 100%;
+            }
+
+            &__image img {
+                width: 100%;
+            }
+
+            &__details {
+                &__title {
+                    font-size: 1.5rem;
+                }
+
+                &__price {
+                    font-size: 1.8rem;
+                }
+
+                &__description {
+                    font-size: 1rem;
+                }
+
+                &__buttons {
+                    flex-direction: column;
+                    align-items: flex-start;
+
+                    &__add-to-cart,
+                    &__add-to-wishlist {
+                        width: 100%;
+                    }
+                }
+                &__info{
+                    padding: 0 0.1rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .single-product-page {
+        padding: 2rem 1rem;
+
+        &__bottom {
+            &__details {
+                &__title {
+                    font-size: 1.3rem;
+                }
+
+                &__price {
+                    font-size: 1.6rem;
+                }
+
+                &__description {
+                    font-size: 0.95rem;
+                    line-height: 26px;
+                }
+
+                &__buttons {
+                    &__quantity {
+                        width: 100%;
+                    }
+                }
+
+                &__info__item {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+            }
+        }
+    }
 }

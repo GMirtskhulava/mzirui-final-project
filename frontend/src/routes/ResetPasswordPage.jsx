@@ -69,7 +69,7 @@ function ResetPasswordPage() {
     return (
         <div className="resetPassword-page">
             <div className="resetPassword-page__form">
-                <h4 className="resetPassword-page__form__title">Forgot Password</h4>
+                <h4 className="resetPassword-page__form__title">Reset Password</h4>
                 <div className="resetPassword-page__form__inputs">
                     {isTokenFound === true ? (
                         <>

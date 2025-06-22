@@ -1,18 +1,18 @@
 @use '../abstracts/variables' as *;
 
 
-.login-page{
+.login-page {
     width: 100%;
     padding: 5rem 15%;
 
-    &__form{
+    &__form {
         width: 50%;
         margin: 0 auto;
         box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.1);
         background-color: #ffffff;
         padding: 30px;
 
-        &__title{
+        &__title {
             font-size: 20px;
             line-height: 23px;
             text-transform: capitalize;
@@ -22,16 +22,17 @@
             color: $secondary-color;
         }
 
-        &__inputs{
-            &__input-box{
-                & label{
+        &__inputs {
+            &__input-box {
+                & label {
                     display: block;
                     font-size: 14px;
                     margin-bottom: 12px;
                     font-weight: 500;
                     text-transform: capitalize;
                 }
-                & input{
+
+                & input {
                     width: 100%;
                     background-color: transparent;
                     border: 1px solid #dee2e6;
@@ -42,24 +43,28 @@
                     margin-bottom: 15px;
                 }
             }
-            &__input-box-bottom{
+
+            &__input-box-bottom {
                 // padding: 0 0.2rem;
 
-                &__checkbox{
+                &__checkbox {
                     display: flex;
                     gap: 0.5rem;
                     margin-bottom: 0.8rem;
                 }
-                & a{
+
+                & a {
                     font-size: 15px;
                     color: $secondary-color;
                     transition: color 0.2s;
-                    &:hover{
+
+                    &:hover {
                         color: $primary-color;
                     }
                 }
             }
-            &__button-box{
+
+            &__button-box {
                 padding: 0.5rem 0;
                 margin-top: 1rem;
                 width: 100%;
@@ -67,7 +72,7 @@
                 justify-content: center;
                 align-items: center;
 
-                & button{
+                & button {
                     padding: 1rem 2rem;
                     border: 0;
                     border-radius: 20px;
@@ -76,19 +81,80 @@
                     font-size: 16px;
                     font-weight: 300;
                     cursor: pointer;
-                    
+
                     color: $white-color;
                     text-transform: uppercase;
-        
-                    &:hover{
+
+                    &:hover {
                         background-color: $secondary-color;
                     }
                 }
             }
-            &__error-msg{
+
+            &__error-msg {
                 color: $red-color;
                 font-size: 13px;
                 padding-bottom: 1.2rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .login-page {
+        padding: 4rem 10%;
+
+        &__form {
+            width: 70%;
+            padding: 25px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .login-page {
+        padding: 3rem 5%;
+
+        &__form {
+            width: 100%;
+            padding: 20px;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .login-page {
+        padding: 2rem 1rem;
+
+        &__form {
+            padding: 15px;
+
+            &__inputs {
+                &__input-box {
+                    & label {
+                        font-size: 13px;
+                    }
+
+                    & input {
+                        padding: 8px 14px;
+                        font-size: 13px;
+                    }
+                }
+
+                &__input-box-bottom {
+                    flex-direction: column;
+                    gap: 0.3rem;
+
+                    &__checkbox {
+                        font-size: 13px;
+                    }
+                }
+
+                &__button-box button {
+                    width: 100%;
+                    font-size: 15px;
+                    padding: 0.8rem 1.5rem;
+                }
             }
         }
     }
