@@ -1,8 +1,11 @@
 import axios from 'axios';
 
+const base_url = `https://pronia-mziuri.onrender.com`
+
+
 export const loginUser = async (email, password) => {
     const response = await axios.post(
-        'http://localhost:2508/api/users/login',
+        `${base_url}/api/users/login`,
         JSON.stringify({ email: email, password: password }),
         {
             headers: { 'Content-Type': 'application/json' },
@@ -13,7 +16,7 @@ export const loginUser = async (email, password) => {
 };
 export const registerUser = async (username, email, password) => {
     const response = await axios.post(
-        'http://localhost:2508/api/users/register',
+        `${base_url}/api/users/register`,
         JSON.stringify({ username: username, email: email, password: password }),
         {
             headers: { 'Content-Type': 'application/json' },
@@ -23,28 +26,28 @@ export const registerUser = async (username, email, password) => {
     return response;
 };
 export const getToken = async () => {
-    const response = await axios.get('http://localhost:2508/api/users/get-token', {
+    const response = await axios.get(`${base_url}/api/users/get-token`, {
         withCredentials: true,
     });
     return response;
 };
 
 export const getUser = async (token) => {
-    const response = await axios.get(`http://localhost:2508/api/users/get-user`, {
+    const response = await axios.get(`${base_url}/api/users/get-user`, {
         headers: { Authorization: token },
     });
     return response.data;
 };
 
 export const getUserById = async (userId) => {
-    const response = await axios.get(`http://localhost:2508/api/users/get-user-id`, {
+    const response = await axios.get(`${base_url}/api/users/get-user-id`, {
         headers: { Authorization: userId },
     });
     return response;
 };
 
 export const getUserByName = async (userName) => {
-    const response = await axios.get(`http://localhost:2508/api/users/get-user-name`, {
+    const response = await axios.get(`${base_url}/api/users/get-user-name`, {
         params: { name: userName },
     });
     return response;
@@ -52,7 +55,7 @@ export const getUserByName = async (userName) => {
 
 export const forgotPasswordUser = async (email) => {
     const response = await axios.put(
-        'http://localhost:2508/api/users/forgot-password',
+        `${base_url}/api/users/forgot-password`,
         JSON.stringify({ email: email }),
         {
             headers: { 'Content-Type': 'application/json' },
@@ -64,7 +67,7 @@ export const forgotPasswordUser = async (email) => {
 
 export const resetPasswordUser = async (newPassword, token) => {
     const response = await axios.put(
-        'http://localhost:2508/api/users/reset-password',
+        `${base_url}/api/users/reset-password`,
         JSON.stringify({ password: newPassword, token: token }),
         {
             headers: { 'Content-Type': 'application/json' },
@@ -75,7 +78,7 @@ export const resetPasswordUser = async (newPassword, token) => {
 };
 
 export const checkResetTokenValidation = async (token) => {
-    const response = await axios.get('http://localhost:2508/api/users/check-resetToken', {
+    const response = await axios.get(`${base_url}/api/users/check-resetToken`, {
         withCredentials: true,
         params: {
             checkToken: token,
@@ -86,7 +89,7 @@ export const checkResetTokenValidation = async (token) => {
 
 export const addWishlistItem = async (productId, userId) => {
     const response = await axios.post(
-        'http://localhost:2508/api/users/wishlist-add',
+        `${base_url}/api/users/wishlist-add`,
         JSON.stringify({ productId: productId, userId: userId }),
         {
             headers: { 'Content-Type': 'application/json' },
@@ -97,7 +100,7 @@ export const addWishlistItem = async (productId, userId) => {
 };
 export const removeWishlistItem = async (productId, userId) => {
     const response = await axios.delete(
-        'http://localhost:2508/api/users/wishlist-remove',
+        `${base_url}/api/users/wishlist-remove`,
         {
             data: { productId, userId },
             headers: { 'Content-Type': 'application/json' },
@@ -109,7 +112,7 @@ export const removeWishlistItem = async (productId, userId) => {
 
 export const addCartItem = async ({productId, productCount}, userId) => {
     const response = await axios.post(
-        'http://localhost:2508/api/users/cart-add',
+        `${base_url}/api/users/cart-add`,
         JSON.stringify({ productId: productId, productCount: productCount, userId: userId }),
         {
             headers: { 'Content-Type': 'application/json' },
@@ -120,7 +123,7 @@ export const addCartItem = async ({productId, productCount}, userId) => {
 };
 export const removeCartItem = async (productId, userId) => {
     const response = await axios.delete(
-        'http://localhost:2508/api/users/cart-remove',
+        `${base_url}/api/users/cart-remove`,
         {
             data: { productId, userId },
             headers: { 'Content-Type': 'application/json' },
@@ -132,7 +135,7 @@ export const removeCartItem = async (productId, userId) => {
 
 export const updateUserData = async (userId, newData) => {
     const response = await axios.put(
-        'http://localhost:2508/api/users/update-data',
+        `${base_url}/api/users/update-data`,
         JSON.stringify({ userId, newData }),
         {
             headers: { 'Content-Type': 'application/json' },
