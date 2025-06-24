@@ -21,7 +21,7 @@ dotenv.config()
 
 app.use(cors({
 //   origin: 'http://192.168.1.12:5173',
-  origin: 'http://localhost:5173',
+  origin: ["http://localhost:5173", "https://pronia-mziuri.onrender.com"],
   credentials: true
 }));
 
