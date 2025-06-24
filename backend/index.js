@@ -2,13 +2,17 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser';
-
+import path from 'path';
 // DB
 import connectDB from './db/connection.js'
 
 // Routes
 import UsersRouter from './routes/users.routes.js'
 import ProductsRouter from './routes/products.routes.js'
+
+
+import { fileURLToPath } from "url";
+import { URL } from "url";
 
 const app = express()
 const PORT = 2508;
@@ -29,6 +33,13 @@ app.use("/api/users", UsersRouter);
 app.use("/api/products", ProductsRouter);
 
 //
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 
 
 
