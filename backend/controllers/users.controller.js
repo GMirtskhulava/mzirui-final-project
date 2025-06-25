@@ -246,7 +246,6 @@ export const wishlistAdd = async (req, res) => {
 }
 export const wishlistRemove = async (req, res) => {
     try {
-        console.log(req.body)
         const { productId, userId } = req.body;
         if(!productId) {
             return res.status(400).json({ err: 'Product ID is required' });
@@ -262,7 +261,6 @@ export const wishlistRemove = async (req, res) => {
         const updatedUser = await Users.findOneAndUpdate({ _id: userId }, { wishlist: updatedWishlist }, { new: true } );
 
         res.status(200).json({ msg: 'Product removed from wishlist', data: updatedUser });
-        console.log("deleted");
     } catch (error) {
         res.status(500).json({ err: `Server error: ${error.message}` });
     }

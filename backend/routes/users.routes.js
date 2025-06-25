@@ -1,10 +1,11 @@
 import express from "express";
-import { loginUser, registerUser, getUser, getUserById, getToken, forgotPasswordUser, resetPasswordUser, checkResetTokenValidation, wishlistAdd, wishlistRemove, cartAdd, cartRemove, updateUserData, getUserByName } from "../controllers/users.controller.js";
+import { loginUser, logoutUser, registerUser, getUser, getUserById, getToken, forgotPasswordUser, resetPasswordUser, checkResetTokenValidation, wishlistAdd, wishlistRemove, cartAdd, cartRemove, updateUserData, getUserByName } from "../controllers/users.controller.js";
 
 
 const UsersRouter = express.Router()
 
 UsersRouter.post('/login', loginUser)
+UsersRouter.post('/logout', logoutUser)
 UsersRouter.post('/register', registerUser)
 UsersRouter.get('/get-user', getUser)
 UsersRouter.get('/get-user-id', getUserById)

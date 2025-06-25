@@ -4,6 +4,7 @@ import { useProductsData } from "./ProductsContext";
 import { useWishlistData } from "./WishlistContext";
 import { useCartData } from "./CartContext";
 import { useNotification } from "./NotifContext";
+import { useCurrencyData } from "./CurrencyContenxt";
 
 export {
     useUserData,
@@ -11,5 +12,6 @@ export {
     useProductsData,
     useWishlistData,
     useCartData,
-    useNotification
+    useNotification,
+    useCurrencyData
 };

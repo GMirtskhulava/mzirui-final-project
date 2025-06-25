@@ -32,7 +32,7 @@
             text-align: start;
 
             display: flex;
-            flex-direction: column; 
+            flex-direction: column;
             gap: 10px;
 
             input {
@@ -52,7 +52,7 @@
                     font-size: 14px;
                     width: 100%;
 
-                    &:focus{
+                    &:focus {
                         outline: 1px solid $primary-color;
                     }
                 }
@@ -68,43 +68,51 @@
                     white-space: nowrap;
                     transition: background-color 0.25s ease;
 
-                    &:hover{
+                    &:hover {
                         background-color: $secondary-color;
                     }
                 }
             }
 
 
-            &__find-result{
-                &__title{
+            &__find-result {
+                &__title {
                     margin: 0.8rem 0;
                     color: $secondary-color;
                     font-size: 18px;
                     font-weight: 500;
                 }
-                &__list{
-                    & ul{
+
+                &__list {
+                    & ul {
                         list-style: none;
-                        & li{ 
+
+                        & li {
                             margin-top: 0.5rem;
-                            & a{
+
+                            & a {
                                 color: $secondary-color;
                                 transition: color 0.2s ease;
-                                &:hover{
+
+                                &:hover {
                                     color: $primary-color;
                                 }
                             }
-                            & span{
+
+                            & span {
                                 font-size: 12px;
                             }
+
                             .badge {
                                 margin-left: 5px;
                                 user-select: none;
                             }
-                            .red-badge{
+
+                            .red-badge {
                                 color: $red-color;
                             }
-                            .admin-badge{
+
+                            .admin-badge {
                                 color: $yellow-color;
                             }
                         }
@@ -114,5 +122,97 @@
 
         }
 
+    }
+}
+
+@media (max-width: 992px) {
+    .profile-afind {
+        width: 95%;
+        padding: 1.5rem;
+
+        &__content {
+            &__row {
+                padding: 1.5rem;
+                margin: 1.5rem auto;
+
+                &__input-box {
+                    flex-direction: column;
+                    align-items: stretch;
+
+                    input {
+                        font-size: 14px;
+                    }
+
+                    button {
+                        width: 100%;
+                        font-size: 14px;
+                    }
+                }
+
+                &__find-result {
+                    &__title {
+                        font-size: 16px;
+                    }
+
+                    &__list {
+                        ul li {
+                            font-size: 14px;
+
+                            a {
+                                font-size: 14px;
+                            }
+
+                            span {
+                                font-size: 11px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .profile-afind {
+        padding: 1rem;
+
+        &__title h2 {
+            font-size: 18px;
+        }
+
+        &__content {
+            &__row {
+                padding: 1rem;
+
+                &__input-box {
+                    input {
+                        font-size: 13px;
+                        padding: 8px;
+                    }
+
+                    button {
+                        font-size: 13px;
+                        padding: 8px;
+                    }
+                }
+
+                &__find-result {
+                    &__title {
+                        font-size: 15px;
+                    }
+
+                    &__list {
+                        ul li {
+                            font-size: 13px;
+
+                            span {
+                                font-size: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

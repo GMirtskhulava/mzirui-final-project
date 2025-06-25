@@ -83,7 +83,7 @@ function App() {
 
                 const userRes = await getUser(token);
                 if (userRes?.data) {
-                    console.log(userRes);
+                    // console.log(userRes);
                     login(userRes.data);
                 } else {
                     if (loggedIn || userData) logout();

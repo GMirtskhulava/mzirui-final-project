@@ -5,6 +5,11 @@ const translationSchema = new mongoose.Schema({
   ka: { type: String }
 }, { _id: false });
 
+const currencySchema = new mongoose.Schema({
+  usd: { type: Number, min: 0, max: 500 },
+  gel: { type: Number, min: 0, max: 500 }
+}, { _id: false });
+
 
 const productSchema = new mongoose.Schema({
     title: { 
@@ -19,9 +24,7 @@ const productSchema = new mongoose.Schema({
 
     },
     price: {
-        type: Number,
-        min: 0,
-        max: 500
+        type: currencySchema
     },
     stars: {
         type: Number,

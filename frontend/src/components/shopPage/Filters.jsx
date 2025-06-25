@@ -1,4 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { SkeletonLoading } from '../index.js';
+import { getCategories } from '../../api/CategoriesApi';
+
+import { useCurrencyData } from '../../context/index.js';
 
 function Filters({
     searchTerm,
@@ -10,6 +14,7 @@ function Filters({
     maxPrice,
     setMaxPrice,
 }) {
+    const { choosedCurrency } = useCurrencyData();
     const trackRef = useRef(null);
     const minTooltipRef = useRef(null);
     const maxTooltipRef = useRef(null);
@@ -17,8 +22,17 @@ function Filters({
     const minLimit = 5;
     const maxLimit = 500;
 
-    const categorylist = ['All', 'Bonsai', 'Indoor Plants', 'Outdoor Plants'];
+    const [categoryList, setCategoryList] = useState()
 
+    useEffect(() => {
+        getCategories().then((res)=>{
+            if(res.status === 200) setCategoryList(res.data.categories)
+            else setCategoryList([]), console.log(res?.data);
+        }).catch((err) =>{
+            console.error(err);
+            setCategoryList([]);
+        })
+    }, [])
     useEffect(() => {
         const minPercent = (minPrice / maxLimit) * 100;
         const maxPercent = (maxPrice / maxLimit) * 100;
@@ -68,18 +82,35 @@ function Filters({
                         <h2>Categories</h2>
                     </div>
                     <ul className="shop-page__filters__main-filter__section__options">
-                        {categorylist.map((cat) => (
-                            <li
-                                key={cat}
-                                onClick={() => handleCategoryClick(cat)}
-                                style={{
-                                    cursor: 'pointer',
-                                    fontWeight: category === cat ? 'bold' : 'normal',
-                                }}
-                            >
-                                {cat}
-                            </li>
-                        ))}
+                        <li
+                            key={0}
+                            onClick={() => handleCategoryClick("All")}
+                            style={{
+                                cursor: 'pointer',
+                                fontWeight: category === "All" ? 'bold' : 'normal',
+                            }}
+                        >
+                            All
+                        </li>
+                        {
+                            !categoryList ? (
+                                <SkeletonLoading />
+                            ) : categoryList && categoryList.length === 0 ? (<></>)
+                                : (
+                                    categoryList.map((cat) => (
+                                        <li
+                                            key={cat._id}
+                                            onClick={() => handleCategoryClick(cat.name)}
+                                            style={{
+                                                cursor: 'pointer',
+                                                fontWeight: category === cat.name ? 'bold' : 'normal',
+                                            }}
+                                        >
+                                            {cat.name}
+                                        </li>
+                                    ))
+                                )
+                        }
                     </ul>
                 </div>
 
@@ -112,13 +143,13 @@ function Filters({
                             className="tooltip min-tooltip"
                             ref={minTooltipRef}
                         >
-                            ${minPrice}
+                        {choosedCurrency === "usd" ? "$" : "₾"}{minPrice}
                         </div>
                         <div
                             className="tooltip max-tooltip"
                             ref={maxTooltipRef}
                         >
-                            ${maxPrice}
+                        {choosedCurrency === "usd" ? "$" : "₾"}{maxPrice}
                         </div>
                     </div>
                 </div>

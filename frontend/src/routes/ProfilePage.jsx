@@ -1,14 +1,18 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
+
 import { useUserData, useNotification} from '../context/index.js';
 import { RouterPath, Dashboard, Orders, Afind } from '../components/index.js'; // Add Orders if you have it
+import { logoutUser } from '../api/UsersApi.js';
 
 function ProfilePage() {
     const { userId } = useParams();
-
-    const { userData } = useUserData();
+    
+    const { showNotification } = useNotification()
+    const { userData, logout } = useUserData();
 
     const [choosedTab, setChoosedTab] = useState(0);
+    const [buttonClicked, setButtonClicked] = useState(false);
 
     const renderTabContent = () => {
         switch(choosedTab) {
@@ -16,14 +20,32 @@ function ProfilePage() {
                 return <Dashboard userId={userId}/>;
             case 1:
                 return <Orders userId={userId}/>;
-            case 2:
-                return <div>You have been logged out.</div>;
-            case 3: 
+            case 2: 
                 return userData.admin ? <Afind /> : null;
             default:
                 return null;
         }
     };
+
+    const handleLogout = async () => {
+        if(buttonClicked) return;
+        setButtonClicked(true)
+        await logoutUser().then((res) =>{
+            if(res.status === 200) {
+                showNotification("logout", "Successfully logged out");
+                setTimeout(() => {
+                    setButtonClicked(false);
+                    logout();
+                    window.location.href = "/"
+                }, 1000);
+            }
+        }).catch((err) => {
+            console.log(err)
+            showNotification("logout", "An error occurred. Try again later.", 1);
+        })
+
+        setButtonClicked(false)
+    }
 
     return (
         <>
@@ -39,14 +61,14 @@ function ProfilePage() {
                         </li>
                         {
                             userId === userData?._id && userData.admin ? (
-                                <li onClick={() => setChoosedTab(3)} className={choosedTab === 3 ? 'active' : ''} >
+                                <li onClick={() => setChoosedTab(2)} className={choosedTab === 2 ? 'active' : ''} >
                                     A-Find
                                 </li>
                             ) : (<></>)
                         }
                         {
                             userId === userData?._id ? (
-                                <li onClick={() => setChoosedTab(2)} className={choosedTab === 2 ? 'active' : ''} >
+                                <li onClick={handleLogout} >
                                     Log Out
                                 </li>
                             )  : (<></>)

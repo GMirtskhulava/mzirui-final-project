@@ -6,7 +6,7 @@ import { RouterPath, Shipping } from '../components/index.js';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
-import { useUserData, useProductsData, useWishlistData, useCartData, useNotification } from '../context/index.js';
+import { useUserData, useProductsData, useWishlistData, useCartData, useNotification, useCurrencyData } from '../context/index.js';
 
 
 
@@ -16,6 +16,7 @@ function SingleProductPage() {
     const { productsData } = useProductsData();
     const { isInWishlist, addWishlistItem, removeWishlistItem } = useWishlistData();
     const { isInCart, addCartItem, removeCartItem } = useCartData();
+    const { choosedCurrency } = useCurrencyData();
     const { i18n } = useTranslation();
     const { showNotification } = useNotification();
 
@@ -133,7 +134,7 @@ function SingleProductPage() {
                                 {userData?.admin ? <p className='single-product-page__bottom__details__title__adm-id'>ID: <span>{product._id}</span> <CopyToClipboard text={product._id}><span><i className="fa-solid fa-copy single-product-page__bottom__details__title__adm-id__copy"></i></span></CopyToClipboard></p> : <></>}
                             </h2>
                             <h1 className='single-product-page__bottom__details__price'>
-                                ${product.price}
+                                {choosedCurrency === "usd" ? "$" : "₾"}{typeof product.price === "object" ? product.price[choosedCurrency] : product.price}
                             </h1>
                             <div className='single-product-page__bottom__details__stars'>
                                 {Array.from({ length: product.stars }).map((_, i) => (

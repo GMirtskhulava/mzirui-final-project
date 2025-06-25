@@ -10,7 +10,7 @@ import { SkeletonLoading } from '../components/index.js';
 import { useTranslation } from 'react-i18next';
 //
 
-import { useWishlistData, useUserData, useCartData, useProductsData } from '../context/index.js';
+import { useWishlistData, useUserData, useCartData, useProductsData, useCurrencyData } from '../context/index.js';
 
 //
 
@@ -20,6 +20,7 @@ function Header() {
     const { wishlistData } = useWishlistData();
     const { cartData } = useCartData();
     const { productsData } = useProductsData();
+    const { choosedCurrency , setChoosedCurrency } = useCurrencyData();
     const [choosedLanguage, setChoosedLanguage] = useState(localStorage.getItem('lang') || 'en');
     const [cartItemsLength, setCartItemsLength] = useState(0);
     
@@ -27,6 +28,10 @@ function Header() {
         i18n.changeLanguage(choosedLanguage);
         localStorage.setItem('lang', choosedLanguage);
     }, [choosedLanguage, i18n]);
+    
+    useEffect(() => {
+        localStorage.setItem('curr', choosedCurrency);
+    }, [choosedCurrency])
 
     useEffect(() => {
         setCartItemsLength((cartData && productsData ? cartData.filter(cartItem => {
@@ -45,6 +50,15 @@ function Header() {
                     >
                         <option value="en">{t('header.langEnglish')}</option>
                         <option value="ka">{t('header.langGeorgian')}</option>
+                    </select>
+                </div>
+                <div className="header-top-box__select-box">
+                    <select
+                        onChange={(e) => setChoosedCurrency(e.target.value)}
+                        value={choosedCurrency}
+                    >
+                        <option value="usd">$ [USD]</option>
+                        <option value="gel">₾ [GEL]</option>
                     </select>
                 </div>
             </div>

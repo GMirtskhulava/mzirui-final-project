@@ -9,6 +9,7 @@ import { ProductsProvider } from './context/ProductsContext.jsx';
 import { WishlistProvider } from './context/WishlistContext.jsx';
 import { CartProvider } from './context/CartContext.jsx';
 import { NotifProvider } from './context/NotifContext.jsx';
+import { CurrencyProvider } from './context/CurrencyContenxt.jsx';
 
 import './language/i18n.js';
 
@@ -16,19 +17,21 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <Router>
-            <UserProvider>
-                <LoaderProvider>
-                    <ProductsProvider>
-                        <NotifProvider>
-                            <WishlistProvider>
-                                <CartProvider>
-                                    <App />
-                                </CartProvider>
-                            </WishlistProvider>
-                        </NotifProvider>
-                    </ProductsProvider>
-                </LoaderProvider>
-            </UserProvider>
+            <CurrencyProvider>
+                <UserProvider>
+                    <LoaderProvider>
+                        <ProductsProvider>
+                            <NotifProvider>
+                                <WishlistProvider>
+                                    <CartProvider>
+                                        <App />
+                                    </CartProvider>
+                                </WishlistProvider>
+                            </NotifProvider>
+                        </ProductsProvider>
+                    </LoaderProvider>
+                </UserProvider>
+            </CurrencyProvider>
         </Router>
     </React.StrictMode>
 );

@@ -4,11 +4,12 @@ import { RouterPath, Filters, ProductList } from '../components/index.js';
 
 // import { getProducts } from '../api/ProductsApi';
 
-import { useProductsData } from '../context/index.js';
+import { useProductsData, useCurrencyData } from '../context/index.js';
 
 function ShopPage() {
     const { productsData } = useProductsData();
     const [filteredProducts, setFilteredProducts] = useState(productsData);
+    const { choosedCurrency } = useCurrencyData();
 
     // Filt
     const [searchTerm, setSearchTerm] = useState('');
@@ -31,8 +32,9 @@ function ShopPage() {
     useEffect(() => {
         if (!productsData) return;
         let filtered = productsData;
-
-        if (category !== 'All') {
+        
+        console.log("pd", category);
+        if (category.toLowerCase() !== 'all') {
             filtered = filtered.filter((product) => product.category.name === category);
         }
         if (searchTerm.trim() !== '') {
@@ -40,12 +42,17 @@ function ShopPage() {
                 product.title.en.toLowerCase().includes(searchTerm.toLowerCase())
             );
         }
+
+        console.log("before", filtered);
         filtered = filtered.filter(
-            (product) => product.price >= minPrice && product.price <= maxPrice
+            (product) => {
+                return product.price[choosedCurrency] >= minPrice && product.price[choosedCurrency] <= maxPrice
+            }
         );
+        console.log("after", filtered);
 
         setFilteredProducts(filtered);
-    }, [productsData, category, searchTerm, minPrice, maxPrice]);
+    }, [productsData, category, searchTerm, minPrice, maxPrice, choosedCurrency]);
 
     return (
         <>

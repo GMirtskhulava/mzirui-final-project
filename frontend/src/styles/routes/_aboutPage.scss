@@ -269,52 +269,60 @@
     }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1700px) {
     .about-page {
-        padding: 3rem 8%;
+        &__our-team {
+            &__content {
+                justify-content: center;
+                gap: 2rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .about-page {
+        padding: 4rem 8%;
 
         &__our-story {
-            & h2 {
+            h2 {
                 font-size: 48px;
-                line-height: 45px;
-                margin-bottom: 3rem;
+                line-height: 52px;
+                margin-bottom: 4rem;
 
-                & span::before {
-                    bottom: -30px;
+                span::before {
+                    scale: 0.9;
+                    bottom: -35px;
                 }
             }
 
-            & p {
-                font-size: 16px;
-                line-height: 28px;
-                margin-bottom: 25px;
+            p {
+                font-size: 17px;
+                line-height: 29px;
             }
         }
 
         &__video {
-            max-width: 85%;
-            margin-bottom: 4rem;
+            max-width: 90%;
         }
 
         &__counter {
-            & p {
-                font-size: 28px;
-                line-height: 42px;
-                margin-bottom: 50px;
+            p {
+                font-size: 32px;
+                line-height: 46px;
+                margin-bottom: 60px;
             }
 
             &__list {
-                padding: 0 2%;
+                gap: 3rem;
 
                 &__column {
-                    border-right: 0;
-
-                    & h2 {
-                        font-size: 32px;
+                    h2 {
+                        font-size: 36px;
                     }
 
-                    & p {
-                        font-size: 24px !important;
+                    p {
+                        font-size: 26px !important;
                     }
                 }
             }
@@ -322,34 +330,65 @@
 
         &__our-team {
             &__header {
-                & h2 {
-                    font-size: 28px;
-                    padding-left: 40px;
-                    padding-right: 40px;
+                h2 {
+                    font-size: 32px;
+                    padding: 0 70px;
+
+                    &::before,
+                    &::after {
+                        width: 60px;
+                    }
                 }
 
-                & p {
-                    max-width: 400px;
-                    margin-bottom: 40px;
+                p {
+                    font-size: 15px;
                 }
             }
 
             &__content {
                 flex-wrap: wrap;
-                justify-content: center;
                 gap: 2rem;
 
                 &__card {
-                    width: 280px !important;
-                    padding-top: 2rem !important;
+                    flex: 1 1 45%;
+                    max-width: 45%;
 
-                    // &__image{
-                    //     &__hover-content{
+                    &__content p {
+                        font-size: 16px;
+                    }
 
-                    //     }
-                    // }
-                    &:nth-child(2n-1) {
-                        padding-top: 2rem !important;
+                    &__image {
+                        width: 100%;
+
+                        &__hover-content {
+                            height: 110px;
+                            padding-top: 20px;
+                            border-end-start-radius: 100px;
+                            border-end-end-radius: 100px;
+
+                            h2 {
+                                font-size: 16px;
+                                line-height: 22px;
+                            }
+
+                            p {
+                                font-size: 13px;
+                            }
+
+                            &__links {
+                                padding-top: 20px;
+
+                                ul {
+                                    gap: 0.7rem;
+
+                                    li {
+                                        width: 36px;
+                                        height: 36px;
+                                        font-size: 14px;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -357,82 +396,118 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .about-page {
-        padding: 2rem 5%;
+        padding: 3rem 5%;
 
         &__our-story {
-            & h2 {
-                font-size: 36px;
-                line-height: 40px;
+            h2 {
+                font-size: 40px;
+                line-height: 46px;
+                margin-bottom: 4rem;
 
-            
-
-                & span::before {
-                    bottom: -20px;
-                    width: 50px;
-                    height: auto;
+                span::before {
+                    scale: 0.8;
+                    bottom: -30px;
                 }
             }
 
-            & p {
-                font-size: 14px;
-                line-height: 24px;
+            p {
+                font-size: 16px;
+                line-height: 28px;
             }
         }
 
         &__video {
             max-width: 100%;
-            margin-bottom: 3rem;
-            border-width: 1rem;
+            margin-bottom: 4rem;
         }
 
         &__counter {
-            & p {
-                font-size: 22px;
-                line-height: 30px;
-                margin-bottom: 40px;
+            p {
+                font-size: 28px;
+                line-height: 40px;
+                margin-bottom: 50px;
             }
 
             &__list {
                 flex-direction: column;
-                padding: 0;
+                gap: 2rem;
 
                 &__column {
-                    border-right: 0;
-                    width: 100%;
-                    margin-bottom: 2rem;
+                    border-right: none;
+                    border-bottom: 1px solid #dcdcdc;
+                    padding-bottom: 1rem;
 
-                    & h2 {
-                        font-size: 28px;
+                    h2 {
+                        font-size: 32px;
                     }
 
-                    & p {
-                        font-size: 20px !important;
+                    p {
+                        font-size: 22px !important;
+                    }
+
+                    &:last-child {
+                        border-bottom: none;
                     }
                 }
             }
         }
 
         &__our-team {
-            &__header{
-                & h2{
-                    &:before,
-                    &:after {
-                        display: none;
+            &__header {
+                h2 {
+                    font-size: 28px;
+                    padding-left: 60px;
+                    padding-right: 60px;
+
+                    &::before,
+                    &::after {
+                        width: 40px;
                     }
                 }
+
+                p {
+                    font-size: 14px;
+                    line-height: 26px;
+                }
             }
+
             &__content {
                 flex-direction: column;
-                gap: 3rem;
+                gap: 2.5rem;
 
                 &__card {
-                    width: 100% !important;
                     padding-top: 0 !important;
 
-                    &:nth-child(2n-1) {
-                        padding-top: 0 !important;
+                    &__image__hover-content {
+                        height: 120px;
+
+                        h2 {
+                            font-size: 16px;
+                        }
+
+                        p {
+                            font-size: 13px;
+                        }
+
+                        &__links {
+                            padding-top: 20px;
+
+                            ul li {
+                                width: 36px;
+                                height: 36px;
+                                font-size: 14px;
+                            }
+                        }
+                    }
+
+                    &__content {
+                        padding-top: 20px;
+
+                        p {
+                            font-size: 16px;
+                        }
                     }
                 }
             }
@@ -440,33 +515,50 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
     .about-page {
-        padding: 1rem 3%;
+        padding: 2rem 3%;
 
-        &__our-story {
-            & h2 {
-                font-size: 28px;
-                line-height: 32px;
+        &__our-story h2 {
+            font-size: 30px;
+            line-height: 36px;
 
-                & span::before {
-                    bottom: -15px;
-                    width: 40px;
-                    height: auto;
-                }
-            }
-
-            & p {
-                font-size: 12px;
-                line-height: 20px;
+            span::before {
+                scale: 0.6;
+                bottom: -25px;
             }
         }
 
-        &__counter {
-            & p {
-                font-size: 18px;
-                line-height: 24px;
-                margin-bottom: 30px;
+        &__counter p {
+            font-size: 22px;
+            line-height: 32px;
+        }
+
+        &__our-team__header h2 {
+            font-size: 22px;
+            padding: 0 40px;
+
+            &::before,
+            &::after {
+                width: 30px;
+            }
+        }
+
+        &__our-team__content__card__image__hover-content {
+            height: 100px;
+
+            h2 {
+                font-size: 14px;
+            }
+
+            p {
+                font-size: 12px;
+            }
+
+            &__links ul li {
+                width: 32px;
+                height: 32px;
+                font-size: 13px;
             }
         }
     }

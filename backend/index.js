@@ -6,13 +6,16 @@ import path from 'path';
 // DB
 import connectDB from './db/connection.js'
 
+import { fileURLToPath } from "url";
+import { URL } from "url";
+
 // Routes
 import UsersRouter from './routes/users.routes.js'
 import ProductsRouter from './routes/products.routes.js'
+import CategoriesRouter from './routes/categories.routes.js';
 
 
-import { fileURLToPath } from "url";
-import { URL } from "url";
+
 
 const app = express()
 const PORT = 2508;
@@ -31,6 +34,7 @@ app.use(cookieParser()); // to access cookies in node.js
 //
 app.use("/api/users", UsersRouter);
 app.use("/api/products", ProductsRouter);
+app.use("/api/categories", CategoriesRouter);
 
 //
 const __filename = fileURLToPath(import.meta.url);

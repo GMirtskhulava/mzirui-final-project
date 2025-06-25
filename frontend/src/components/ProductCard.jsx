@@ -3,17 +3,20 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { useWishlistData, useUserData, useCartData, useNotification } from '../context/index.js';
+import { useWishlistData, useUserData, useCartData, useNotification, useCurrencyData } from '../context/index.js';
 
 function ProductCard({ product }) {
     const { loggedIn, userData } = useUserData();
     const { isInWishlist, addWishlistItem, removeWishlistItem } = useWishlistData();
     const { isInCart, addCartItem, removeCartItem } = useCartData();
+    const { choosedCurrency } = useCurrencyData();
     const { i18n } = useTranslation();
     const { showNotification } = useNotification();
 
 
     const [clickedButton, setClickedButton] = useState(false);
+
+    // console.log(product)
 
     const toggleWishlist = async (productId) => {
         if(clickedButton) return console.log("Button already clicked");
@@ -107,7 +110,7 @@ function ProductCard({ product }) {
                 >
                     {product.title[i18n.language]}
                 </Link>
-                <p className="productCard__content__price">${product.price}</p>
+                <p className="productCard__content__price">{choosedCurrency === "usd" ? "$" : "₾"}{typeof product.price === "object" ? product.price[choosedCurrency] : product.price}</p>
                 <div className="productCard__content__stars">
                     {Array.from({ length: product.stars }).map((_, i) => (
                         <i
