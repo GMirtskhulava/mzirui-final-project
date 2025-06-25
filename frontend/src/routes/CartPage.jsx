@@ -4,7 +4,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Link } from 'react-router-dom'
 import { RouterPath, SkeletonLoading } from '../components/index.js'
 
-import { useUserData, useProductsData, useCartData, useNotification } from '../context/index.js';
+import { useUserData, useProductsData, useCartData, useNotification, useCurrencyData } from '../context/index.js';
 import { useTranslation } from 'react-i18next';
 
 
@@ -13,6 +13,7 @@ function CartPage() {
     const { productsData } = useProductsData();
     const { isInCart, cartData, addCartItem, removeCartItem } = useCartData();
     const { showNotification } = useNotification();
+    const { choosedCurrency } = useCurrencyData();
     const { i18n } = useTranslation();
 
     const [cartProducts, setCartProducts] = useState();
