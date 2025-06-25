@@ -139,7 +139,7 @@ function CartPage() {
                                             {userData?.admin ? <p className='cart-page__table__body__product__adm-id'>ID: <span>{product._id.toString()}</span> <CopyToClipboard text={product._id}><span><i className="fa-solid fa-copy cart-page__table__body__product__adm-id__copy"></i></span></CopyToClipboard></p> : <></>}
                                         </td>
                                         <td className='cart-page__table__body__unit-price'>
-                                            ${product.hidden ? '-' : product.price}
+                                            {choosedCurrency === "usd" ? "$" : "₾"}{product.hidden ? '-' : product.price[choosedCurrency]}
                                         </td>
                                         <td className={`cart-page__table__body__quantity ${product.hidden ? '' : product.countInStock > 0 ? '' : 'out-of-stock'}`}>
                                             <input

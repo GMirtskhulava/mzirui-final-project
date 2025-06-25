@@ -110,7 +110,7 @@ function ProductCard({ product }) {
                 >
                     {product.title[i18n.language]}
                 </Link>
-                <p className="productCard__content__price">{choosedCurrency === "usd" ? "$" : "₾"}{typeof product.price === "object" ? product.price[choosedCurrency] : product.price}</p>
+                <p className="productCard__content__price">{choosedCurrency === "usd" ? "$" : "₾"}{product.price[choosedCurrency]}</p>
                 <div className="productCard__content__stars">
                     {Array.from({ length: product.stars }).map((_, i) => (
                         <i

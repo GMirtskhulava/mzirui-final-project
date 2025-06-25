@@ -4,7 +4,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Link } from 'react-router-dom'
 import { RouterPath, SkeletonLoading } from '../components/index.js'
 
-import { useUserData, useProductsData, useWishlistData, useCartData, useNotification } from '../context/index.js';
+import { useUserData, useProductsData, useWishlistData, useCartData, useNotification, useCurrencyData } from '../context/index.js';
 
 import i18n from 'i18next'
 
@@ -14,6 +14,7 @@ function WishlistPage() {
     const { wishlistData, isInWishlist, removeWishlistItem } = useWishlistData();
     const { isInCart, addCartItem, removeCartItem } = useCartData();
     const { showNotification } = useNotification();
+    const { choosedCurrency } = useCurrencyData();
 
 
     const [wishlistProducts, setWishlistProducts] = useState();
@@ -135,7 +136,7 @@ function WishlistPage() {
                                         {userData?.admin ? <p className='wishlist-page__body__product__adm-id'>ID: <span>{product._id.toString()}</span> <CopyToClipboard text={product._id}><span><i className="fa-solid fa-copy wishlist-page__body__product__adm-id__copy"></i></span></CopyToClipboard></p> : <></>}
                                     </td>
                                     <td className='wishlist-page__body__unit-price'>
-                                        ${product.hidden ? '-' : product.price}
+                                        {choosedCurrency === "usd" ? "$" : "₾"}{product.hidden ? '-' : product.price[choosedCurrency]}
                                     </td>
                                     <td className={`wishlist-page__body__stock-status ${product.hidden ? '' : product.countInStock > 0 ? '' : 'out-of-stock'}`}>
                                         {product.hidden ? '-' : product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}

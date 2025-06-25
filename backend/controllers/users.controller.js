@@ -17,7 +17,6 @@ export const loginUser = async (req, res) => {
         if(user.banned) {
             return res.status(403).json({ err: 'Account banned' });
         }
-
         res.clearCookie('token');
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1d' });
         res.cookie('token', token, {

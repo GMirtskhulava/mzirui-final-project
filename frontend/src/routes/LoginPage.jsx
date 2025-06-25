@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { RouterPath } from '../components/index.js';
 import { Link } from 'react-router-dom';
 
 import { loginUser } from '../api/UsersApi';
 
-import { useNotification } from '../context/index.js';
+import { useNotification, useUserData} from '../context/index.js';
 
 function LoginPage() {
     const { showNotification } = useNotification();
@@ -14,7 +14,7 @@ function LoginPage() {
         password: '',
     });
     const [errormsg, setErrorMsg] = useState('');
-    // const { login } = useUserData();
+    const { loggedIn, userData } = useUserData();
 
     const handleFormChange = (e) => {
         setInputValues((p) => ({
@@ -36,29 +36,36 @@ function LoginPage() {
 
         return true;
     };
-    const hangleLoginButton = () => {
+    const handleLoginButton = () => {
         setErrorMsg('');
+
         if (checkFormValidations()) {
             loginUser(inputValues.email, inputValues.password)
                 .then((res) => {
-                    if(res.status === 200) {
-                        console.log(res.data);
+                    if (res.status === 200) {
                         // login(res.data.data);
                         window.location.href = '/';
                     }
                 })
                 .catch((err) => {
-                    if (err.response.status === 400) {
+                    const status = err.response?.status;
+
+                    if (status === 400) {
                         setErrorMsg('Invalid email or password');
-                    } else if(err.response.status === 403) {
+                    } else if (status === 403) {
                         setErrorMsg('! Account is Banned !');
                         showNotification("login", "Account is banned", 1);
                     } else {
                         setErrorMsg('Server error, please try again later');
                     }
                 });
-        } else return;
+        }
     };
+
+
+    useEffect(() => {
+        if(userData && loggedIn) return window.location.href = "/";
+    }, [userData, loggedIn])
 
     return (
         <>
@@ -101,7 +108,7 @@ function LoginPage() {
                             <Link to="/register">Don't have an account?</Link>
                         </div>
                         <div className="login-page__form__inputs__button-box">
-                            <button onClick={hangleLoginButton}>Login</button>
+                            <button onClick={handleLoginButton}>Login</button>
                         </div>
                     </div>
                 </div>
