@@ -3,6 +3,8 @@
 A full-stack web application with a **React (Vite)** frontend and a **Node.js + Express** backend.  
 Data is managed using **MongoDB** with **Mongoose**, and authentication is handled with **JWT**.
 
+Test site: https://pronia-mziuri.onrender.com
+
 ## 🧠 Project Structure
 ```
 mzirui-final-project/
