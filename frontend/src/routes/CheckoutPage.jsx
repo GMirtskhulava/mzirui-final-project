@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { RouterPath, SkeletonLoading } from '../components/index.js';
-import { useUserData, useProductsData, useCartData, useNotification } from '../context/index.js';
+import { useUserData, useProductsData, useCartData, useNotification, useCurrencyData } from '../context/index.js';
 import { useTranslation } from 'react-i18next';
 
 function CheckoutPage() {
@@ -9,6 +9,7 @@ function CheckoutPage() {
     const { productsData } = useProductsData();
     const { cartData } = useCartData();
     const { i18n } = useTranslation();
+    const { choosedCurrency } = useCurrencyData();
 
     const [cartProducts, setCartProducts] = useState();
     const [totalCost, setTotalCost] = useState(0);
@@ -25,7 +26,7 @@ function CheckoutPage() {
         cartData.forEach(cartItem => {
             const product = productsData.find(p => p._id === cartItem.productId);
             if(product && !product.hidden) {
-                total += product.price * cartItem.productCount;
+                total += product.price[choosedCurrency] * cartItem.productCount;
             }
         });
 
@@ -109,13 +110,13 @@ function CheckoutPage() {
                         ) : cartProducts.map((product) => (
                             <div className="checkout-page__order__order-box__order-line" key={product._id}>
                                 <span>{product.title[i18n.language]} <span><b>× {cartData.find(cartItem => cartItem.productId === product._id).productCount}</b></span></span>
-                                <span>${product.price}</span>
+                                <span>{choosedCurrency === "usd" ? "$" : "₾"}{product.price[choosedCurrency].toFixed(2)}</span>
                             </div>
                         ))
                     }
                     <div className="checkout-page__order__order-box__order-line checkout-page__order__order-box__order-line--total">
                         <span>Order Total</span>
-                        <span>${totalCost.toFixed(2)}</span>
+                        <span>{choosedCurrency === "usd" ? "$" : "₾"}{totalCost.toFixed(2)}</span>
                     </div>
 
                     <div className="checkout-page__order__order-box__payment-info">

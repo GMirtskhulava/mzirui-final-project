@@ -145,7 +145,7 @@ export const forgotPasswordUser = async (req, res) => {
         }
         else return res.status(400).json({ err: 'Token already exists!' });
 
-        const resetLink = `http://localhost:5173/reset-password/${token}`;
+        const resetLink = `https://pronia-mziuri.onrender.com/reset-password/${token}`;
 
         await mailSender(email, resetLink);
 
@@ -352,7 +352,7 @@ export const updateUserData = async (req, res) => {
         }
 
         if (newPassword && newPassword.length > 0) {
-            const isSamePassword = await CompareHash(newPassword, user.password); // Optional
+            const isSamePassword = await CompareHash(newPassword, user.password);
             if (!isSamePassword) {
                 updates.password = await HashString(newPassword);
             }

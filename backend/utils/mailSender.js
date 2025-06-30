@@ -43,7 +43,7 @@ const mailSender = async (userEmail, resetLink) => {
             {
                 filename: 'proniaLogo.png',
                 path: './assets/images/proniaLogo.png',
-                cid: 'proniaLogo' // same as used in img src above
+                cid: 'proniaLogo'
             }
         ]
     }

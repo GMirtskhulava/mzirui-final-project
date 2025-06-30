@@ -125,7 +125,8 @@ function WishlistPage() {
                             ) : wishlistProducts.map((product) => (
                                 <tr key={product._id} className={product.hidden ? "hidden-product" : ""}>
                                     <td className='wishlist-page__body__remove'>
-                                        <button className='wishlist-page__body__remove__btn' disabled={product.hidden} onClick={() => removeFromWishlist(product._id)}><i className="fa-solid fa-trash"></i></button>
+                                        <button className='wishlist-page__body__remove__btn' onClick={() => removeFromWishlist(product._id)}><i className="fa-solid fa-trash"></i></button>
+                                        {/*  disabled={product.hidden} */}
                                     </td>
                                     <td className='wishlist-page__body__image'>
                                         <Link to={product.hidden ? '' : `/product/${product._id}`} ><img src={product.image["small"]} alt="Product" /></Link>

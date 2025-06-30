@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
 import { useUserData, useNotification} from '../context/index.js';
-import { RouterPath, Dashboard, Orders, Afind } from '../components/index.js'; // Add Orders if you have it
+import { RouterPath, Dashboard, Orders, Manage } from '../components/index.js';
 import { logoutUser } from '../api/UsersApi.js';
 
 function ProfilePage() {
@@ -21,7 +21,7 @@ function ProfilePage() {
             case 1:
                 return <Orders userId={userId}/>;
             case 2: 
-                return userData.admin ? <Afind /> : null;
+                return userData.admin ? <Manage /> : null;
             default:
                 return null;
         }
@@ -62,7 +62,7 @@ function ProfilePage() {
                         {
                             userId === userData?._id && userData.admin ? (
                                 <li onClick={() => setChoosedTab(2)} className={choosedTab === 2 ? 'active' : ''} >
-                                    A-Find
+                                    Admin Panel
                                 </li>
                             ) : (<></>)
                         }

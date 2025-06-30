@@ -1,0 +1,163 @@
+import React, { useState, useEffect } from 'react';
+import { getCategories } from '../api/CategoriesApi';
+import { updateProductData } from '../api/ProductsApi';
+import { useNotification } from '../context/index.js';
+
+function EditProductModal({ product, onClose, onSave }) {
+    const { showNotification } = useNotification();
+    const [editedProduct, setEditedProduct] = useState({ ...product });
+    const [categories, setCategories] = useState([]);
+    const [saving, setSaving] = useState(false);
+
+    useEffect(() => {
+        // console.log(editedProduct.category)
+        getCategories().then((res) => {
+            setCategories(res.data.categories)
+        }).catch((err) => console.error("Failed to fetch categories", err));
+    }, []);
+
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+
+        if (name.includes('.')) {
+            const [parent, child] = name.split('.');
+            setEditedProduct((prev) => ({
+                ...prev,
+                [parent]: { ...prev[parent], [child]: value },
+            }));
+        } else if (type === 'checkbox') {
+            setEditedProduct((prev) => ({ ...prev, [name]: checked }));
+        } else {
+            setEditedProduct((prev) => ({ ...prev, [name]: value }));
+        }
+    };
+    const validateInputs = () => {
+        const { title, price, countInStock } = editedProduct;
+        if (!title?.en || !title?.ka) {
+            showNotification("edit product", "Title is required", 1);
+            return false;
+        }
+        if (!price?.usd || !price?.gel) {
+            showNotification("edit product", "Price is required", 1);
+            return false;
+        }
+        if (countInStock < 0) {
+            showNotification("edit product", "Count in stock must be positive", 1);
+            return false;
+        }
+        if (!editedProduct.category) {
+            showNotification("edit product", "Category is required", 1);
+            return false;
+        }
+        return true;
+
+    }
+    const handleSubmit = async () => {
+        if (!validateInputs()) {
+            showNotification("edit product", "Please fill all required fields", 1);
+            return;
+        }
+        try {
+            setSaving(true);
+            await updateProductData(product._id, editedProduct).then((res)=>{
+                console.log(res);
+                if(res?.status === 204) return showNotification("update product", "Nothing to update");
+                else if(res?.status === 200) {
+                    showNotification("update product", "Product successfully updated");
+                    onSave(res.data.data);
+                }
+            }).catch((err) => {
+                console.log(err);
+                showNotification("update product", "Failed to update product data", 1);
+            })
+        } catch(err) {
+            console.log(err);
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    return (
+        <div className="edit-product-modal">
+            <div className="edit-product-modal__content">
+                <button className="edit-product-modal__close" onClick={onClose}>×</button>
+                <h2>Edit Product</h2>
+
+                <label>Title (EN)</label>
+                <input name="title.en" value={editedProduct.title?.en || ''} onChange={handleChange} />
+
+                <label>Title (KA)</label>
+                <input name="title.ka" value={editedProduct.title?.ka || ''} onChange={handleChange} />
+
+                <div className="row two-cols">
+                    <div className='two-cols__col'>
+                        <label>Price (USD)</label>
+                        <input type="text" name="price.usd" value={editedProduct.price?.usd || '0'} min="0" onChange={handleChange} />
+                    </div>
+                    <div className='two-cols__col'>
+                        <label>Price (GEL)</label>
+                        <input type="text" name="price.gel" value={editedProduct.price?.gel || '0'} min="0" onChange={handleChange} />
+                    </div>
+                </div>
+
+                <label>Count in Stock</label>
+                <input type="number" name="countInStock" value={editedProduct.countInStock || 0} onChange={handleChange} />
+
+                <div className="row two-cols">
+                    <div className='two-cols__col'>
+                        <label>Description (EN)</label>
+                        <textarea name="description.en" value={editedProduct.description?.en || ''} onChange={handleChange} />
+                    </div>
+                    <div className='two-cols__col'>
+                        <label>Description (KA)</label>
+                        <textarea name="description.ka" value={editedProduct.description?.ka || ''} onChange={handleChange} />
+                    </div>
+                </div>
+
+                <div className="row two-cols">
+                    <div className='two-cols__col'>
+                        
+                        <label>Image URL (Small)</label>
+                        <input name="image.small" value={editedProduct.image?.small || ''} onChange={handleChange} />
+                        {editedProduct.image?.small && (
+                            <img src={editedProduct.image.small} alt="Small preview" className="image-preview" />
+                        )}
+                    </div>
+                    <div className='two-cols__col'>
+                        <label>Image URL (Medium)</label>
+                        <input name="image.medium" value={editedProduct.image?.medium || ''} onChange={handleChange} />
+                        {editedProduct.image?.medium && (
+                            <img src={editedProduct.image.medium} alt="Medium preview" className="image-preview" />
+                        )}
+                    </div>
+
+                </div>
+
+                <div className="row checkboxes">
+                    <label>
+                        Featured
+                        <input type="checkbox" name="featured" checked={editedProduct.featured} onChange={handleChange} />
+                    </label>
+                    <label>
+                        Hidden
+                        <input type="checkbox" name="hidden" checked={editedProduct.hidden} onChange={handleChange} />
+                    </label>
+                </div>
+
+                <label>Category</label>
+                <select name="category" value={typeof editedProduct.category === 'object' ? editedProduct.category._id : editedProduct.category}
+                     onChange={handleChange}>
+                    <option value="">Select Category</option>
+                    { categories.map(cat => (
+                        <option key={cat._id} value={cat._id}>{cat.name}</option>
+                    ))}
+                </select>
+
+                <button className="edit-product-modal__save" onClick={handleSubmit} disabled={saving}>{saving ? "Saving..." : "Save"}</button>
+
+            </div>
+        </div>
+    );
+}
+
+export default EditProductModal;

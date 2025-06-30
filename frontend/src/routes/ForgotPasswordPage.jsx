@@ -2,8 +2,11 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { forgotPasswordUser } from '../api/UsersApi';
+import { useNotification } from '../context/index.js';
 
 function ForgotPasswordPage() {
+    const { showNotification } = useNotification();
+
     const [inputValues, setInputValues] = useState({
         email: '',
     });
@@ -31,17 +34,14 @@ function ForgotPasswordPage() {
     const handleNextButton = () => {
         setErrorMsg('');
         if (emailWasSent)
-            return setErrorMsg(
-                'A reset link has already been sent to your email address. Please check your inbox.'
-            );
+            return setErrorMsg('A reset link has already been sent to your email address. Please check your inbox.'), showNotification('forgot password', 'A reset link has already been sent to your email address. Please check your inbox.');
         if (checkFormValidations()) {
             forgotPasswordUser(inputValues.email)
                 .then((res) => {
                     if (res.status === 200) {
                         setEmailWasSent(true);
-                        setErrorMsg(
-                            'A reset link has been sent to your email address. Please check your inbox.'
-                        );
+                        setErrorMsg('A reset link has been sent to your email address. Please check your inbox.');
+                        showNotification('forgot password', 'A reset link has been sent to your email address. Please check your inbox.');
                     }
                 })
                 .catch((err) => {

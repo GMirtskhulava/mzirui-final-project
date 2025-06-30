@@ -19,7 +19,7 @@ function Filters({
     const minTooltipRef = useRef(null);
     const maxTooltipRef = useRef(null);
 
-    const minLimit = 5;
+    const minLimit = 1;
     const maxLimit = 500;
 
     const [categoryList, setCategoryList] = useState()

@@ -34,7 +34,7 @@ function CartPage() {
         cartData.forEach(cartItem => {
             const product = productsData.find(p => p._id === cartItem.productId);
             if(product && !product.hidden) {
-                total += product.price * cartItem.productCount;
+                total += product.price[choosedCurrency] * cartItem.productCount;
             }
         });
 
@@ -140,7 +140,7 @@ function CartPage() {
                                             {userData?.admin ? <p className='cart-page__table__body__product__adm-id'>ID: <span>{product._id.toString()}</span> <CopyToClipboard text={product._id}><span><i className="fa-solid fa-copy cart-page__table__body__product__adm-id__copy"></i></span></CopyToClipboard></p> : <></>}
                                         </td>
                                         <td className='cart-page__table__body__unit-price'>
-                                            {choosedCurrency === "usd" ? "$" : "₾"}{product.hidden ? '-' : product.price[choosedCurrency]}
+                                            {choosedCurrency === "usd" ? "$" : "₾"}{product.hidden ? '-' : product.price[choosedCurrency].toFixed(2)}
                                         </td>
                                         <td className={`cart-page__table__body__quantity ${product.hidden ? '' : product.countInStock > 0 ? '' : 'out-of-stock'}`}>
                                             <input
@@ -153,7 +153,7 @@ function CartPage() {
                                             />
                                         </td>
                                         <td className='cart-page__table__body__total'>
-                                            ${product.hidden ? '-' : (product.price * (cartData?.find(cartItem => cartItem.productId === product._id)?.productCount || 0)).toFixed(2)}
+                                            {choosedCurrency === "usd" ? "$" : "₾"}{product.hidden ? '-' : (product.price[choosedCurrency] * (cartData?.find(cartItem => cartItem.productId === product._id)?.productCount || 0)).toFixed(2)}
                                         </td>
                                     </tr>
                                 ))
@@ -164,7 +164,7 @@ function CartPage() {
                 </div>
                 <div className='cart-page__footer'>
                     <h2 className='cart-page__footer__title'>Cart total</h2>
-                    <p className='cart-page__footer__total'>Total <span>${totalCost.toFixed(2)}</span></p>
+                    <p className='cart-page__footer__total'>Total <span>{choosedCurrency === "usd" ? "$" : "₾"}{totalCost.toFixed(2)}</span></p>
                     <Link className='cart-page__footer__button' to="/checkout">Process to Checkout</Link>
                 </div>
             </div>

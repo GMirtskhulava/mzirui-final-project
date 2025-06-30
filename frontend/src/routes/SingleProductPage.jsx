@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { RouterPath, Shipping } from '../components/index.js';
+import EditProductModal from '../modals/EditProductModal.jsx';
 
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import { useUserData, useProductsData, useWishlistData, useCartData, useNotification, useCurrencyData } from '../context/index.js';
 
+import { deleteProduct } from '../api/ProductsApi.js';
 
 
 function SingleProductPage() {
@@ -24,22 +26,24 @@ function SingleProductPage() {
     const [clickedButton, setClickedButton] = useState(false);
     const [productCount, setProductCount] = useState(0);
 
+    const [showEditModal, setShowEditModal] = useState(false);
+
     useEffect(() => {
         if (!productsData) {
-            setProduct(null); 
+            setProduct(null);
         } else {
             const found = productsData.find(item => item._id === id);
             setProduct(found || false);
             setProductCount(found.countInStock === 0 ? 0 : 1)
-            
+
         }
     }, [productsData, id]);
 
     const toggleWishlist = async (productId) => {
-        if(!userData?.admin && product.hidden) return console.log("Product is unavailable");
-        if(clickedButton) return console.log("Button already clicked");
+        if (!userData?.admin && product.hidden) return console.log("Product is unavailable");
+        if (clickedButton) return console.log("Button already clicked");
         setClickedButton(true);
-        if(isInWishlist(productId)) {
+        if (isInWishlist(productId)) {
             if (!loggedIn) {
                 removeWishlistItem(productId);
                 showNotification("wishlist", "Removed successfully")
@@ -56,12 +60,12 @@ function SingleProductPage() {
             }
         }
         else {
-            if(!loggedIn) {
+            if (!loggedIn) {
                 addWishlistItem(productId);
                 showNotification("wishlist", "Added successfully")
             }
             else {
-                if(await addWishlistItem(productId, userData._id)) {
+                if (await addWishlistItem(productId, userData._id)) {
                     showNotification("wishlist", "Added successfully")
                 }
                 else {
@@ -72,12 +76,12 @@ function SingleProductPage() {
         setClickedButton(false);
     }
     const toggleCart = async (productId) => {
-        if(clickedButton) return console.log("Button already clicked");
-        if(product.hidden) return console.log("Product is unavailable"), showNotification("cart", "Product is unavailable", 1);
-        if(product.countInStock < 1) return showNotification("cart", "Product is not in Stock", 1)
-        if(!loggedIn) return showNotification("cart", "You are not logged in", 1);
+        if (clickedButton) return console.log("Button already clicked");
+        if (product.hidden) return console.log("Product is unavailable"), showNotification("cart", "Product is unavailable", 1);
+        if (product.countInStock < 1) return showNotification("cart", "Product is not in Stock", 1)
+        if (!loggedIn) return showNotification("cart", "You are not logged in", 1);
         setClickedButton(true);
-        if(isInCart(productId)) {
+        if (isInCart(productId)) {
             if (await removeCartItem(productId, userData._id)) {
                 showNotification("cart", "Removed successfully")
             }
@@ -87,7 +91,7 @@ function SingleProductPage() {
             }
         }
         else {
-            if(await addCartItem({productId, productCount}, userData._id)) {
+            if (await addCartItem({ productId, productCount }, userData._id)) {
                 showNotification("cart", "Added successfully")
             }
             else {
@@ -98,17 +102,53 @@ function SingleProductPage() {
     }
 
     const handleCounterChange = (e) => {
-        if(e.target.value > product.countInStock) e.target.value = product.countInStock
+        if (e.target.value > product.countInStock) e.target.value = product.countInStock
         setProductCount(e.target.value);
 
+    }
+
+    const handleProductDelete = async (productId) => {
+        if (!userData?.admin) return showNotification("delete product", "You are not admin to delete products", 1);
+        if (clickedButton) return console.log("Button already clicked");
+        setClickedButton(true);
+        try {
+            await deleteProduct(productId).then((res) => {
+                if(res.status === 200) {
+                    showNotification("delete product", "Product successfully deleted");
+                    setTimeout(() => {
+                        window.location.href = "/shop";
+                    }, 1000)
+                }
+                else if(res.status === 204) {
+                    showNotification("delete product", "Nothing to delete");
+                }
+            }).catch((err) => {
+                console.error(err);
+                showNotification("delete product", "Failed to delete product", 1);
+            })
+        } catch (error) {
+            console.error(error);
+            showNotification("delete product", "Failed to delete product", 1);
+        } 
+        setClickedButton(false);
     }
 
     return (
         <>
             <RouterPath />
 
+            {showEditModal && (
+                <EditProductModal
+                    product={product}
+                    onClose={() => setShowEditModal(false)}
+                    onSave={(updatedProduct) => {
+                        setProduct(updatedProduct);
+                        setShowEditModal(false);
+                    }}
+                />
+            )}
             <div className="single-product-page">
-                { product && product.hidden && userData?.admin === false ?
+                {product && product.hidden && userData?.admin === false ?
                     (<div className='single-product-page__unavailable'>
                         <h1>Product Unavailable</h1>
                     </div>)
@@ -126,15 +166,44 @@ function SingleProductPage() {
                             <img src={product.image["medium"]} alt="Product" />
                         </div>
                         <div className='single-product-page__bottom__details'>
-                            <h2 className='single-product-page__bottom__details__title'>
-                                {product.title[i18n.language]}
-                                {product.hidden && <span className="single-product-page__bottom__details__title__hidden-product-label">[Unavailable]</span>}
-                                {userData?.admin ? product.countInStock === 0 && <span className='single-product-page__bottom__details__title__out-of-stock'>(Out of Stock)</span> 
-                                    : !product.hidden && product.countInStock === 0 && <span className='single-product-page__bottom__details__title__out-of-stock'>(Out of Stock)</span>}
-                                {userData?.admin ? <p className='single-product-page__bottom__details__title__adm-id'>ID: <span>{product._id}</span> <CopyToClipboard text={product._id}><span><i className="fa-solid fa-copy single-product-page__bottom__details__title__adm-id__copy"></i></span></CopyToClipboard></p> : <></>}
-                            </h2>
+                            <div className='single-product-page__bottom__details__title'>
+                                <h2>
+                                    {product.title[i18n.language]}
+                                    {product.hidden && <span className="single-product-page__bottom__details__title__hidden-product-label">[Unavailable]</span>}
+                                    {userData?.admin && product.countInStock === 0 && (
+                                        <span className='single-product-page__bottom__details__title__out-of-stock'>(Out of Stock)</span>
+                                    )}
+                                    {userData?.admin && (
+                                        <>
+                                        <span
+                                            className="single-product-page__bottom__details__title__edit-product-btn"
+                                            onClick={() => setShowEditModal(true)}
+                                        >
+                                            Edit <i className="fa-solid fa-pen"></i>
+                                        </span>
+                                        <span
+                                            className="single-product-page__bottom__details__title__del-product-btn"
+                                            onClick={()=>handleProductDelete(product._id)}
+                                        >
+                                            Delete <i className="fa-solid fa-trash"></i>
+                                        </span>
+                                        </>)}
+                                </h2>
+
+                                {userData?.admin && (
+                                    <div className='single-product-page__bottom__details__title__adm-id'>
+                                        ID: <span>{product._id}</span>
+                                        <CopyToClipboard text={product._id}>
+                                            <span>
+                                                <i className="fa-solid fa-copy single-product-page__bottom__details__title__adm-id__copy"></i>
+                                            </span>
+                                        </CopyToClipboard>
+                                    </div>
+                                )}
+                            </div>
+
                             <h1 className='single-product-page__bottom__details__price'>
-                                {choosedCurrency === "usd" ? "$" : "₾"}{typeof product.price === "object" ? product.price[choosedCurrency] : product.price}
+                                {choosedCurrency === "usd" ? "$" : "₾"}{product.price[choosedCurrency].toFixed(2)}
                             </h1>
                             <div className='single-product-page__bottom__details__stars'>
                                 {Array.from({ length: product.stars }).map((_, i) => (
@@ -155,7 +224,7 @@ function SingleProductPage() {
                                     onChange={handleCounterChange}
                                 />
                                 <button className='single-product-page__bottom__details__buttons__add-to-cart' onClick={() => toggleCart(product._id)}>
-                                    {isInCart(product._id) ? "Remove from Cart" : "Add to Cart" }
+                                    {isInCart(product._id) ? "Remove from Cart" : "Add to Cart"}
                                 </button>
                                 <button className='single-product-page__bottom__details__buttons__add-to-wishlist' onClick={() => toggleWishlist(product._id)}>
                                     <i className={`fa-solid fa-heart ${isInWishlist(product._id) ? 'active' : ''}`}></i>

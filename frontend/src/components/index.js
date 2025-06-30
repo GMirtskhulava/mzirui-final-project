@@ -19,7 +19,7 @@ import ProductList from './ProductList';
 
 import Dashboard from './profilePage/Dashboard';
 import Orders from './profilePage/Orders.jsx';
-import Afind from './profilePage/Afind.jsx';
+import Manage from './profilePage/Manage.jsx';
 
 export {
     Loader,
@@ -40,5 +40,5 @@ export {
     // 
     Dashboard,
     Orders,
-    Afind,
+    Manage,
 };

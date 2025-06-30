@@ -1,7 +1,7 @@
 @use "../../abstracts/variables" as *;
 
 
-.profile-afind {
+.profile-afind, .profile-manage {
     width: 80%;
     margin: 2rem auto;
     padding: 2rem;
@@ -126,7 +126,7 @@
 }
 
 @media (max-width: 992px) {
-    .profile-afind {
+    .profile-afind, .profile-manage {
         width: 95%;
         padding: 1.5rem;
 
@@ -174,7 +174,7 @@
 }
 
 @media (max-width: 576px) {
-    .profile-afind {
+    .profile-afind, .profile-manage {
         padding: 1rem;
 
         &__title h2 {

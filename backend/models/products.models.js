@@ -6,8 +6,8 @@ const translationSchema = new mongoose.Schema({
 }, { _id: false });
 
 const currencySchema = new mongoose.Schema({
-  usd: { type: Number, min: 0, max: 500 },
-  gel: { type: Number, min: 0, max: 500 }
+  usd: { type: mongoose.Schema.Types.Double, min: 0, max: 500 },
+  gel: { type: mongoose.Schema.Types.Double, min: 0, max: 500 }
 }, { _id: false });
 
 

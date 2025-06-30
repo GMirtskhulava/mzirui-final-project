@@ -33,7 +33,7 @@
 
 @use "./components/profilePage/dashboard";
 @use "./components/profilePage/orders";
-@use "./components/profilePage/afind";
+@use "./components/profilePage/manage";
 
 @use "./components/routerPath";
 @use "./components/loadingPage";
@@ -41,3 +41,6 @@
 @use "./components/productCard";
 @use "./components/productList";
 @use "./components/notification";
+
+
+@use "./modals/editAndAddProductModal";

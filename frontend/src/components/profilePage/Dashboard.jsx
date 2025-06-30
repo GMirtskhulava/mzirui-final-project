@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { useUserData, useNotification } from '../../context/index.js';
-import { updateUserData, getUserById } from '../../api/UsersApi.js'; // make sure getUserById is exported
+import { updateUserData, getUserById } from '../../api/UsersApi.js';
 
 function Dashboard({ userId }) {
     const { loggedIn, userData } = useUserData();
@@ -65,7 +65,7 @@ function Dashboard({ userId }) {
                     showNotification("profile", "Nothing to update");
                 } else {
                     showNotification("profile", "Data successfully updated");
-                    if(activeUser._id === userData._id) window.location.href = "/profile";
+                    if(activeUser._id === userData._id) window.location.href = `/profile/${userData._id}`;
                     else setActiveUser(res.data.data)
                 }
             })
