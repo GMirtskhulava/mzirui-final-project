@@ -10,10 +10,21 @@ function EditProductModal({ product, onClose, onSave }) {
     const [saving, setSaving] = useState(false);
 
     useEffect(() => {
-        // console.log(editedProduct.category)
-        getCategories().then((res) => {
-            setCategories(res.data.categories)
-        }).catch((err) => console.error("Failed to fetch categories", err));
+        // con sole.log(editedProduct.category)
+        const fetchCategories = async () => {
+            try {
+                const response = await getCategories();
+                if (response.status === 200) {
+                    setCategories(response.data.categories);
+                }
+                else {
+                    console.error('Failed to fetch categories', response.data);
+                }
+            } catch(err) {
+                console.log("Failed to fetch categories:", err)
+            }
+        }
+        fetchCategories();
     }, []);
 
     const handleChange = (e) => {
@@ -57,24 +68,23 @@ function EditProductModal({ product, onClose, onSave }) {
             showNotification("edit product", "Please fill all required fields", 1);
             return;
         }
+        if(saving) return;
         try {
             setSaving(true);
-            await updateProductData(product._id, editedProduct).then((res)=>{
-                console.log(res);
-                if(res?.status === 204) return showNotification("update product", "Nothing to update");
-                else if(res?.status === 200) {
-                    showNotification("update product", "Product successfully updated");
-                    onSave(res.data.data);
-                }
-            }).catch((err) => {
-                console.log(err);
-                showNotification("update product", "Failed to update product data", 1);
-            })
+            const response = await updateProductData(product._id, editedProduct)
+            console.log(response);
+            if(response.status === 204) {
+                showNotification("update product", "Nothing to update");
+            }
+            else if(response.status === 200) {
+                showNotification("update product", "Product successfully updated");
+                onSave(response.data.data);
+            }
         } catch(err) {
             console.log(err);
-        } finally {
-            setSaving(false);
+            showNotification("update product", "Failed to update product data", 1);
         }
+        setSaving(false);
     };
 
     return (

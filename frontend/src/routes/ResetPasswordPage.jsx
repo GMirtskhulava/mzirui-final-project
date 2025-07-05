@@ -12,6 +12,7 @@ function ResetPasswordPage() {
     });
     const [errormsg, setErrorMsg] = useState('');
     const [isTokenFound, setIsTokenFound] = useState();
+    const [buttonClicked, setButtonClicked] = useState(false);
 
     const { token } = useParams();
 
@@ -46,25 +47,32 @@ function ResetPasswordPage() {
         return true;
     };
 
-    const handleRessetPasswordButton = () => {
+    const handleResetPasswordButton = async () => {
+        if (buttonClicked) return;
+        setButtonClicked(true);
         setErrorMsg('');
         if (checkFormValidations()) {
-            resetPasswordUser(inputValues.newPassword, token)
-                .then((res) => {
-                    if (res.status === 200) {
-                        window.location.href = '/login';
-                    }
-                })
-                .catch((err) => {
-                    if (err.response.status === 401) {
-                        setErrorMsg('Invalid or expired token');
-                    } else if (err.response.status === 404) {
-                        setErrorMsg('User with this email does not exist');
-                    } else {
-                        setErrorMsg('Server error, please try again later');
-                    }
-                });
-        } else return;
+            try {
+                const response = await resetPasswordUser(inputValues.newPassword, token);
+                if (response.status === 200) {
+                    window.location.href = '/login';
+                }
+                else {
+                    console.log(response.data);
+                    setErrorMsg('Something went wrong, please try again later');
+                }
+            } catch(err) {
+                console.error(err);
+                if (err.response?.status === 401) {
+                    setErrorMsg('Invalid or expired token');
+                } else if (err.response?.status === 404) {
+                    setErrorMsg('User with this email does not exist');
+                } else {
+                    setErrorMsg('Server error, please try again later');
+                }
+            }
+        } 
+        setButtonClicked(false);
     };
     return (
         <div className="resetPassword-page">
@@ -97,7 +105,7 @@ function ResetPasswordPage() {
                                 {errormsg}
                             </p>
                             <div className="resetPassword-page__form__inputs__button-box">
-                                <button onClick={handleRessetPasswordButton}>Reset Password</button>
+                                <button onClick={handleResetPasswordButton}>Reset Password</button>
                             </div>
                         </>
                     ) : isTokenFound === false ? (

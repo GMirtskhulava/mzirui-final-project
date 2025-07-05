@@ -69,8 +69,12 @@ function CartPage() {
 
         setClickedButton(true)
         try {
-            await addCartItem({ productId, productCount: newCount }, userData._id);
-            showNotification("cart", "Quantity updated");
+            if(await addCartItem({ productId, productCount: newCount }, userData._id)) {
+                showNotification("cart", "Quantity updated");
+            }
+            else {
+                showNotification("cart", "Failed to update quantity", 1);
+            }
         } catch(error) {
             console.error(error);
             showNotification("cart", "Failed to update quantity", 1);

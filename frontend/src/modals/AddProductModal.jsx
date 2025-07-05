@@ -19,9 +19,20 @@ function AddProductModal({ onClose }) {
     const [saving, setSaving] = useState(false);
 
     useEffect(() => {
-        getCategories()
-            .then((res) => setCategories(res.data.categories))
-            .catch((err) => console.error('Failed to fetch categories', err));
+        const fetchCategories = async () => {
+
+            try {
+                const response = await getCategories();
+                if (response.status === 200) {
+                    setCategories(response.data.categories);
+                } else {
+                    console.error('Failed to fetch categories', response.data);
+                }
+            } catch(err) {
+                console.error("Failed to load categories", err);
+            }
+        }
+        fetchCategories();
     }, []);
 
     const handleChange = (e) => {
@@ -75,17 +86,17 @@ function AddProductModal({ onClose }) {
         if (!validateInputs()) return;
         try {
             setSaving(true);
-            await createProduct(newProduct).then((res) => {
-                if (res.status === 200) {
-                    onClose();
-                    showNotification("add product", "Product successfully created");
-                }
-            }).catch((err) => {
-                console.log(err);
+            const response = await createProduct(newProduct)
+            if (response.status === 200) {
+                onClose();
+                showNotification("add product", "Product successfully created");
+            }
+            else {
+                console.log(response);
                 showNotification("add product", "Failed to create product", 1);
-            })
+            }
         } catch (err) {
-            console.error(err);
+            console.log(err);
             showNotification("add product", "Failed to create product", 1);
         }
         setSaving(false);

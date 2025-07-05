@@ -56,7 +56,16 @@ export const registerUser = async (req, res) => {
         const newUser = new Users({ username, email, password: hashedPassword });
         await newUser.save();
 
-        res.status(201).json({ msg: 'User registered successfully' });
+        res.clearCookie('token');
+        const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1d' });
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 24 * 60 * 60 * 1000 // 1 Dge
+        });
+
+        res.status(200).json({ msg: 'User registered successfully' });
     } catch (error) {
         res.status(500).json({ err: `Server error: ${error.message}` });
     }

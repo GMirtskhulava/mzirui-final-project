@@ -12,6 +12,7 @@ function ForgotPasswordPage() {
     });
     const [errormsg, setErrorMsg] = useState('');
     const [emailWasSent, setEmailWasSent] = useState(false);
+    const [buttonClicked, setButtonClicked] = useState(false);
 
     const handleFormChange = (e) => {
         setInputValues((p) => ({
@@ -31,27 +32,34 @@ function ForgotPasswordPage() {
 
         return true;
     };
-    const handleNextButton = () => {
+    const handleNextButton = async () => {
+        if(buttonClicked) return;
+        setButtonClicked(true);
         setErrorMsg('');
-        if (emailWasSent)
-            return setErrorMsg('A reset link has already been sent to your email address. Please check your inbox.'), showNotification('forgot password', 'A reset link has already been sent to your email address. Please check your inbox.');
-        if (checkFormValidations()) {
-            forgotPasswordUser(inputValues.email)
-                .then((res) => {
-                    if (res.status === 200) {
+        if(emailWasSent) {
+            setErrorMsg('A reset link has already been sent to your email address. Please check your inbox.'), showNotification('forgot password', 'A reset link has already been sent to your email address. Please check your inbox.');
+        }
+        else {
+            if(checkFormValidations()) {
+                try {
+                    const response = await forgotPasswordUser(inputValues.email);
+                    if(response?.status === 200) {
                         setEmailWasSent(true);
                         setErrorMsg('A reset link has been sent to your email address. Please check your inbox.');
                         showNotification('forgot password', 'A reset link has been sent to your email address. Please check your inbox.');
                     }
-                })
-                .catch((err) => {
-                    if (err.response.status === 400) {
-                        setErrorMsg('Invalid email');
+                    console.log("res:", response);
+                } catch(err) {
+                    console.error(err)
+                    if(err.response?.status === 400 || err.response?.status === 404) {
+                        setErrorMsg('User with this email not found');
                     } else {
                         setErrorMsg('Server error, please try again later');
                     }
-                });
-        } else return;
+                }
+            }
+        }
+        setButtonClicked(false);
     };
     return (
         <div className="forgotPassword-page">

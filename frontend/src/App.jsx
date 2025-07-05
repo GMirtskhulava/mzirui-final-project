@@ -94,13 +94,17 @@ function App() {
         };
 
         const fetchProductData = async () => {
-            await getProducts()
-                .then((res) => {
-                    setProductsData(res.data.products);
-                })
-                .catch((err) => {
+            try {
+                const response = await getProducts();
+                if (response?.data?.products) {
+                    setProductsData(response.data.products);
+                } else {
                     setProductsData([]);
-                });
+                }
+            } catch(err) {
+                console.error("Error fetching product data:", err);
+                setProductsData([]);
+            }
         };
 
         fetchUserData();

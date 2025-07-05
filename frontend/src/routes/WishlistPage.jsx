@@ -40,9 +40,11 @@ function WishlistPage() {
             if(await removeWishlistItem(productId, userData._id)) {
                 console.log("Removed successfully");
                 // notification samomavlod
+                showNotification("wishlist", "Removed successfully");
             }
             else {
                 console.log("Failed to remove item from wishlist");
+                showNotification("wishlist", "Failed to remove item from wishlist", 1);
             }
         }
     }

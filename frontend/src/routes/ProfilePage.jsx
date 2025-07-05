@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
-import { useUserData, useNotification} from '../context/index.js';
+import { useUserData, useNotification } from '../context/index.js';
 import { RouterPath, Dashboard, Orders, Manage } from '../components/index.js';
 import { logoutUser } from '../api/UsersApi.js';
 
 function ProfilePage() {
     const { userId } = useParams();
-    
+
     const { showNotification } = useNotification()
     const { userData, logout } = useUserData();
 
@@ -15,12 +15,12 @@ function ProfilePage() {
     const [buttonClicked, setButtonClicked] = useState(false);
 
     const renderTabContent = () => {
-        switch(choosedTab) {
+        switch (choosedTab) {
             case 0:
-                return <Dashboard userId={userId}/>;
+                return <Dashboard userId={userId} />;
             case 1:
-                return <Orders userId={userId}/>;
-            case 2: 
+                return <Orders userId={userId} />;
+            case 2:
                 return userData.admin ? <Manage /> : null;
             default:
                 return null;
@@ -28,21 +28,25 @@ function ProfilePage() {
     };
 
     const handleLogout = async () => {
-        if(buttonClicked) return;
+        if (buttonClicked) return;
         setButtonClicked(true)
-        await logoutUser().then((res) =>{
-            if(res.status === 200) {
+        try {
+            const response = await logoutUser();
+            if (response.status === 200) {
                 showNotification("logout", "Successfully logged out");
                 setTimeout(() => {
-                    setButtonClicked(false);
                     logout();
-                    window.location.href = "/"
+                    window.location.href = "/";
                 }, 1000);
+            } else {
+                showNotification("logout", "An error occurred. Try again later.", 1);
+                setButtonClicked(false);
             }
-        }).catch((err) => {
+        } catch (err) {
             console.log(err)
             showNotification("logout", "An error occurred. Try again later.", 1);
-        })
+            setButtonClicked(false);
+        }
 
         setButtonClicked(false)
     }
@@ -71,7 +75,7 @@ function ProfilePage() {
                                 <li onClick={handleLogout} >
                                     Log Out
                                 </li>
-                            )  : (<></>)
+                            ) : (<></>)
                         }
                     </ul>
                 </div>

@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { RouterPath } from '../components/index.js';
 import { Link } from 'react-router-dom';
 
 import { registerUser } from '../api/UsersApi';
 
+import { useUserData, useNotification } from '../context/index.js';
+
 function RegisterPage() {
+    const { userData, loggedIn } = useUserData();
+    const { showNotification } = useNotification();
+
     const [inputValues, setInputValues] = useState({
         firstName: '',
         lastName: '',
@@ -14,6 +19,7 @@ function RegisterPage() {
         confirmPassword: '',
     });
     const [errormsg, setErrorMsg] = useState('');
+    const [buttonClicked, setButtonClicked] = useState(false);
 
     const handleFormChange = (e) => {
         setInputValues((p) => ({
@@ -47,25 +53,42 @@ function RegisterPage() {
         return true;
     };
 
-    const handleRegisterButton = () => {
+    const handleRegisterButton = async () => {
+        if (buttonClicked) return;
+        setButtonClicked(true);
         setErrorMsg('');
         if (checkFormValidations()) {
-            registerUser(
-                `${inputValues.firstName} ${inputValues.lastName}`,
-                inputValues.email,
-                inputValues.password
-            )
-                .then((res) => {
-                    if (res.status === 200) {
-                        console.log(res.data);
-                        // window.location.href = '/';
-                    }
-                })
-                .catch((err) => {
+            try {
+                const response = await registerUser(
+                    `${inputValues.firstName} ${inputValues.lastName}`,
+                    inputValues.email,
+                    inputValues.password
+                );
+                if (response.status === 200) {
+                    // console.log(response.data);
+                    window.location.href = '/';
+                    showNotification("register", "Successfully registered");
+                    setTimeout(() => {
+                        setButtonClicked(false);
+                        window.location.href = "/"
+                    }, 1000);
+                }
+            } catch (err) {
+                console.error(err);
+                if (err.response?.data?.err) {
                     setErrorMsg(err.response.data.err);
-                });
-        } else return;
+                }
+                else {
+                    setErrorMsg('Server error, please try again later');
+                }
+            }
+        }
+        setButtonClicked(false);
     };
+
+    useEffect(() => {
+        if(userData && loggedIn) return window.location.href = "/";
+    }, [userData, loggedIn])
     return (
         <>
             <RouterPath />

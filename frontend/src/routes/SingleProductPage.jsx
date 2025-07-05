@@ -112,24 +112,23 @@ function SingleProductPage() {
         if (clickedButton) return console.log("Button already clicked");
         setClickedButton(true);
         try {
-            await deleteProduct(productId).then((res) => {
-                if(res.status === 200) {
-                    showNotification("delete product", "Product successfully deleted");
-                    setTimeout(() => {
-                        window.location.href = "/shop";
-                    }, 1000)
-                }
-                else if(res.status === 204) {
-                    showNotification("delete product", "Nothing to delete");
-                }
-            }).catch((err) => {
-                console.error(err);
+            const response = await deleteProduct(productId)
+            if (response.status === 200) {
+                showNotification("delete product", "Product successfully deleted");
+                setTimeout(() => {
+                    window.location.href = "/shop";
+                }, 1000)
+            }
+            else if (res.status === 204) {
+                showNotification("delete product", "Nothing to delete");
+            }
+            else {
                 showNotification("delete product", "Failed to delete product", 1);
-            })
+            }
         } catch (error) {
             console.error(error);
             showNotification("delete product", "Failed to delete product", 1);
-        } 
+        }
         setClickedButton(false);
     }
 
@@ -168,25 +167,25 @@ function SingleProductPage() {
                         <div className='single-product-page__bottom__details'>
                             <div className='single-product-page__bottom__details__title'>
                                 <h2>
-                                    {product.title[i18n.language]}
-                                    {product.hidden && <span className="single-product-page__bottom__details__title__hidden-product-label">[Unavailable]</span>}
-                                    {userData?.admin && product.countInStock === 0 && (
+                                    {product?.title[i18n.language]}
+                                    {product?.hidden && <span className="single-product-page__bottom__details__title__hidden-product-label">[Unavailable]</span>}
+                                    {userData?.admin && product?.countInStock === 0 && (
                                         <span className='single-product-page__bottom__details__title__out-of-stock'>(Out of Stock)</span>
                                     )}
                                     {userData?.admin && (
                                         <>
-                                        <span
-                                            className="single-product-page__bottom__details__title__edit-product-btn"
-                                            onClick={() => setShowEditModal(true)}
-                                        >
-                                            Edit <i className="fa-solid fa-pen"></i>
-                                        </span>
-                                        <span
-                                            className="single-product-page__bottom__details__title__del-product-btn"
-                                            onClick={()=>handleProductDelete(product._id)}
-                                        >
-                                            Delete <i className="fa-solid fa-trash"></i>
-                                        </span>
+                                            <span
+                                                className="single-product-page__bottom__details__title__edit-product-btn"
+                                                onClick={() => setShowEditModal(true)}
+                                            >
+                                                Edit <i className="fa-solid fa-pen"></i>
+                                            </span>
+                                            <span
+                                                className="single-product-page__bottom__details__title__del-product-btn"
+                                                onClick={() => handleProductDelete(product._id)}
+                                            >
+                                                Delete <i className="fa-solid fa-trash"></i>
+                                            </span>
                                         </>)}
                                 </h2>
 

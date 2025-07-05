@@ -15,27 +15,34 @@ function Dashboard({ userId }) {
     const [role, setRole] = useState(false);
     const [banned, setBanned] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
+    const [buttonClicked, setButtonClicked] = useState(false);
 
     const [activeUser, setActiveUser] = useState(null);
-
+    
     useEffect(() => {
-        if (!userId || !userData) return;
+        const fetchUser = async () => {
+            if (!userId || !userData) return;
 
-        if (userId === userData._id) {
-            setActiveUser(userData);
-        } else {
-            if(!userData.admin) return setActiveUser(false)
-            else {
-                getUserById(userId).then((res) => {
-                    if(res.status === 200) setActiveUser(res.data.data);
-                    else setActiveUser([]);
-                }).catch((err) => {
-                    setActiveUser([])
+            if (userId === userData._id) {
+                setActiveUser(userData);
+            } else {
+                if (!userData.admin) return setActiveUser(false);
+                try {
+                    const response = await getUserById(userId);
+                    if (response.status === 200) {
+                        setActiveUser(response.data.data);
+                    } else {
+                        setActiveUser([]);
+                    }
+                } catch (err) {
+                    setActiveUser([]);
                     console.log("Failed to load user", err);
-                });
+                }
             }
-        }
+        };
+        fetchUser();
     }, [userId, userData]);
+
 
     useEffect(() => {
         if (!activeUser || activeUser.length === 0) return;
@@ -49,7 +56,9 @@ function Dashboard({ userId }) {
     }, [activeUser]);
 
     const handleUpdate = async () => {
+        if (buttonClicked) return;
         if (!checkValidations()) return;
+        setButtonClicked(true);
 
         const updatedData = {
             newUsername: `${firstName} ${lastName}`,
@@ -59,19 +68,23 @@ function Dashboard({ userId }) {
             newBanStatus: banned
         };
 
-        await updateUserData(activeUser._id, updatedData)
-            .then((res) => {
-                if (res.status === 204) {
-                    showNotification("profile", "Nothing to update");
-                } else {
-                    showNotification("profile", "Data successfully updated");
-                    if(activeUser._id === userData._id) window.location.href = `/profile/${userData._id}`;
-                    else setActiveUser(res.data.data)
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        try {
+            const response = await updateUserData(activeUser._id, updatedData);
+            if (response.status === 204) {
+                showNotification("profile", "Nothing to update");
+            }
+            else {
+                showNotification("profile", "Data successfully updated");
+                if(activeUser._id === userData._id) window.location.href = `/profile/${userData._id}`;
+                else setActiveUser(response.data.data);
+            }
+        }
+        catch (err) {
+            console.log(err);
+            showNotification("profile", "Failed to update data", 1);
+        }
+
+        setButtonClicked(false);
     };
 
     const checkValidations = () => {

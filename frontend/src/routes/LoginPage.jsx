@@ -36,29 +36,32 @@ function LoginPage() {
 
         return true;
     };
-    const handleLoginButton = () => {
+    const handleLoginButton = async () => {
         setErrorMsg('');
 
         if (checkFormValidations()) {
-            loginUser(inputValues.email, inputValues.password)
-                .then((res) => {
-                    if (res.status === 200) {
-                        // login(res.data.data);
-                        window.location.href = '/';
-                    }
-                })
-                .catch((err) => {
-                    const status = err.response?.status;
-
-                    if (status === 400) {
-                        setErrorMsg('Invalid email or password');
-                    } else if (status === 403) {
-                        setErrorMsg('! Account is Banned !');
-                        showNotification("login", "Account is banned", 1);
-                    } else {
-                        setErrorMsg('Server error, please try again later');
-                    }
-                });
+            try {
+                const response = await loginUser(inputValues.email, inputValues.password);
+                if(response.status === 200) {
+                    window.location.href = '/';
+                }
+                else {
+                    setErrorMsg('Something went wrong, please try again later');
+                    showNotification("login", "Something went wrong, please try again later", 1);
+                }
+            } catch(err) {
+                console.error(err);
+                
+                const status = err.response?.status;
+                if (status === 400) {
+                    setErrorMsg('Invalid email or password');
+                } else if (status === 403) {
+                    setErrorMsg('! Account is Banned !');
+                    showNotification("login", "Account is banned", 1);
+                } else {
+                    setErrorMsg('Server error, please try again later');
+                }
+            }
         }
     };
 

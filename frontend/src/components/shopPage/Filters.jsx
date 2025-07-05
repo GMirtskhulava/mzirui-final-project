@@ -25,13 +25,21 @@ function Filters({
     const [categoryList, setCategoryList] = useState()
 
     useEffect(() => {
-        getCategories().then((res)=>{
-            if(res.status === 200) setCategoryList(res.data.categories)
-            else setCategoryList([]), console.log(res?.data);
-        }).catch((err) =>{
-            console.error(err);
-            setCategoryList([]);
-        })
+        const fetchCategories = async () => {
+            try {
+                const response = await getCategories();
+                if (response.status === 200) {
+                    setCategoryList(response.data.categories);
+                } else {
+                setCategoryList([]);
+                console.log(response?.data);
+            }
+            } catch(err) {
+                setCategoryList([]);
+                console.error("Failed to load categories", err);
+            }
+        }
+        fetchCategories();
     }, [])
     useEffect(() => {
         const minPercent = (minPrice / maxLimit) * 100;
