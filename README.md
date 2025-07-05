@@ -40,7 +40,7 @@ npm install
 ## 🔐 Admin Access
 Use the following credentials to log in as an admin:
 
-``
+```
 📧 Email: adminacc@gmail.com
 🔑 Password: admin123 
-``
+```
