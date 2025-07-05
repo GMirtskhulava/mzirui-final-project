@@ -66,13 +66,9 @@ function RegisterPage() {
                 );
                 if (response.status === 200) {
                     // console.log(response.data);
-                    window.location.href = '/';
                     showNotification("register", "Successfully registered");
-                    setTimeout(() => {
-                        setButtonClicked(false);
-                        window.location.href = "/"
-                    }, 1000);
                 }
+                window.location.href = '/';
             } catch (err) {
                 console.error(err);
                 if (err.response?.data?.err) {

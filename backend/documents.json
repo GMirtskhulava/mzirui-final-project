@@ -1,0 +1,132 @@
+[
+    {
+        "title": {
+            "en": "American Marigold",
+            "ka": "ამერიკული გიგანტური გუინეა"
+        },
+        "description": {
+            "en": "Bright and vibrant flowers, perfect for gardens. Thrives in full sunlight and well-drained soil.",
+            "ka": "ნათელი და ფერადი ყვავილები, შესანიშნავია ბაღებისთვის. იზრდება მზიან ადგილებში და კარგად დრენირებულ ნიადაგში."
+        },
+        "category": {
+            "$oid": "6834b3309fa96d524039a9ed"
+        },
+        "price": {
+            "usd": {
+                "$numberDouble": "5.5"
+            },
+            "gel": {
+                "$numberDouble": "13.5"
+            }
+        },
+        "stars": {
+            "$numberDouble": "4.2"
+        },
+        "featured": true,
+        "countInStock": {
+            "$numberInt": "3"
+        },
+        "hidden": false,
+        "image": {
+            "small": "https://htmldemo.net/pronia/pronia/assets/images/product/small-size/1-2-112x124.png",
+            "medium": "https://htmldemo.net/pronia/pronia/assets/images/product/medium-size/1-2-270x300.jpg"
+        },
+        "updatedAt": {
+            "$date": {
+                "$numberLong": "1751728972913"
+            }
+        }
+    },
+    {
+        "title": {
+            "en": "Bleeding Heart",
+            "ka": "მსხვრავი გული"
+        },
+        "description": {
+            "en": "Bleeding Heart (Lamprocapnos spectabilis) is a beautiful perennial plant known for its heart-shaped, pink and white flowers that hang gracefully from arching stems. It blooms in spring and prefers partial shade with moist, well-drained soil. The plant is popular in shade gardens and adds a romantic, delicate touch.",
+            "ka": "მსხვრავი გული (Lamprocapnos spectabilis) მრავალწლოვანი მცენარეა, რომელსაც ვარდისფერი და თეთრი, გულის ფორმის ყვავილები აქვს, ლამაზად ჩამოკიდებული ღეროებზე. ყვავილობს გაზაფხულზე და საუკეთესოდ იზრდება ნახევარჩრდილში, ტენიან და კარგად დრენირებულ ნიადაგზე. ხშირად გამოიყენება ჩრდილოვან ბაღებში თავისი ნაზი და რომანტიკული იერის გამო."
+        },
+        "category": {
+            "$oid": "6834c0079fa96d524039a9f7"
+        },
+        "price": {
+            "usd": {
+                "$numberDouble": "30.0"
+            },
+            "gel": {
+                "$numberDouble": "81.0"
+            }
+        },
+        "stars": {
+            "$numberInt": "0"
+        },
+        "featured": false,
+        "countInStock": {
+            "$numberInt": "0"
+        },
+        "hidden": false,
+        "image": {
+            "small": "https://htmldemo.net/pronia/pronia/assets/images/product/small-size/2-3-70x78.png",
+            "medium": "https://htmldemo.net/pronia/pronia/assets/images/product/medium-size/1-3-270x300.jpg"
+        },
+        "createdAt": {
+            "$date": {
+                "$numberLong": "1751136081420"
+            }
+        },
+        "updatedAt": {
+            "$date": {
+                "$numberLong": "1751192899640"
+            }
+        },
+        "__v": {
+            "$numberInt": "0"
+        }
+    },
+    {
+        "title": {
+            "en": "Black Eyed Susan",
+            "ka": "შავთვალა სუზანი"
+        },
+        "description": {
+            "en": "Black-Eyed Susan is a bright, daisy-like wildflower with golden yellow petals and a dark brown or black center. It blooms in summer and is native to North America. It symbolizes encouragement, motivation, and justice.",
+            "ka": "შავთვალა სუზანი ნათელი, გვირილას მსგავსი ველური ყვავილია ოქროსფერი ფურცლებითა და მუქი ყავისფერი ან შავი შუაგულით. ის ყვავის ზაფხულში და წარმოშობით ჩრდილოეთ ამერიკიდანაა. სიმბოლურად ასოცირდება წამახალისებლობასთან, მოტივაციასთან და სამართლიანობასთან."
+        },
+        "category": {
+            "$oid": "6834b3309fa96d524039a9ed"
+        },
+        "price": {
+            "usd": {
+                "$numberDouble": "4.0"
+            },
+            "gel": {
+                "$numberDouble": "11.0"
+            }
+        },
+        "stars": {
+            "$numberInt": "0"
+        },
+        "featured": false,
+        "countInStock": {
+            "$numberInt": "1"
+        },
+        "hidden": false,
+        "image": {
+            "small": "https://htmldemo.net/pronia/pronia/assets/images/product/small-size/1-2-112x124.png",
+            "medium": "https://htmldemo.net/pronia/pronia/assets/images/product/medium-size/1-2-270x300.jpg"
+        },
+        "createdAt": {
+            "$date": {
+                "$numberLong": "1751193077565"
+            }
+        },
+        "updatedAt": {
+            "$date": {
+                "$numberLong": "1751193077565"
+            }
+        },
+        "__v": {
+            "$numberInt": "0"
+        }
+    }
+]
