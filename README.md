@@ -15,21 +15,21 @@ mzirui-final-project/
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Installation
 
-Clone the repository and install all dependencies for both frontend and backend:
+Clone the repository and install all packages for frontend and backend:
 
 ```bash
 git clone https://github.com/GMirtskhulava/mzirui-final-project.git
 cd mzirui-final-project
 ```
 
-Install frontend dependencies
+Install frontend packages
 ```bash
 cd frontend
 npm install
 ```
-Install backend dependencies:
+Install backend packages:
 ```bash
 cd backend
 npm install
@@ -37,10 +37,10 @@ npm install
 
 ---
 
-## 🔐 Admin Access
+## Admin Access
 Use the following credentials to log in as an admin:
 
 ```
-📧 Email: adminacc@gmail.com
-🔑 Password: admin123 
+Email: adminacc@gmail.com
+Password: admin123 
 ```
