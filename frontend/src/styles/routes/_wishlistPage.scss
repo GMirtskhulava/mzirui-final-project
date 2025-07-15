@@ -68,6 +68,15 @@
             }
         }
 
+        &__image {
+            & a {
+                & img {
+                    max-width: 110px;
+                    height: auto;
+                }
+            }
+        }
+
         &__product {
             a {
                 font-size: 16px;
@@ -162,7 +171,7 @@
         -webkit-overflow-scrolling: touch;
 
         table {
-            min-width: 700px; 
+            min-width: 700px;
             font-size: 14px;
         }
 

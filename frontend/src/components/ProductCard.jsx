@@ -88,7 +88,7 @@ function ProductCard({ product }) {
                     to={`/product/${product._id}`}
                     className="productCard__image__link"
                 >
-                    <img src={product.image["medium"]} />
+                    <img src={product.image} />
                 </Link>
                 <div className="productCard__image__buttons productCard-image-hover">
                     <button onClick={() => toggleWishlist(product._id)}>

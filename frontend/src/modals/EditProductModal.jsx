@@ -126,18 +126,10 @@ function EditProductModal({ product, onClose, onSave }) {
 
                 <div className="row two-cols">
                     <div className='two-cols__col'>
-                        
-                        <label>Image URL (Small)</label>
-                        <input name="image.small" value={editedProduct.image?.small || ''} onChange={handleChange} />
-                        {editedProduct.image?.small && (
-                            <img src={editedProduct.image.small} alt="Small preview" className="image-preview" />
-                        )}
-                    </div>
-                    <div className='two-cols__col'>
-                        <label>Image URL (Medium)</label>
-                        <input name="image.medium" value={editedProduct.image?.medium || ''} onChange={handleChange} />
-                        {editedProduct.image?.medium && (
-                            <img src={editedProduct.image.medium} alt="Medium preview" className="image-preview" />
+                        <label>Image URL</label>
+                        <input name="image" value={editedProduct.image || ''} onChange={handleChange} />
+                        {editedProduct.image && (
+                            <img src={editedProduct.image} alt="Image preview" className="image-preview" />
                         )}
                     </div>
 

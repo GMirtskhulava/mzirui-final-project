@@ -162,7 +162,7 @@ function SingleProductPage() {
                 ) : (
                     <div className={`single-product-page__bottom ${userData?.admin === false && product.hidden ? 'hidden-product' : ''}`}>
                         <div className='single-product-page__bottom__image'>
-                            <img src={product.image["medium"]} alt="Product" />
+                            <img src={product.image} alt="Product" />
                         </div>
                         <div className='single-product-page__bottom__details'>
                             <div className='single-product-page__bottom__details__title'>

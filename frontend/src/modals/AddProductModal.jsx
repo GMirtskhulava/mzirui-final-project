@@ -12,7 +12,7 @@ function AddProductModal({ onClose }) {
         countInStock: 0,
         featured: false,
         hidden: false,
-        image: { small: '', medium: '' },
+        image: '',
         category: ''
     });
     const [categories, setCategories] = useState([]);
@@ -69,7 +69,7 @@ function AddProductModal({ onClose }) {
             showNotification("add product", "Category is required", 1);
             return false;
         }
-        if (!newProduct.image.small || !newProduct.image.medium) {
+        if (!newProduct.image) {
             showNotification("add product", "Image URLs are required", 1);
             return false;
         }
@@ -140,20 +140,14 @@ function AddProductModal({ onClose }) {
                 </div>
 
                 <div className="row two-cols">
-                    <div>
-                        <label>Image URL (Small)</label>
-                        <input name="image.small" value={newProduct.image.small} onChange={handleChange} />
-                        {newProduct.image.small && (
-                            <img src={newProduct.image.small} alt="Small preview" className="image-preview" />
+                    <div className='two-cols__col'>
+                        <label>Image URL</label>
+                        <input name="image" value={newProduct.image || ''} onChange={handleChange} />
+                        {newProduct.image && (
+                            <img src={newProduct.image} alt="Image preview" className="image-preview" />
                         )}
                     </div>
-                    <div>
-                        <label>Image URL (Medium)</label>
-                        <input name="image.medium" value={newProduct.image.medium} onChange={handleChange} />
-                        {newProduct.image.medium && (
-                            <img src={newProduct.image.medium} alt="Medium preview" className="image-preview" />
-                        )}
-                    </div>
+
                 </div>
 
                 <div className="row checkboxes">

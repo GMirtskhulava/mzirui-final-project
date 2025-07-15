@@ -100,11 +100,8 @@ export const updateProductData = async (req, res) => {
         }
 
         // Image
-        if (newData.image?.medium && newData.image.medium !== product.image?.medium) {
-            updates["image.medium"] = newData.image.medium
-        }
-        if (newData.image?.small && newData.image.small !== product.image?.small) {
-            updates["image.small"] = newData.image.small
+        if (newData.image && newData.image !== product.image) {
+            updates.image = newData.image
         }
 
         // Category

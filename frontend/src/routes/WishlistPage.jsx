@@ -131,7 +131,7 @@ function WishlistPage() {
                                         {/*  disabled={product.hidden} */}
                                     </td>
                                     <td className='wishlist-page__body__image'>
-                                        <Link to={product.hidden ? '' : `/product/${product._id}`} ><img src={product.image["small"]} alt="Product" /></Link>
+                                        <Link to={product.hidden ? '' : `/product/${product._id}`} ><img src={product.image} alt="Product" /></Link>
                                     </td>
                                     <td className='wishlist-page__body__product'>
                                         <Link to={product.hidden ? '' : `/product/${product._id}`} >{product.title[i18n.language]}</Link>

@@ -32,6 +32,20 @@ function CheckoutPage() {
 
         setTotalCost(total);
     }, [cartData, productsData, loggedIn, userData]);
+
+    useEffect(() => {
+        if (!cartProducts || cartProducts.length === 0) return;
+        
+        let total = 0;
+        cartData.forEach(cartItem => {
+            const product = productsData.find(p => p._id === cartItem.productId);
+            if(product && !product.hidden) {
+                total += product.price[choosedCurrency] * cartItem.productCount;
+            }
+        });
+
+        setTotalCost(total);
+    }, [choosedCurrency])
     return (
     <>
         <RouterPath />

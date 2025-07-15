@@ -41,6 +41,19 @@ function CartPage() {
         setTotalCost(total);
     }, [cartData, productsData, loggedIn, userData]);
 
+    useEffect(() => {
+        if (!cartProducts || cartProducts.length === 0) return;
+        
+        let total = 0;
+        cartData.forEach(cartItem => {
+            const product = productsData.find(p => p._id === cartItem.productId);
+            if(product && !product.hidden) {
+                total += product.price[choosedCurrency] * cartItem.productCount;
+            }
+        });
+
+        setTotalCost(total);
+    }, [choosedCurrency])
 
 
     const removeFromCart = async (productId) => {
@@ -136,7 +149,7 @@ function CartPage() {
                                             <button className='cart-page__table__body__remove__btn' disabled={product.hidden} onClick={() => removeFromCart(product._id)}><i className="fa-solid fa-trash"></i></button>
                                         </td>
                                         <td className='cart-page__table__body__image'>
-                                            <Link to={product.hidden ? '' : `/product/${product._id}`} ><img src={product.image["small"]} alt="Product" /></Link>
+                                            <Link to={product.hidden ? '' : `/product/${product._id}`} ><img src={product.image} alt="Product" /></Link>
                                         </td>
                                         <td className='cart-page__table__body__product'>
                                             <Link to={product.hidden ? '' : `/product/${product._id}`} >{product.title[i18n.language]}</Link>
